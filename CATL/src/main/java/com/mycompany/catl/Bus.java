@@ -6,6 +6,10 @@ package com.mycompany.catl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.concurrent.locks.Lock;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 /**
  *
@@ -13,9 +17,26 @@ import java.util.logging.Logger;
  */
 public class Bus extends Thread{
     private String identifier;
+    Lock textLock ;
+    private static final String airportEvolution = "airportEvolution.txt";
+    private static FileWriter writer;
+    private static BufferedWriter writerBuffer;
 
-    public Bus(String identifier) {
+    static {
+        try {
+            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
+            writer = new FileWriter(airportEvolution, true);
+            // Crear un BufferedWriter para escribir en el archivo
+            writerBuffer = new BufferedWriter(writer);
+        } catch (IOException e) {
+            System.err.println("Error al abrir el archivo: " + e.getMessage());
+        }
+    }
+
+
+    public Bus(String identifier, Lock textLock) {
         this.identifier = identifier;
+        this.textLock = textLock;
     }
     
     public void run(){
