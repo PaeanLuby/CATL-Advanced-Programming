@@ -93,19 +93,47 @@ public class Bus extends Thread{
                 textLock.lock();
                 try{
                     LocalDateTime date = LocalDateTime.now();
-                    writerBuffer.write(date+": The bus "+this.identifier+" has arrived to the airport of "+this.getCity());
+                    //METER PASAGEROS A AEROPUERTO
+                    writerBuffer.write(date+": The bus "+this.identifier+" has arrived to the airport of "+this.getCity()+" with "+passengers+" passengers.");
+                    writerBuffer.newLine();
+                    passengers=0;
+                }catch(Exception e) {}
+                finally{
+                textLock.unlock();
+                }
+                
+                //Wait for passengers
+                sleepTime = (long)(Math.random() * 3000 + 2000);
+                sleep(sleepTime);
+                
+                //Passengers enter the bus
+                textLock.lock();
+                try{
+                    LocalDateTime date = LocalDateTime.now();
+                    long jumpIn = (long)(Math.random() * 50);
+                    passengers+=jumpIn;
+                    //SUBSTRACT FROM AIRPORT SYSTEM
+                    writerBuffer.write(date+": "+jumpIn+" passengers have accessed to the bus "+this.identifier+" that initiates its route towards the downtown of "+this.getCity());
                     writerBuffer.newLine();
                 }catch(Exception e) {}
                 finally{
                 textLock.unlock();
                 }
-
-
-                // Close the BufferedWriter (it also closes the FileWriter)
-                try {
-                    writerBuffer.close();
-                } catch (IOException e) {
-                    System.err.println("Error al cerrar el archivo: " + e.getMessage());
+                
+                //Bus initiates its route towards downtown
+                sleepTime = (long)(Math.random() * 5000 + 5000);
+                sleep(sleepTime);
+                
+                //Arrival to downtown bus-stop
+                textLock.lock();
+                try{
+                    LocalDateTime date = LocalDateTime.now();
+                    writerBuffer.write(date+": The bus "+this.identifier+" has arrived to the downtown of "+this.getCity()+" with "+passengers+" passengers.");
+                    writerBuffer.newLine();
+                    passengers=0;
+                }catch(Exception e) {}
+                finally{
+                textLock.unlock();
                 }
 
             } catch (InterruptedException ex) {
