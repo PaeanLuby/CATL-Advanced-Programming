@@ -4,10 +4,18 @@
  */
 package com.mycompany.catl;
 
-/**
- *
- * @author THINKPAD
- */
 public class Airport {
-    
+    private int passengers;
+
+    public void setPassengers(int passengers) {
+        this.passengers = passengers;
+    }
+
+    public int getPassengers() {
+        return passengers;
+    }
+
+    public Airport(int passengers) {
+        this.passengers = passengers;
+    }
 }

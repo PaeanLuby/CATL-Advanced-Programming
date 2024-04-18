@@ -21,26 +21,13 @@ public class Bus extends Thread{
     private int passengers=0;
     Lock textLock ;
     Airport airport;
-    private static final String airportEvolution = "src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
-    private static FileWriter writer;
-    private static BufferedWriter writerBuffer;
+    private BufferedWriter writerBuffer;
 
-    static {
-        try {
-            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
-            writer = new FileWriter(airportEvolution, true);
-            // Crear un BufferedWriter para escribir en el archivo
-            writerBuffer = new BufferedWriter(writer);
-        } catch (IOException e) {
-            System.err.println("Error al abrir el archivo: " + e.getMessage());
-        }
-    }
-
-
-    public Bus(String identifier, Lock textLock, Airport airport) {
+    public Bus(String identifier, Lock textLock, Airport airport, BufferedWriter writerBuffer) {
         this.identifier = identifier;
         this.textLock = textLock;
-        this.airport=airport;
+        this.airport = airport;
+        this.writerBuffer = writerBuffer;
     }
     
     /**
@@ -93,7 +80,7 @@ public class Bus extends Thread{
                 textLock.lock();
                 try{
                     LocalDateTime date = LocalDateTime.now();
-                    //METER PASAGEROS A AEROPUERTO
+                    airport.setPassengers(airport.getPassengers()+passengers);
                     writerBuffer.write(date+": The bus "+this.identifier+" has arrived to the airport of "+this.getCity()+" with "+passengers+" passengers.");
                     writerBuffer.newLine();
                     passengers=0;
@@ -112,7 +99,7 @@ public class Bus extends Thread{
                     LocalDateTime date = LocalDateTime.now();
                     long jumpIn = (long)(Math.random() * 50);
                     passengers+=jumpIn;
-                    //SUBSTRACT FROM AIRPORT SYSTEM
+                    airport.setPassengers(airport.getPassengers()-passengers);
                     writerBuffer.write(date+": "+jumpIn+" passengers have accessed to the bus "+this.identifier+" that initiates its route towards the downtown of "+this.getCity());
                     writerBuffer.newLine();
                 }catch(Exception e) {}
