@@ -39,18 +39,34 @@ public class Bus extends Thread{
         this.textLock = textLock;
     }
     
+    public void getCity(){
+        
+    }
+    
     public void run(){
         try {
             textLock.lock();
             try{
-               // writeBuffer.write("Hola");
-              //  writeBuffer.newLine();
+                writerBuffer.write("The bus "+this.identifier+" has arrived to the city of");
+                writerBuffer.newLine();
             }catch(Exception e) {}
             finally{
             textLock.unlock();
             }
             long sleepTime = (long)(Math.random() * 3000 + 2000);
             sleep(sleepTime);                                                   //Arrival to downtown
+            
+            
+            
+            
+            
+            
+            try {
+                // Cerrar el BufferedWriter (esto también cierra el FileWriter)
+                writerBuffer.close();
+            } catch (IOException e) {
+                System.err.println("Error al cerrar el archivo: " + e.getMessage());
+            }
             
         } catch (InterruptedException ex) {
             Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
