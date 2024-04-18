@@ -41,6 +41,14 @@ public class Bus extends Thread{
     
     public void run(){
         try {
+            textLock.lock();
+            try{
+               // writeBuffer.write("Hola");
+              //  writeBuffer.newLine();
+            }catch(Exception e) {}
+            finally{
+            textLock.unlock();
+            }
             long sleepTime = (long)(Math.random() * 3000 + 2000);
             sleep(sleepTime);                                                   //Arrival to downtown
             
