@@ -8,6 +8,7 @@ package com.mycompany.catl;
  *
  * @author THINKPAD
  */
-public class Airplane {
-    
+public class Airplane extends Thread{
+    private int capacity;
+    private int passengers;
 }

@@ -4,10 +4,24 @@
  */
 package com.mycompany.catl;
 
+import java.util.List;
+
 /**
  *
  * @author THINKPAD
  */
 public class TaxiArea {
-    
+    private List<Airplane> airplanes;
+
+    public TaxiArea(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
+    }
+
+    public List<Airplane> getAirplanes() {
+        return airplanes;
+    }
+
+    public void setAirplanes(List<Airplane> airplanes) {
+        this.airplanes = airplanes;
+    }
 }

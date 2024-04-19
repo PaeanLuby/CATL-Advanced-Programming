@@ -9,5 +9,18 @@ package com.mycompany.catl;
  * @author THINKPAD
  */
 public class Runway {
+    private Airplane airplane;
+
+    public Runway(Airplane airplane) {
+        this.airplane = airplane;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
     
 }
