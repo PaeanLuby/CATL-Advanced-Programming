@@ -45,6 +45,7 @@ public class Bus extends Thread{
 
     
     public void run(){
+        while (true){
             try {
                 //Arrival to downtown
                 textLock.lock();
@@ -127,5 +128,5 @@ public class Bus extends Thread{
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    
+    }
 }
