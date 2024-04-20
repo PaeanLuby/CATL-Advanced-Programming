@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Lock;
  *
  * @author THINKPAD
  */
-public class Airplane implements Runnable {
+public class Airplane extends Thread {
     private int capacity;
     private int passengers;
     private String identifier;
