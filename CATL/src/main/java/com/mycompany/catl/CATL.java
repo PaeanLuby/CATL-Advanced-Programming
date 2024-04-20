@@ -17,12 +17,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CATL {
 
     public static void main(String[] args) {
+        //Creation of Madrid and Barcelonaairport:
+        for (int i=0;i<2;i++){
+            Hangar hangar
+        }
 //        Airport madrid = new Airport(30);
 //        Airport barcelona = new Airport(30);
-//        Lock l = new ReentrantLock();
-//        String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
-//        FileWriter writer;
-//        BufferedWriter writerBuffer = null;
+        Lock l = new ReentrantLock();
+        String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
+        FileWriter writer;
+        BufferedWriter writerBuffer = null;
 //        try {
 //            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
 //            writer = new FileWriter(airportEvolution, true);
