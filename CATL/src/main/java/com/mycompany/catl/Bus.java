@@ -31,7 +31,7 @@ public class Bus extends Thread{
     }
     
     /**
-    * Determina si el bus esta en Madrid o en Barcelona
+    * Determine if the bus is in Madrid or Barcelona
     * 
     * @return Madrid if the bus has an even identifier, Barcelona if it has an odd identifier
     */
