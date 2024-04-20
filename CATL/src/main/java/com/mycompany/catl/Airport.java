@@ -106,6 +106,24 @@ public class Airport {
     public void setMaintenanceHall(MaintenanceHall maintenanceHall) {
         this.maintenanceHall = maintenanceHall;
     }
+    
+    public BoardingGate getBoardingGate(int index) {
+        return boardingGates[index];
+    }
+    
+    public void setBoardingGate(int index, BoardingGate bG) {
+        boardingGates[index] = bG;
+    }
+    
+    public Runway getRunway(int index) {
+        return runways[index];
+    }
+    
+    public void setRunway(int index, Runway rW) {
+        runways[index] = rW;
+    }
+    
+    
 
 //    public BoardingGate getBoardingBG() {
 //        return boardingBG;

@@ -12,13 +12,41 @@ import java.util.concurrent.locks.Lock;
  *
  * @author THINKPAD
  */
-public class Airplane extends Thread{
+public class Airplane implements Runnable {
     private int capacity;
     private int passengers;
     private String identifier;
     private Lock textLock;
     private Airport airport;
     private BufferedWriter writerBuffer;
+    
+    public void run(){
+        //Airplane creation in the Hangar
+        int positionHangar = airport.getHangar().addAirplane(this);  //initializing the airplane in the hangar and saving its position in the list
+        if (positionHangar==-1){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
+        textLock.lock(); //lock the log for writing
+                try{
+                    LocalDateTime date = LocalDateTime.now();
+                    writerBuffer.write(date+": The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
+                    writerBuffer.newLine();
+                }catch(Exception e) {}
+                finally{
+                textLock.unlock();
+                }
+        //Airplane moves to the Parking Area
+        airport.getParking().addAirplane(airport.getHangar().takeAirplane(positionHangar)); //taking the airplane from the hangar and put in it in Parking Area
+        textLock.lock(); //lock the log for writing
+                try{
+                    LocalDateTime date = LocalDateTime.now();
+                    writerBuffer.write(date+": The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
+                    writerBuffer.newLine();
+                }catch(Exception e) {}
+                finally{
+                textLock.unlock();
+                }
+        //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
+        this.getAirport().board();
+    }
 
     public int getCapacity() {
         return capacity;
@@ -84,30 +112,5 @@ public class Airplane extends Thread{
 
 
     
-    public void run(){
-        //Airplane creation in the Hangar
-        int puestoHangar = airport.getHangar().addAirplane(this);  //initializing the airplane in the hangar and saving its position in the list
-        if (puestoHangar==-1){System.out.println("ERROR insertando avion en hangar");} //possible error detection
-        textLock.lock(); //lock the log for writing
-                try{
-                    LocalDateTime date = LocalDateTime.now();
-                    writerBuffer.write(date+": The airplane "+this.identifier+" have been created in the hangar of the airport of: "+this.getCity());
-                    writerBuffer.newLine();
-                }catch(Exception e) {}
-                finally{
-                textLock.unlock();
-                }
-        //Airplane moves to the Parking Area
-        airport.getParking().addAirplane(airport.getHangar().takeAirplane(puestoHangar)); //taking the airplane from the hangar and put in it in Parking Area
-        textLock.lock(); //lock the log for writing
-                try{
-                    LocalDateTime date = LocalDateTime.now();
-                    writerBuffer.write(date+": The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
-                    writerBuffer.newLine();
-                }catch(Exception e) {}
-                finally{
-                textLock.unlock();
-                }
-        //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-    }
+    
 }
