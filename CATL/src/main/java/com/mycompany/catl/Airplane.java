@@ -60,9 +60,9 @@ public class Airplane extends Thread{
         this.airport = airport;
     }
 
-    public Airplane(int capacity, int passengers, String identifier, Lock textLock, Airport airport, BufferedWriter writerBuffer) {
+    public Airplane(int capacity, String identifier, Lock textLock, Airport airport, BufferedWriter writerBuffer) {
         this.capacity = capacity;
-        this.passengers = passengers;
+        this.passengers = 0;
         this.identifier = identifier;
         this.textLock = textLock;
         this.airport = airport;
@@ -70,7 +70,7 @@ public class Airplane extends Thread{
     }
     
     /**
-    * Determina si el avion esta en Madrid o en Barcelona
+    * Determine if the airplane is in Madrid or in Barcelona
     * 
     * @return Madrid if the bus has an even identifier, Barcelona if it has an odd identifier
     */
