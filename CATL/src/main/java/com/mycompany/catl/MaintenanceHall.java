@@ -9,5 +9,8 @@ package com.mycompany.catl;
  * @author THINKPAD
  */
 public class MaintenanceHall {
+
+    public MaintenanceHall() {
+    }
     
 }

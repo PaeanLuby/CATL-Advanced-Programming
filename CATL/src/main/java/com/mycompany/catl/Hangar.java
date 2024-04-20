@@ -3,8 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.catl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -12,13 +14,13 @@ import java.util.concurrent.locks.Lock;
  * @author THINKPAD
  */
 public class Hangar {
-    private List<Airplane> airplanes;
-    private Lock hangarLock;
-
-    public Hangar(List<Airplane> airplanes, Lock hangarLock) {
-        this.airplanes = airplanes;
-        this.hangarLock = hangarLock;
+    private List<Airplane> airplanes = new ArrayList<>();
+    private Lock hangarLock = new ReentrantLock();
+    
+    //Constructor
+    public Hangar() {
     }
+
 
 
     public List<Airplane> getAirplanes() {

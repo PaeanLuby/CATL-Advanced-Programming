@@ -18,45 +18,55 @@ public class CATL {
 
     public static void main(String[] args) {
         //Creation of Madrid and Barcelonaairport:
-        for (int i=0;i<2;i++){
-            Hangar hangar
-        }
-//        Airport madrid = new Airport(30);
-//        Airport barcelona = new Airport(30);
-        Lock l = new ReentrantLock();
+        //Shared class
+        Airway Mad_Bar = new Airway();
+        Airway Bar_Mad = new Airway();
+        //Madrid class
+        Hangar hangarMadrid = new Hangar();
+        MaintenanceHall maintenanceHallMadrid = new MaintenanceHall();
+        Parking parkingMadrid = new Parking();
+        TaxiArea taxiMadrid =new TaxiArea();
+        Airport madrid = new Airport(hangarMadrid,Mad_Bar,Bar_Mad,taxiMadrid,parkingMadrid,maintenanceHallMadrid);
+        //Barcelona class
+        Hangar hangarBarcelona = new Hangar();
+        MaintenanceHall maintenanceHallBarcelona = new MaintenanceHall();
+        Parking parkingBarcelona = new Parking();
+        TaxiArea taxiBarcelona =new TaxiArea();
+        Airport barcelona = new Airport(hangarBarcelona,Mad_Bar,Bar_Mad,taxiBarcelona,parkingBarcelona,maintenanceHallBarcelona);
+        
+        Lock textLock = new ReentrantLock();
         String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
         FileWriter writer;
         BufferedWriter writerBuffer = null;
-//        try {
-//            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
-//            writer = new FileWriter(airportEvolution, true);
-//            // Crear un BufferedWriter para escribir en el archivo
-//            writerBuffer = new BufferedWriter(writer);
-//        } catch (IOException e) {
-//            System.err.println("Error al abrir el archivo: " + e.getMessage());
-//        }
-//        
-//        Bus b1=new Bus("b-0001",l,barcelona,writerBuffer);
-//        Bus b2=new Bus("b-0002",l,madrid,writerBuffer);
-//        Bus b3=new Bus("b-0003",l,barcelona,writerBuffer);
-//        b1.start();
-//        b2.start();
-//        b3.start();
-//        
-//        try {
-//            b1.join();
-//            b2.join();
-//            b3.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        
-//        try {
-//        // Cerrar el BufferedWriter
-//            writerBuffer.close();
-//        } catch (IOException e) {
-//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-//        }
+        
+        try {
+            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
+            writer = new FileWriter(airportEvolution, true);
+            // Crear un BufferedWriter para escribir en el archivo
+            writerBuffer = new BufferedWriter(writer);
+        } catch (IOException e) {
+            System.err.println("Error al abrir el archivo: " + e.getMessage());
+        }
+
+        AirplaneCreator airplaneCreator = new  AirplaneCreator(textLock,madrid,barcelona,writerBuffer);
+        BusCreator busCreator = new BusCreator(textLock,madrid,barcelona,writerBuffer);
+        
+        airplaneCreator.start();
+        busCreator.start();
+        
+        try {
+            airplaneCreator.join();
+            busCreator.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+        // Cerrar el BufferedWriter
+            writerBuffer.close();
+        } catch (IOException e) {
+            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
+        }
 
     }
 }

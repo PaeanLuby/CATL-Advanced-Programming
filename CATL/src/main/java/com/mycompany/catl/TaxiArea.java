@@ -4,6 +4,7 @@
  */
 package com.mycompany.catl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,11 +12,12 @@ import java.util.List;
  * @author THINKPAD
  */
 public class TaxiArea {
-    private List<Airplane> airplanes;
+    private List<Airplane> airplanes = new ArrayList<>();
 
-    public TaxiArea(List<Airplane> airplanes) {
-        this.airplanes = airplanes;
+    public TaxiArea() {
     }
+
+    
 
     public List<Airplane> getAirplanes() {
         return airplanes;

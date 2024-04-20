@@ -46,7 +46,7 @@ public class AirplaneCreator extends Thread {
     }
     
     public void run(){
-        for(int i=0;i<8000;i++){
+        for(int i=0;i<8;i++){ //8000
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits

@@ -28,8 +28,8 @@ public class Airport {
 //    private Runway runway3;
 //    private Runway runway4;
 
-    public Airport(int passengers, Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
-        this.passengers = passengers;
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
+        this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
         this.Bar_Mad = Bar_Mad;

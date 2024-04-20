@@ -4,8 +4,10 @@
  */
 package com.mycompany.catl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -13,13 +15,13 @@ import java.util.concurrent.locks.Lock;
  */
 
 public class Parking {
-    private List<Airplane> airplanes;
-    private Lock parkingLock;
+    private List<Airplane> airplanes = new ArrayList<>();
+    private Lock parkingLock=new ReentrantLock();
 
-    public Parking(List<Airplane> airplanes, Lock parkingLock) {
-        this.airplanes = airplanes;
-        this.parkingLock = parkingLock;
+    public Parking() {
     }
+
+
 
     
 
