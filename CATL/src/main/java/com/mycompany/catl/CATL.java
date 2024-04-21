@@ -66,7 +66,7 @@ public class CATL {
         }
         
         try {
-        // Cerrar el BufferedWriter
+        // Close the BufferedWriter
             writerBuffer.close();
         } catch (IOException e) {
             System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());

@@ -38,16 +38,16 @@ public class Hangar {
     * @return its position on the list
     */
     public int addAirplane(Airplane airplane){
-        int puesto=-1;           //initialize puesto with -1 as an error signal
+        int position=-1;           //initialize puesto with -1 as an error signal
         this.hangarLock.lock();  //lock to avoid mutual exclusion between threads 
         try{
+            position= airplanes.size();  //saves its position in puesto
             this.airplanes.add(airplane);  //adds the airplane to the airplanes list of hangar
-            puesto= airplanes.size();  //saves its position in puesto
         }catch(Exception e) {}
         finally{
         hangarLock.unlock(); //unlock the lock
         }
-        return puesto; //returns the position of the airplane in the airplanes hangar list
+        return position; //returns the position of the airplane in the airplanes hangar list
     }
     
     /**
