@@ -21,13 +21,11 @@ public class Bus extends Thread{
     private int passengers=0;
     Lock textLock ;
     Airport airport;
-    private BufferedWriter writerBuffer;
 
-    public Bus(String identifier, Lock textLock, Airport airport, BufferedWriter writerBuffer) {
+    public Bus(String identifier, Lock textLock, Airport airport) {
         this.identifier = identifier;
         this.textLock = textLock;
         this.airport = airport;
-        this.writerBuffer = writerBuffer;
     }
     
     /**
@@ -46,6 +44,20 @@ public class Bus extends Thread{
     
     public void run(){
        // while (true){
+            //writeBuffer oppening
+            String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
+            FileWriter writer;
+            BufferedWriter writerBuffer = null;
+
+            try {
+                // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
+                writer = new FileWriter(airportEvolution, true);
+                // Crear un BufferedWriter para escribir en el archivo
+                writerBuffer = new BufferedWriter(writer);
+            } catch (IOException e) {
+                System.err.println("Error al abrir el archivo: " + e.getMessage());
+            }
+            
             try {
                 //Arrival to downtown
                 textLock.lock();
@@ -126,6 +138,12 @@ public class Bus extends Thread{
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //Closing buffer
+            try {
+                writerBuffer.close();
+            } catch (IOException e) {
+                System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
             }
         //}
     }

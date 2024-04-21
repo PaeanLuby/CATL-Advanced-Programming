@@ -17,13 +17,11 @@ public class BusCreator extends Thread{
     private Lock textLock;
     private Airport madrid;
     private Airport barcelona;
-    private BufferedWriter writerBuffer;
 
-    public BusCreator(Lock textLock, Airport madrid, Airport barcelona, BufferedWriter writerBuffer) {
+    public BusCreator(Lock textLock, Airport madrid, Airport barcelona) {
         this.textLock = textLock;
         this.madrid = madrid;
         this.barcelona = barcelona;
-        this.writerBuffer = writerBuffer;
     }
     
     public void run(){
@@ -35,10 +33,10 @@ public class BusCreator extends Thread{
             }
             identifier="B-"+identifier;    //We add B-
             if (i%2==0){                   //Even identifier for Madrid
-                bus= new Bus(identifier,textLock,madrid,writerBuffer);
+                bus= new Bus(identifier,textLock,madrid);
             }
             else{                         //Odd identifier for Barcelona
-                bus= new Bus(identifier,textLock,barcelona,writerBuffer);
+                bus= new Bus(identifier,textLock,barcelona);
             }
             bus.start();
             

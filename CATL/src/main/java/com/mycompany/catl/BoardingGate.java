@@ -31,6 +31,7 @@ public class BoardingGate {
     
     public void startBoarding(boolean capacityReached, Airplane airplane) {
         access.lock();
+        
         try {
             while (!capacityReached && remainingAttempts > 0) {
                 airplane.setPassengers(airplane.getAirport().getPassengers()); //Take available passengers

@@ -50,38 +50,27 @@ public class CATL {
         Airport barcelona = new Airport(hangarBarcelona,Mad_Bar,Bar_Mad,taxiBarcelona,parkingBarcelona,maintenanceHallBarcelona, boardingGatesBarcelona, runwaysBarcelona);
         
         Lock textLock = new ReentrantLock();
-        String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
-        FileWriter writer;
-        BufferedWriter writerBuffer = null;
         
-        try {
-            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
-            writer = new FileWriter(airportEvolution, true);
-            // Crear un BufferedWriter para escribir en el archivo
-            writerBuffer = new BufferedWriter(writer);
-        } catch (IOException e) {
-            System.err.println("Error al abrir el archivo: " + e.getMessage());
-        }
 
-        AirplaneCreator airplaneCreator = new  AirplaneCreator(textLock,madrid,barcelona,writerBuffer);
-        BusCreator busCreator = new BusCreator(textLock,madrid,barcelona,writerBuffer);
+        AirplaneCreator airplaneCreator = new  AirplaneCreator(textLock,madrid,barcelona);
+        BusCreator busCreator = new BusCreator(textLock,madrid,barcelona);
         
         airplaneCreator.start();
         busCreator.start();
         
-        try {
-            airplaneCreator.join();
-            busCreator.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        
-        try {
-        // Cerrar el BufferedWriter
-            writerBuffer.close();
-        } catch (IOException e) {
-            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-        }
+//        try {
+//            airplaneCreator.join();
+//            busCreator.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        
+//        try {
+//        // Close the BufferedWriter
+//            writerBuffer.close();
+//        } catch (IOException e) {
+//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
+//        }
 
     }
 }
