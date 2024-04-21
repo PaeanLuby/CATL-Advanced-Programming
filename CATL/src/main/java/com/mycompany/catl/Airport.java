@@ -28,7 +28,7 @@ public class Airport {
 //    private Runway runway3;
 //    private Runway runway4;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGate[] boardingGate, Runway[] runways) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -36,8 +36,8 @@ public class Airport {
         this.taxiArea = taxiArea;
         this.parking = parking;
         this.maintenanceHall = maintenanceHall;
-        boardingGates = new BoardingGate[6]; //6 boarding gates
-        runways = new Runway[4]; //4 runways
+        this.boardingGates = boardingGates; 
+        this.runways = runways; 
         
 //        this.boardingBG = boardingBG;
 //        this.landingBG = landingBG;

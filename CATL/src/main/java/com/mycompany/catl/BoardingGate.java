@@ -29,22 +29,24 @@ public class BoardingGate {
         this.remainingAttempts = 3;
     }
     
-    public void board(boolean capacityReached) throws InterruptedException {
+    public void board(boolean capacityReached) {
         access.lock();
         try {
-            if (!capacityReached && remainingAttempts > 0) {
+            while (!capacityReached && remainingAttempts > 0) {
                 airplane.setPassengers(airplane.getAirport().getPassengers()); //Take available passengers
                 long timeWait = (long) Math.random() * 4000 + 1000;
                 Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
                 remainingAttempts--;
                 //return false; //Boarding in progress
-            } else {
-                for (int i =  0; i < airplane.getPassengers(); i++) {
+            } 
+
+            for (int i =  0; i < airplane.getPassengers(); i++) {
                    Thread.sleep((long) Math.random()*2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                   capacityReached = true;
                    remainingAttempts = 3;
                 }
+                
                 //return true; //Boarding successful
-            }
         } catch (InterruptedException e){
             
         } finally {
