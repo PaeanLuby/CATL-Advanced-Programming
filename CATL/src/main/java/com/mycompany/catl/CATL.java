@@ -25,6 +25,17 @@ public class CATL {
         Runway[] runwaysMadrid = new Runway[4];
         BoardingGate[] boardingGatesBarcelona = new BoardingGate[6];
         Runway[] runwaysBarcelona = new Runway[4];
+        
+                
+        for (int i = 0; i < 6; i++) {
+            boardingGatesMadrid[i] = new BoardingGate(i);
+            boardingGatesBarcelona[i] = new BoardingGate(i);
+            if (i < 4) {
+                runwaysMadrid[i] = new Runway();
+                runwaysBarcelona[i] = new Runway();
+            }
+        }
+        
         //Madrid class
         Hangar hangarMadrid = new Hangar();
         MaintenanceHall maintenanceHallMadrid = new MaintenanceHall();

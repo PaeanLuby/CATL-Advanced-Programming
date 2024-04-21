@@ -28,7 +28,7 @@ public class Airport {
 //    private Runway runway3;
 //    private Runway runway4;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGate[] boardingGate, Runway[] runways) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGate[] boardingGates, Runway[] runways) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -36,19 +36,8 @@ public class Airport {
         this.taxiArea = taxiArea;
         this.parking = parking;
         this.maintenanceHall = maintenanceHall;
-        this.boardingGates = boardingGates; 
-        this.runways = runways; 
-        
-//        this.boardingBG = boardingBG;
-//        this.landingBG = landingBG;
-//        this.universalBG1 = universalBG1;
-//        this.universalBG2 = universalBG2;
-//        this.universalBG3 = universalBG3;
-//        this.universalBG4 = universalBG4;
-//        this.runway1 = runway1;
-//        this.runway2 = runway2;
-//        this.runway3 = runway3;
-//        this.runway4 = runway4;
+        this.boardingGates = boardingGates;
+        this.runways = runways;
     }
 
     public int getPassengers() {

@@ -29,23 +29,32 @@ public class Airplane extends Thread {
                     LocalDateTime date = LocalDateTime.now();
                     writerBuffer.write(date+": The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
                     writerBuffer.newLine();
-                }catch(Exception e) {}
-                finally{
-                textLock.unlock();
+                } catch(Exception e) {
+                } finally {
+                    textLock.unlock();
                 }
         //Airplane moves to the Parking Area
-        airport.getParking().addAirplane(airport.getHangar().takeAirplane(positionHangar)); //taking the airplane from the hangar and put in it in Parking Area
+        airport.getParking().addAirplane(airport.getHangar().releaseAirplane(positionHangar)); //taking the airplane from the hangar and put in it in Parking Area
         textLock.lock(); //lock the log for writing
                 try{
                     LocalDateTime date = LocalDateTime.now();
                     writerBuffer.write(date+": The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
                     writerBuffer.newLine();
-                }catch(Exception e) {}
-                finally{
-                textLock.unlock();
+                } catch(Exception e) {
+                } finally {
+                    textLock.unlock();
                 }
         //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-       // this.getAirport().board();
+        int index = 1; //index 0 is specific for landings
+        while (airport.getBoardingGate(index) != null) {
+            index++; 
+            index = index % 5;
+            if (index == 0) {
+                index++;
+            } 
+        }
+        airport.getBoardingGate(index).enterPlane(this); //enter into free space
+        airport.getBoardingGate(index).startBoarding(false, this); //capacity initially not reached 
     }
 
     public int getCapacity() {

@@ -11,8 +11,8 @@ package com.mycompany.catl;
 public class Runway {
     private Airplane airplane;
 
-    public Runway(Airplane airplane) {
-        this.airplane = airplane;
+    public Runway() {
+        this.airplane = null; //starts with no airplane
     }
 
     public Airplane getAirplane() {
