@@ -21,13 +21,11 @@ public class AirplaneCreator extends Thread {
     private Lock textLock;
     private Airport madrid;
     private Airport barcelona;
-    private BufferedWriter writerBuffer;
 
-    public AirplaneCreator(Lock textLock, Airport madrid, Airport barcelona, BufferedWriter writerBuffer) {
+    public AirplaneCreator(Lock textLock, Airport madrid, Airport barcelona) {
         this.textLock = textLock;
         this.madrid = madrid;
         this.barcelona = barcelona;
-        this.writerBuffer = writerBuffer;
     }
     /**
     * Create a random identifier
@@ -56,10 +54,10 @@ public class AirplaneCreator extends Thread {
             int capacity = (int)(Math.random() * 200)+100;
             
             if (i%2==0){                   //Even identifier for Madrid
-                airplane= new Airplane(capacity,identifier,textLock,madrid,writerBuffer);
+                airplane= new Airplane(capacity,identifier,textLock,madrid);
             }
             else{                         //Odd identifier for Barcelona
-                airplane= new Airplane(capacity,identifier,textLock,barcelona,writerBuffer);
+                airplane= new Airplane(capacity,identifier,textLock,barcelona);
             }
             airplane.start();
             

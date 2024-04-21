@@ -5,6 +5,8 @@
 package com.mycompany.catl;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.concurrent.locks.Lock;
 
@@ -18,9 +20,21 @@ public class Airplane extends Thread {
     private String identifier;
     private Lock textLock;
     private Airport airport;
-    private BufferedWriter writerBuffer;
     
     public void run(){
+        //writeBuffer oppening
+        String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
+        FileWriter writer;
+        BufferedWriter writerBuffer = null;
+        
+        try {
+            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
+            writer = new FileWriter(airportEvolution, true);
+            // Crear un BufferedWriter para escribir en el archivo
+            writerBuffer = new BufferedWriter(writer);
+        } catch (IOException e) {
+            System.err.println("Error al abrir el archivo: " + e.getMessage());
+        }
         //Airplane creation in the Hangar
         int positionHangar = airport.getHangar().addAirplane(this);  //initializing the airplane in the hangar and saving its position in the list
         if (positionHangar==-1){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
@@ -46,6 +60,13 @@ public class Airplane extends Thread {
                 }
         //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
        // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
+       
+       //Closing buffer
+        try {
+            writerBuffer.close();
+        } catch (IOException e) {
+            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
+        }
     }
 
     public int getCapacity() {
@@ -88,13 +109,12 @@ public class Airplane extends Thread {
         this.airport = airport;
     }
 
-    public Airplane(int capacity, String identifier, Lock textLock, Airport airport, BufferedWriter writerBuffer) {
+    public Airplane(int capacity, String identifier, Lock textLock, Airport airport) {
         this.capacity = capacity;
         this.passengers = 0;
         this.identifier = identifier;
         this.textLock = textLock;
         this.airport = airport;
-        this.writerBuffer = writerBuffer;
     }
     
     /**
