@@ -45,7 +45,7 @@ public class Airplane extends Thread {
                 textLock.unlock();
                 }
         //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-       // this.getAirport().board();
+       // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
     }
 
     public int getCapacity() {
