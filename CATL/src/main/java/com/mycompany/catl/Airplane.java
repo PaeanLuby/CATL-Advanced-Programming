@@ -36,8 +36,7 @@ public class Airplane extends Thread {
             System.err.println("Error al abrir el archivo: " + e.getMessage());
         }
         //Airplane creation in the Hangar
-        int positionHangar = airport.getHangar().addAirplane(this);  //initializing the airplane in the hangar and saving its position in the list
-        if (positionHangar==-1){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
+        if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
         textLock.lock(); //lock the log for writing
                 try{
                     LocalDateTime date = LocalDateTime.now();
@@ -48,7 +47,7 @@ public class Airplane extends Thread {
                     textLock.unlock();
                 }
         //Airplane moves to the Parking Area
-        airport.getParking().addAirplane(airport.getHangar().releaseAirplane(positionHangar)); //taking the airplane from the hangar and put in it in Parking Area
+        airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
         textLock.lock(); //lock the log for writing
                 try{
                     LocalDateTime date = LocalDateTime.now();
