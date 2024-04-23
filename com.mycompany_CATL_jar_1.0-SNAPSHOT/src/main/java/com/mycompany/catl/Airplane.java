@@ -45,7 +45,10 @@ public class Airplane implements Runnable {
                 textLock.unlock();
                 }
         //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-        this.getAirport().board();
+        try {
+            
+            this.getAirport().getBoardingGate(this.capacity).board();
+        } catch (InterruptedException e) {}
     }
 
     public int getCapacity() {

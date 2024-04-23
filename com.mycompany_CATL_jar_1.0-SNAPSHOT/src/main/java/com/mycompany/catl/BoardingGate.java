@@ -29,8 +29,9 @@ public class BoardingGate {
         this.remainingAttempts = 3;
     }
     
-    public void board(boolean capacityReached) throws InterruptedException {
+    public void board() throws InterruptedException {
         access.lock();
+        boolean capacityReached = false;
         try {
             if (!capacityReached && remainingAttempts > 0) {
                 airplane.setPassengers(airplane.getAirport().getPassengers()); //Take available passengers

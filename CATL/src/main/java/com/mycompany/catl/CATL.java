@@ -21,20 +21,22 @@ public class CATL {
         //Shared class
         Airway Mad_Bar = new Airway();
         Airway Bar_Mad = new Airway();
-        BoardingGate[] boardingGatesMadrid = new BoardingGate[6];
+        BoardingGates boardingGatesMadrid = new BoardingGates(1); //1 is exclusively for landing
+        BoardingGates landingGatesMadrid = new BoardingGates(0); //0 is exclusively for boarding
         Runway[] runwaysMadrid = new Runway[4];
-        BoardingGate[] boardingGatesBarcelona = new BoardingGate[6];
-        Runway[] runwaysBarcelona = new Runway[4];
+        BoardingGates boardingGatesBarcelona = new BoardingGates(1); //1 is exclusively for landing
+        BoardingGates landingGatesBarcelona = new BoardingGates(0); //0 is exclusively for boarding
+        Runway[] runwaysBarcelona = new Runway[4]; //
         
-                
-        for (int i = 0; i < 6; i++) {
-            boardingGatesMadrid[i] = new BoardingGate(i);
-            boardingGatesBarcelona[i] = new BoardingGate(i);
-            if (i < 4) {
-                runwaysMadrid[i] = new Runway();
-                runwaysBarcelona[i] = new Runway();
-            }
-        }
+//                
+//        for (int i = 0; i < 6; i++) {
+//            boardingGatesMadrid[i] = new BoardingGates(i);
+//            boardingGatesBarcelona[i] = new BoardingGates(i);
+//            if (i < 4) {
+//                runwaysMadrid[i] = new Runway();
+//                runwaysBarcelona[i] = new Runway();
+//            }
+//        }
         
         //Madrid class
         Hangar hangarMadrid = new Hangar();
@@ -58,19 +60,6 @@ public class CATL {
         airplaneCreator.start();
         busCreator.start();
         
-//        try {
-//            airplaneCreator.join();
-//            busCreator.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        
-//        try {
-//        // Close the BufferedWriter
-//            writerBuffer.close();
-//        } catch (IOException e) {
-//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-//        }
 
     }
 }

@@ -20,9 +20,19 @@ public class Airplane extends Thread {
     private String identifier;
     private Lock textLock;
     private Airport airport;
+    private int boardingGateNumber;
+    
+    public Airplane(int capacity, String identifier, Lock textLock, Airport airport) {
+        this.capacity = capacity;
+        this.passengers = 0;
+        this.identifier = identifier;
+        this.textLock = textLock;
+        this.airport = airport;
+        this.boardingGateNumber = -1;
+    }
     
     public void run(){
-        //writeBuffer oppening
+        //writeBuffer opening
         String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
         FileWriter writer;
         BufferedWriter writerBuffer = null;
@@ -58,16 +68,45 @@ public class Airplane extends Thread {
                     textLock.unlock();
                 }
         //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-        int index = 1; //index 0 is specific for landings
-        while (airport.getBoardingGate(index) != null) {
-            index++; 
-            index = index % 5;
-            if (index == 0) {
-                index++;
+        //int index = 1; //index 0 is specific for landings
+//        while (airport.getBoardingGate(index) != null) {
+//            //System.out.println("Boarding gate is " +airport.getBoardingGate(index));
+//            index++; 
+//            index = index % 5;
+//            if (index == 0) {
+//                index++;
+//            } 
+//        }
+        airport.getParking().releaseAirplane(this);
+        //boarding attempt
+        try {
+        int remainingAttempts = 3;
+        while (capacity >= airport.getPassengers() && remainingAttempts > 0) {
+            remainingAttempts--;
+            this.setPassengers(airport.getPassengers()); //Take available passengers
+            long timeWait = (long) Math.random() * 4000 + 1000;
+            Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
+            System.out.println("Not yet full. Attempts left: " + remainingAttempts);               
+                //return false; //Boarding in progress
             } 
+            
+            boardingGateNumber = airport.getBoardingGates().enterGate(this); //enter into free space
+            
+            for (int i = 0; i < passengers; i++) {
+                   Thread.sleep((long) Math.random()*2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                   System.out.println("Plane successfully boarded.");   
+            }
+                   
+            airport.getBoardingGates().releaseGate(this);
+                
+                //return true; //Boarding successful
+        } catch (InterruptedException e){
+        } finally {
         }
-        airport.getBoardingGate(index).enterPlane(this); //enter into free space
-        airport.getBoardingGate(index).startBoarding(false, this); //capacity initially not reached 
+        
+
+        //
+        //airport.getBoardingGate(index).startBoarding(this); //capacity initially not reached 
        // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
        
        //Closing buffer
@@ -77,6 +116,8 @@ public class Airplane extends Thread {
             System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
         }
     }
+    
+    
 
     public int getCapacity() {
         return capacity;
@@ -115,14 +156,6 @@ public class Airplane extends Thread {
     }
 
     public void setAirport(Airport airport) {
-        this.airport = airport;
-    }
-
-    public Airplane(int capacity, String identifier, Lock textLock, Airport airport) {
-        this.capacity = capacity;
-        this.passengers = 0;
-        this.identifier = identifier;
-        this.textLock = textLock;
         this.airport = airport;
     }
     

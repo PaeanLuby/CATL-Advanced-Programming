@@ -14,21 +14,21 @@ public class Airport {
     private TaxiArea taxiArea;
     private Parking parking;
     private MaintenanceHall maintenanceHall; 
-    private BoardingGate[] boardingGates;
+    private BoardingGates boardingGates;
     private Runway[] runways;
     
-//    private BoardingGate boardingBG;
-//    private BoardingGate landingBG;
-//    private BoardingGate universalBG1;
-//    private BoardingGate universalBG2;
-//    private BoardingGate universalBG3;
-//    private BoardingGate universalBG4;
+//    private BoardingGates boardingBG;
+//    private BoardingGates landingBG;
+//    private BoardingGates universalBG1;
+//    private BoardingGates universalBG2;
+//    private BoardingGates universalBG3;
+//    private BoardingGates universalBG4;
 //    private Runway runway1;
 //    private Runway runway2;
 //    private Runway runway3;
 //    private Runway runway4;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGate[] boardingGates, Runway[] runways) { //, BoardingGate boardingBG, BoardingGate landingBG, BoardingGate universalBG1, BoardingGate universalBG2, BoardingGate universalBG3, BoardingGate universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runway[] runways) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -96,12 +96,12 @@ public class Airport {
         this.maintenanceHall = maintenanceHall;
     }
     
-    public BoardingGate getBoardingGate(int index) {
-        return boardingGates[index];
+    public BoardingGates getBoardingGates() {
+        return boardingGates;
     }
     
-    public void setBoardingGate(int index, BoardingGate bG) {
-        boardingGates[index] = bG;
+    public void setBoardingGate(int index, BoardingGates bG) {
+        //boardingGates[index] = bG;
     }
     
     public Runway getRunway(int index) {
@@ -114,51 +114,51 @@ public class Airport {
     
     
 
-//    public BoardingGate getBoardingBG() {
+//    public BoardingGates getBoardingBG() {
 //        return boardingBG;
 //    }
 //
-//    public void setBoardingBG(BoardingGate boardingBG) {
+//    public void setBoardingBG(BoardingGates boardingBG) {
 //        this.boardingBG = boardingBG;
 //    }
 //
-//    public BoardingGate getLandingBG() {
+//    public BoardingGates getLandingBG() {
 //        return landingBG;
 //    }
 //
-//    public void setLandingBG(BoardingGate landingBG) {
+//    public void setLandingBG(BoardingGates landingBG) {
 //        this.landingBG = landingBG;
 //    }
 //
-//    public BoardingGate getUniversalBG1() {
+//    public BoardingGates getUniversalBG1() {
 //        return universalBG1;
 //    }
 //
-//    public void setUniversalBG1(BoardingGate universalBG1) {
+//    public void setUniversalBG1(BoardingGates universalBG1) {
 //        this.universalBG1 = universalBG1;
 //    }
 //
-//    public BoardingGate getUniversalBG2() {
+//    public BoardingGates getUniversalBG2() {
 //        return universalBG2;
 //    }
 //
-//    public void setUniversalBG2(BoardingGate universalBG2) {
+//    public void setUniversalBG2(BoardingGates universalBG2) {
 //        this.universalBG2 = universalBG2;
 //    }
 //
-//    public BoardingGate getUniversalBG3() {
+//    public BoardingGates getUniversalBG3() {
 //        return universalBG3;
 //    }
 //
-//    public void setUniversalBG3(BoardingGate universalBG3) {
+//    public void setUniversalBG3(BoardingGates universalBG3) {
 //        this.universalBG3 = universalBG3;
 //    }
 //
-//    public BoardingGate getUniversalBG4() {
+//    public BoardingGates getUniversalBG4() {
 //        return universalBG4;
 //    }
 //
-//    public void setUniversalBG4(BoardingGate universalBG4) {
+//    public void setUniversalBG4(BoardingGates universalBG4) {
 //        this.universalBG4 = universalBG4;
 //    }
 //

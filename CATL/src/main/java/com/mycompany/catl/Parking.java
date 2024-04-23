@@ -31,14 +31,16 @@ public class Parking {
     * 
     * @param airplane the new airplane
     */
-    public void addAirplane(Airplane airplane){
-        this.parkingLock.lock();          //lock to avoid mutual exclusion between threads 
+    public boolean addAirplane(Airplane airplane){
+        this.parkingLock.lock();          //lock to avoid mutual exclusion between threads
+        boolean added = false;
         try{
-            this.airplanes.add(airplane); //add the airplane at the end of the list
-        }catch(Exception e) {}
-        finally{
-        parkingLock.unlock();             //unlock the lock
-        }
+            added = this.airplanes.add(airplane); //add the airplane at the end of the list
+            System.out.println("Airplane was added to parking: " + added);
+        } catch(Exception e) {
+        } finally{
+            parkingLock.unlock();             //unlock the lock
+        } return added;
     }
     
     /**
@@ -48,13 +50,15 @@ public class Parking {
     * @return the airplane that we take out
     */
     public Airplane releaseAirplane(Airplane airplane){ //We don't need to lock it because with the FIFO strategy it is our airplane or it isn't 
+        parkingLock.lock();
         while(this.airplanes.getFirst()!=airplane){}//While the first airplane is not our plane we don't do anything
         if(this.airplanes.getFirst()==airplane){ //If the first airplane is our airplane
             System.out.println("Successfully removed the airplane from parking.");
             return this.airplanes.removeFirst(); //we remove it and return it
         }
         else{                                    //for a possible error
-            System.out.println("Error sacando avión del parking!");
+            System.out.println("Error getting a plane from parking!");
+            parkingLock.unlock();
             return null;
         }
     }

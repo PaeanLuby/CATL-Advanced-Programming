@@ -1,7 +1,6 @@
 com\mycompany\catl\Runway.class
 com\mycompany\catl\Hangar.class
 com\mycompany\catl\Parking.class
-com\mycompany\catl\BoardingGate.class
 com\mycompany\catl\AirplaneCreator.class
 com\mycompany\catl\GraphicalInterface$3.class
 com\mycompany\catl\GraphicalInterface$2.class
@@ -9,6 +8,7 @@ com\mycompany\catl\MaintenanceHall.class
 com\mycompany\catl\TaxiArea.class
 com\mycompany\catl\GraphicalInterface.class
 com\mycompany\catl\Airport.class
+com\mycompany\catl\BoardingGates.class
 com\mycompany\catl\GraphicalInterface$1.class
 com\mycompany\catl\Bus.class
 com\mycompany\catl\BusCreator.class
