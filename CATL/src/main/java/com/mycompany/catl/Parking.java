@@ -51,15 +51,19 @@ public class Parking {
     */
     public Airplane releaseAirplane(Airplane airplane){ //We don't need to lock it because with the FIFO strategy it is our airplane or it isn't 
         parkingLock.lock();
-        while(this.airplanes.getFirst()!=airplane){}//While the first airplane is not our plane we don't do anything
-        if(this.airplanes.getFirst()==airplane){ //If the first airplane is our airplane
-            System.out.println("Successfully removed the airplane from parking.");
-            return this.airplanes.removeFirst(); //we remove it and return it
-        }
-        else{                                    //for a possible error
-            System.out.println("Error getting a plane from parking!");
-            parkingLock.unlock();
+        while(this.airplanes.indexOf(airplane)!= 0){}//While the first airplane is not our plane we don't do anything
+        try {
+            if(this.airplanes.getFirst()==airplane){ //If the first airplane is our airplane
+                System.out.println("Successfully removed the airplane from parking.");
+                return this.airplanes.removeFirst(); //we remove it and return it
+            } else {
+                System.out.println("Error getting a plane from parking!");
+                return null;
+            }  
+        } catch (Error e) {
             return null;
+        } finally {
+            parkingLock.unlock();
         }
     }
 }

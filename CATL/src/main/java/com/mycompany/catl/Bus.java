@@ -69,7 +69,7 @@ public class Bus extends Thread{
                 finally{
                 textLock.unlock();
                 }
-                long sleepTime = (long)(Math.random() * 3000 + 2000);
+                long sleepTime = (long)(Math.random() * 3 + 2);
                 sleep(sleepTime);                                                   
 
                 //Passengers access
@@ -86,14 +86,15 @@ public class Bus extends Thread{
                 }
                 
                 //Bus initiates its route towards the airport
-                sleepTime = (long)(Math.random() * 5000 + 5000);
+                sleepTime = (long)(Math.random() * 5 + 5);
                 sleep(sleepTime);
                 
                 //Arrival to airport bus-stop
                 textLock.lock();
                 try{
                     LocalDateTime date = LocalDateTime.now();
-                    airport.setPassengers(airport.getPassengers()+passengers);
+                    airport.setPassengers(airport.getPassengers() + passengers);
+                    //System.out.println("Number of passengers is: " + currPassengers);
                     writerBuffer.write(date+": The bus "+this.identifier+" has arrived to the airport of "+this.getCity()+" with "+passengers+" passengers.");
                     writerBuffer.newLine();
                     passengers=0;
@@ -146,5 +147,5 @@ public class Bus extends Thread{
                 System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
             }
         //}
-    }
+    } 
 }

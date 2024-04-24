@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.concurrent.locks.Lock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,11 +31,12 @@ public class Airplane extends Thread {
         this.textLock = textLock;
         this.airport = airport;
         this.boardingGateNumber = -1;
+        System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
     }
     
     public void run(){
         //writeBuffer opening
-        String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
+        String airportEvolution = "\\C:\\Users\\pluby\\Desktop\\AdvancedFINAL\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
         FileWriter writer;
         BufferedWriter writerBuffer = null;
         
@@ -67,17 +70,13 @@ public class Airplane extends Thread {
                 } finally {
                     textLock.unlock();
                 }
-        //Airplane  awaits the availability of one BOARDING GATE (FIFO strategy)
-        //int index = 1; //index 0 is specific for landings
-//        while (airport.getBoardingGate(index) != null) {
-//            //System.out.println("Boarding gate is " +airport.getBoardingGate(index));
-//            index++; 
-//            index = index % 5;
-//            if (index == 0) {
-//                index++;
-//            } 
-//        }
-        airport.getParking().releaseAirplane(this);
+
+        try {
+            airport.getParking().releaseAirplane(this);
+            airport.getBoardingGates().enterGate(this); //enter into free space
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //boarding attempt
         try {
         int remainingAttempts = 3;
@@ -89,14 +88,12 @@ public class Airplane extends Thread {
             System.out.println("Not yet full. Attempts left: " + remainingAttempts);               
                 //return false; //Boarding in progress
             } 
-            
-            boardingGateNumber = airport.getBoardingGates().enterGate(this); //enter into free space
-            
+
             for (int i = 0; i < passengers; i++) {
-                   Thread.sleep((long) Math.random()*2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
-                   System.out.println("Plane successfully boarded.");   
+                   Thread.sleep((long) Math.random()*2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
             }
-                   
+            System.out.println("Plane " + identifier + " successfully boarded.");   
+     
             airport.getBoardingGates().releaseGate(this);
                 
                 //return true; //Boarding successful
@@ -110,11 +107,11 @@ public class Airplane extends Thread {
        // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
        
        //Closing buffer
-        try {
-            writerBuffer.close();
-        } catch (IOException e) {
-            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-        }
+//        try {
+//            writerBuffer.close();
+//        } catch (IOException e) {
+//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
+//        }
     }
     
     
