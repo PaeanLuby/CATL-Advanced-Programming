@@ -18,12 +18,12 @@ import java.util.logging.Logger;
  * @author THINKPAD
  */
 public class AirplaneCreator extends Thread {
-    private Lock textLock;
+    private Log log;
     private Airport madrid;
     private Airport barcelona;
 
-    public AirplaneCreator(Lock textLock, Airport madrid, Airport barcelona) {
-        this.textLock = textLock;
+    public AirplaneCreator(Log log, Airport madrid, Airport barcelona) {
+        this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
     }
@@ -44,7 +44,7 @@ public class AirplaneCreator extends Thread {
     }
     
     public void run(){
-        for(int i=0; i<6; i++){ //8000
+        for(int i=0; i<3; i++){ //8000
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -54,10 +54,10 @@ public class AirplaneCreator extends Thread {
             int capacity = (int)(Math.random() * 200)+100;
             
             if (i%2==0){                   //Even identifier for Madrid
-                airplane= new Airplane(capacity,identifier,textLock,madrid);
+                airplane= new Airplane(capacity,identifier,log,madrid);
             }
             else{                         //Odd identifier for Barcelona
-                airplane= new Airplane(capacity,identifier,textLock,barcelona);
+                airplane= new Airplane(capacity,identifier,log,barcelona);
             }
             airplane.start();
             
@@ -65,8 +65,13 @@ public class AirplaneCreator extends Thread {
             try {
                 sleep(sleepTime);    //sleeps between 1 and 3 second between each bus
             } catch (InterruptedException ex) {
-                Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            try {
+//                sleep(15000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 }

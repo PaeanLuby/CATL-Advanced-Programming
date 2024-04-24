@@ -14,18 +14,23 @@ import java.util.logging.Logger;
  * @author THINKPAD
  */
 public class BusCreator extends Thread{
-    private Lock textLock;
+    private Log log;
     private Airport madrid;
+    private Lock madridPassengersLock;
     private Airport barcelona;
+    private Lock barcelonaPassengersLock;
 
-    public BusCreator(Lock textLock, Airport madrid, Airport barcelona) {
-        this.textLock = textLock;
+    public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock) {
+        this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
+        this.madridPassengersLock = madridPassengersLock;
+        this.barcelonaPassengersLock = barcelonaPassengersLock;
     }
+
     
     public void run(){
-        for(int i=0; i<3; i++){ //4000
+        for(int i=0; i<4; i++){ //4000
             Bus bus;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -33,10 +38,10 @@ public class BusCreator extends Thread{
             }
             identifier="B-"+identifier;    //We add B-
             if (i%2==0){                   //Even identifier for Madrid
-                bus= new Bus(identifier,textLock,madrid);
+                bus= new Bus(identifier,log,madrid,madridPassengersLock);
             }
             else{                         //Odd identifier for Barcelona
-                bus= new Bus(identifier,textLock,barcelona);
+                bus= new Bus(identifier,log,barcelona,barcelonaPassengersLock);
             }
             bus.start();
             
@@ -46,6 +51,12 @@ public class BusCreator extends Thread{
             } catch (InterruptedException ex) {
                 Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+//            try {
+//                sleep(15000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 }

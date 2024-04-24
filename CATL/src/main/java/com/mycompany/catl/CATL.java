@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CATL {
 
     public static void main(String[] args) {
+        Log log = new Log();
         //Creation of Madrid and Barcelonaairport:
         //Shared class
         Airway Mad_Bar = new Airway();
@@ -51,15 +54,30 @@ public class CATL {
         TaxiArea taxiBarcelona =new TaxiArea();
         Airport barcelona = new Airport(hangarBarcelona,Mad_Bar,Bar_Mad,taxiBarcelona,parkingBarcelona,maintenanceHallBarcelona, boardingGatesBarcelona, runwaysBarcelona);
         
-        Lock textLock = new ReentrantLock();
+        Lock madridPassengersLock = new ReentrantLock();
+        Lock barcelonaPassengersLock = new ReentrantLock();
         
 
-        AirplaneCreator airplaneCreator = new  AirplaneCreator(textLock,madrid,barcelona);
-        BusCreator busCreator = new BusCreator(textLock,madrid,barcelona);
+        AirplaneCreator airplaneCreator = new  AirplaneCreator(log,madrid,barcelona);
+        BusCreator busCreator = new BusCreator(log,madrid,barcelona,madridPassengersLock,barcelonaPassengersLock);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            airplaneCreator.interrupt();
+            busCreator.interrupt();
+            log.close();
+        }));
         
         airplaneCreator.start();
         busCreator.start();
         
+//        try {
+//            airplaneCreator.join();
+//            busCreator.join();
+//            log.close();
+//            System.out.println("THE END BBY");
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(CATL.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 }

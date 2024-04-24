@@ -20,56 +20,29 @@ public class Airplane extends Thread {
     private int capacity;
     private int passengers;
     private String identifier;
-    private Lock textLock;
+    private Log log;
     private Airport airport;
     private int boardingGateNumber;
     
-    public Airplane(int capacity, String identifier, Lock textLock, Airport airport) {
+    public Airplane(int capacity, String identifier, Log log, Airport airport) {
         this.capacity = capacity;
         this.passengers = 0;
         this.identifier = identifier;
-        this.textLock = textLock;
+        this.log = log;
         this.airport = airport;
         this.boardingGateNumber = -1;
         System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
+        this.log.write("Airplane " + identifier + " with capacity " + capacity + " has been created.");
     }
     
     public void run(){
-        //writeBuffer opening
-        String airportEvolution = "\\C:\\Users\\pluby\\Desktop\\AdvancedFINAL\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
-        FileWriter writer;
-        BufferedWriter writerBuffer = null;
-        
-        try {
-            // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
-            writer = new FileWriter(airportEvolution, true);
-            // Crear un BufferedWriter para escribir en el archivo
-            writerBuffer = new BufferedWriter(writer);
-        } catch (IOException e) {
-            System.err.println("Error al abrir el archivo: " + e.getMessage());
-        }
+
         //Airplane creation in the Hangar
         if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
-        textLock.lock(); //lock the log for writing
-                try{
-                    LocalDateTime date = LocalDateTime.now();
-                    writerBuffer.write(date+": The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
-                    writerBuffer.newLine();
-                } catch(Exception e) {
-                } finally {
-                    textLock.unlock();
-                }
+        this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
         //Airplane moves to the Parking Area
         airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
-        textLock.lock(); //lock the log for writing
-                try{
-                    LocalDateTime date = LocalDateTime.now();
-                    writerBuffer.write(date+": The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
-                    writerBuffer.newLine();
-                } catch(Exception e) {
-                } finally {
-                    textLock.unlock();
-                }
+        this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
 
         try {
             airport.getParking().releaseAirplane(this);
@@ -85,7 +58,8 @@ public class Airplane extends Thread {
             this.setPassengers(airport.getPassengers()); //Take available passengers
             long timeWait = (long) Math.random() * 4000 + 1000;
             Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
-            System.out.println("Not yet full. Attempts left: " + remainingAttempts);               
+            System.out.println("Not yet full. Attempts left: " + remainingAttempts);
+            this.log.write("Not yet full. Attempts left: " + remainingAttempts);
                 //return false; //Boarding in progress
             } 
 
@@ -93,7 +67,7 @@ public class Airplane extends Thread {
                    Thread.sleep((long) Math.random()*2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
             }
             System.out.println("Plane " + identifier + " successfully boarded.");   
-     
+            this.log.write("Plane " + identifier + " successfully boarded.");
             airport.getBoardingGates().releaseGate(this);
                 
                 //return true; //Boarding successful
@@ -138,14 +112,6 @@ public class Airplane extends Thread {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-
-    public Lock getTextLock() {
-        return textLock;
-    }
-
-    public void setTextLock(Lock textLock) {
-        this.textLock = textLock;
     }
 
     public Airport getAirport() {

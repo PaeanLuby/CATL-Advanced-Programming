@@ -1,2 +1,1 @@
-2024-04-24T20:04:59.388821400: The airplane IP-0001 has been created in the hangar of the airport of: Barcelona
-2024-04-24T20:04:59.390913: The airplane IP-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+
