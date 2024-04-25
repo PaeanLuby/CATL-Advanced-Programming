@@ -23,13 +23,15 @@ public class Airplane extends Thread {
     private Log log;
     private Airport airport;
     private int boardingGateNumber;
+    private GraphicalInterface gf;
     
-    public Airplane(int capacity, String identifier, Log log, Airport airport) {
+    public Airplane(int capacity, String identifier, Log log, Airport airport,GraphicalInterface gf) {
         this.capacity = capacity;
         this.passengers = 0;
         this.identifier = identifier;
         this.log = log;
         this.airport = airport;
+        this.gf=gf;
         this.boardingGateNumber = -1;
         System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
         this.log.write("Airplane " + identifier + " with capacity " + capacity + " has been created.");
@@ -39,6 +41,7 @@ public class Airplane extends Thread {
         while(true) {
             //Airplane creation in the Hangar
             if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
+            
             this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
             //Airplane moves to the Parking Area
             airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
@@ -59,7 +62,7 @@ public class Airplane extends Thread {
                 long timeWait = (long) Math.random() * 4000 + 1000;
                 Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
                 System.out.println("Not yet full. Attempts left: " + remainingAttempts);
-                this.log.write("Not yet full. Attempts left: " + remainingAttempts);
+               // this.log.write("Not yet full. Attempts left: " + remainingAttempts);
                     //return false; //Boarding in progress
                 } 
 

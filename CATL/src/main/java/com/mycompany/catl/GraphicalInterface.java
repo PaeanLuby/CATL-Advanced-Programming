@@ -4,22 +4,22 @@
  */
 package com.mycompany.catl;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  *
  * @author THINKPAD
  */
 public class GraphicalInterface extends javax.swing.JFrame {
-    //private Airport madrid;
-    //private Airport barcelona;
-
     /**
      * Creates new form GraphicalInterface
      */
-    public GraphicalInterface(){//Airport madrid, Airport Barcelona) {
+    public GraphicalInterface() {
         initComponents();
-        //this.madrid=madrid;
-        //this.barcelona=barcelona;
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,6 +238,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         madridPassengers.setEditable(false);
         madridPassengers.setBackground(new java.awt.Color(255, 255, 255));
+        madridPassengers.setText("0");
         madridPassengers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 madridPassengersActionPerformed(evt);
@@ -266,6 +267,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         barcelonaPassengers.setEditable(false);
         barcelonaPassengers.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaPassengers.setText("0");
 
         jLabel38.setText("Hangar:");
 
@@ -412,15 +414,14 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                             .addComponent(jLabel6)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(madridGate1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(madridRunway1))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel13)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(madridRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel14)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(madridRunway1))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel13)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(madridRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -545,8 +546,8 @@ public class GraphicalInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(pauseButton)
+                .addGap(25, 25, 25)
                 .addComponent(resumeButton)
                 .addGap(361, 361, 361))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -585,9 +586,9 @@ public class GraphicalInterface extends javax.swing.JFrame {
                             .addComponent(jLabel37)
                             .addComponent(barcelonaPassengers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel38)
-                            .addComponent(barcelonaHangar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(barcelonaHangar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel38))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel39)
@@ -651,9 +652,9 @@ public class GraphicalInterface extends javax.swing.JFrame {
                             .addComponent(jLabel31)
                             .addComponent(madridPassengers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(madridHangar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(madridHangar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -769,6 +770,58 @@ public class GraphicalInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_barcelonaBusAirportTownActionPerformed
 
+    public void setMadridPassengers(int madridPassengers) {
+        this.madridPassengers.setText(String.valueOf(madridPassengers));
+    }
+    public void setBarcelonaPassengers(int madridPassengers) {
+        this.barcelonaPassengers.setText(String.valueOf(madridPassengers));
+    }
+    
+    private Lock lockMadridBusTownAirport = new ReentrantLock();
+    private Lock lockBarcelonaBusTownAirport = new ReentrantLock();
+    private Lock lockMadridBusAirportTown = new ReentrantLock();
+    private Lock lockBarcelonaBusAirportTown = new ReentrantLock();
+    
+    public void  setMadridBusTownAirport(String bus){
+        lockMadridBusTownAirport.lock();
+        try{
+            this.madridBusTownAirport.setText(bus);
+        }catch(Exception e) {}
+        finally{
+            lockMadridBusTownAirport.unlock();
+        }
+    }
+
+    public void setBarcelonaBusTownAirport(String bus) {
+        lockBarcelonaBusTownAirport.lock();
+        try {
+            this.barcelonaBusTownAirport.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockBarcelonaBusTownAirport.unlock();
+        }
+    }
+
+    public void setMadridBusAirportTown(String bus) {
+        lockMadridBusAirportTown.lock();
+        try {
+            this.madridBusAirportTown.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockMadridBusAirportTown.unlock();
+        }
+    }
+
+    public void setBarcelonaBusAirportTown(String bus) {
+        lockBarcelonaBusAirportTown.lock();
+        try {
+            this.barcelonaBusAirportTown.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockBarcelonaBusAirportTown.unlock();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

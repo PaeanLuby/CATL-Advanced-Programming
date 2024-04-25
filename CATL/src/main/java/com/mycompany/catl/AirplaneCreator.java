@@ -21,11 +21,13 @@ public class AirplaneCreator extends Thread {
     private Log log;
     private Airport madrid;
     private Airport barcelona;
+    private GraphicalInterface gf;
 
-    public AirplaneCreator(Log log, Airport madrid, Airport barcelona) {
+    public AirplaneCreator(Log log, Airport madrid, Airport barcelona,GraphicalInterface gf) {
         this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
+        this.gf = gf;
     }
     /**
     * Create a random identifier
@@ -44,7 +46,7 @@ public class AirplaneCreator extends Thread {
     }
     
     public void run(){
-        for(int i=0; i<8; i++){ //8000
+        for(int i=0; i<4; i++){ //8000
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -54,10 +56,10 @@ public class AirplaneCreator extends Thread {
             int capacity = (int)(Math.random() * 200)+100;
             
             if (i%2==0){                   //Even identifier for Madrid
-                airplane= new Airplane(capacity,identifier,log,madrid);
+                airplane= new Airplane(capacity,identifier,log,madrid,gf);
             }
             else{                         //Odd identifier for Barcelona
-                airplane= new Airplane(capacity,identifier,log,barcelona);
+                airplane= new Airplane(capacity,identifier,log,barcelona,gf);
             }
             airplane.start();
             
