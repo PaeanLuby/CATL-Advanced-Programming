@@ -9,12 +9,16 @@ package com.mycompany.catl;
  * @author THINKPAD
  */
 public class GraphicalInterface extends javax.swing.JFrame {
+    //private Airport madrid;
+    //private Airport barcelona;
 
     /**
      * Creates new form GraphicalInterface
      */
-    public GraphicalInterface() {
+    public GraphicalInterface(){//Airport madrid, Airport Barcelona) {
         initComponents();
+        //this.madrid=madrid;
+        //this.barcelona=barcelona;
     }
 
     /**
@@ -28,92 +32,742 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pauseButton = new javax.swing.JButton();
+        resumeButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        madridMaintenance = new javax.swing.JTextField();
+        madridHangar = new javax.swing.JTextField();
+        madridParkingArea = new javax.swing.JTextField();
+        madridGate1 = new javax.swing.JTextField();
+        madridGate4 = new javax.swing.JTextField();
+        madridGate2 = new javax.swing.JTextField();
+        madridGate5 = new javax.swing.JTextField();
+        madridGate3 = new javax.swing.JTextField();
+        madridGate6 = new javax.swing.JTextField();
+        madridTaxiArea = new javax.swing.JTextField();
+        madridRunway1 = new javax.swing.JTextField();
+        madridRunway2 = new javax.swing.JTextField();
+        madridRunway3 = new javax.swing.JTextField();
+        madridRunway4 = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        madridBusTownAirport = new javax.swing.JTextField();
+        madridBusAirportTown = new javax.swing.JTextField();
+        madridPassengers = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        barcelonaBusTownAirport = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        barcelonaBusAirportTown = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        barcelonaPassengers = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        barcelonaHangar = new javax.swing.JTextField();
+        jLabel39 = new javax.swing.JLabel();
+        barcelonaMaintenance = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        barcelonaParkingArea = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        barcelonaGate1 = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        barcelonaGate2 = new javax.swing.JTextField();
+        barcelonaGate4 = new javax.swing.JTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        barcelonaGate5 = new javax.swing.JTextField();
+        jLabel45 = new javax.swing.JLabel();
+        barcelonaGate6 = new javax.swing.JTextField();
+        barcelonaGate3 = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        barcelonaTaxiArea = new javax.swing.JTextField();
+        barcelonaRunway1 = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        barcelonaRunway2 = new javax.swing.JTextField();
+        barcelonaRunway4 = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        barcelonaRunway3 = new javax.swing.JTextField();
+        jLabel52 = new javax.swing.JLabel();
+        AirwayMadridBarcelona = new javax.swing.JTextField();
+        jLabel53 = new javax.swing.JLabel();
+        AirwayBarcelonaMadrid = new javax.swing.JTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Madrid Airport");
 
-        jLabel2.setText("Barcelona Airport");
-
-        jButton1.setText("Pause");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        pauseButton.setText("Pause");
+        pauseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                pauseButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Resume");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        resumeButton.setText("Resume");
+        resumeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                resumeButtonActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Hangar");
+        jLabel3.setText("Hangar:");
+
+        jLabel4.setText("Maintenance: ");
+
+        jLabel5.setText("Parking Area:");
+
+        jLabel6.setText("Gate 1:");
+
+        jLabel7.setText("Gate 2:");
+
+        jLabel8.setText("Gate 3:");
+
+        jLabel9.setText("Gate 5:");
+
+        jLabel10.setText("Gate 4:");
+
+        jLabel11.setText("Gate 6:");
+
+        jLabel12.setText("Taxi area:");
+
+        jLabel13.setText("Runway 2:");
+
+        jLabel14.setText("Runway 1:");
+
+        jLabel15.setText("Runway 3:");
+
+        jLabel16.setText("Runway 4:");
+
+        jLabel31.setText("Number of passengers at the airport:");
+
+        jLabel32.setText("Transfers Downtown:");
+
+        jLabel33.setText("Transfers Airport:");
+
+        madridMaintenance.setEditable(false);
+        madridMaintenance.setBackground(new java.awt.Color(255, 255, 255));
+        madridMaintenance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                madridMaintenanceActionPerformed(evt);
+            }
+        });
+
+        madridHangar.setEditable(false);
+        madridHangar.setBackground(new java.awt.Color(255, 255, 255));
+        madridHangar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                madridHangarActionPerformed(evt);
+            }
+        });
+
+        madridParkingArea.setEditable(false);
+        madridParkingArea.setBackground(new java.awt.Color(255, 255, 255));
+        madridParkingArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                madridParkingAreaActionPerformed(evt);
+            }
+        });
+
+        madridGate1.setEditable(false);
+        madridGate1.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridGate4.setEditable(false);
+        madridGate4.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridGate2.setEditable(false);
+        madridGate2.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridGate5.setEditable(false);
+        madridGate5.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridGate3.setEditable(false);
+        madridGate3.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridGate6.setEditable(false);
+        madridGate6.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridTaxiArea.setEditable(false);
+        madridTaxiArea.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridRunway1.setEditable(false);
+        madridRunway1.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridRunway2.setEditable(false);
+        madridRunway2.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridRunway3.setEditable(false);
+        madridRunway3.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridRunway4.setEditable(false);
+        madridRunway4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+
+        madridBusTownAirport.setEditable(false);
+        madridBusTownAirport.setBackground(new java.awt.Color(255, 255, 255));
+        madridBusTownAirport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                madridBusTownAirportActionPerformed(evt);
+            }
+        });
+
+        madridBusAirportTown.setEditable(false);
+        madridBusAirportTown.setBackground(new java.awt.Color(255, 255, 255));
+
+        madridPassengers.setEditable(false);
+        madridPassengers.setBackground(new java.awt.Color(255, 255, 255));
+        madridPassengers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                madridPassengersActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel34.setText("Barcelona Airport");
+
+        jLabel35.setText("Transfers Airport:");
+
+        barcelonaBusTownAirport.setEditable(false);
+        barcelonaBusTownAirport.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel36.setText("Transfers Downtown:");
+
+        barcelonaBusAirportTown.setEditable(false);
+        barcelonaBusAirportTown.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaBusAirportTown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcelonaBusAirportTownActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setText("Number of passengers at the airport:");
+
+        barcelonaPassengers.setEditable(false);
+        barcelonaPassengers.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel38.setText("Hangar:");
+
+        barcelonaHangar.setEditable(false);
+        barcelonaHangar.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaHangar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcelonaHangarActionPerformed(evt);
+            }
+        });
+
+        jLabel39.setText("Maintenance: ");
+
+        barcelonaMaintenance.setEditable(false);
+        barcelonaMaintenance.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaMaintenance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcelonaMaintenanceActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setText("Parking Area:");
+
+        barcelonaParkingArea.setEditable(false);
+        barcelonaParkingArea.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaParkingArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcelonaParkingAreaActionPerformed(evt);
+            }
+        });
+
+        jLabel41.setText("Gate 1:");
+
+        barcelonaGate1.setEditable(false);
+        barcelonaGate1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel42.setText("Gate 2:");
+
+        barcelonaGate2.setEditable(false);
+        barcelonaGate2.setBackground(new java.awt.Color(255, 255, 255));
+
+        barcelonaGate4.setEditable(false);
+        barcelonaGate4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel43.setText("Gate 4:");
+
+        jLabel44.setText("Gate 5:");
+
+        barcelonaGate5.setEditable(false);
+        barcelonaGate5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel45.setText("Gate 6:");
+
+        barcelonaGate6.setEditable(false);
+        barcelonaGate6.setBackground(new java.awt.Color(255, 255, 255));
+
+        barcelonaGate3.setEditable(false);
+        barcelonaGate3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel46.setText("Gate 3:");
+
+        jLabel47.setText("Taxi area");
+
+        barcelonaTaxiArea.setEditable(false);
+        barcelonaTaxiArea.setBackground(new java.awt.Color(255, 255, 255));
+
+        barcelonaRunway1.setEditable(false);
+        barcelonaRunway1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel48.setText("Runway 1");
+
+        jLabel49.setText("Runway 2:");
+
+        barcelonaRunway2.setEditable(false);
+        barcelonaRunway2.setBackground(new java.awt.Color(255, 255, 255));
+
+        barcelonaRunway4.setEditable(false);
+        barcelonaRunway4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel50.setText("Runway 4:");
+
+        jLabel51.setText("Runway 3:");
+
+        barcelonaRunway3.setEditable(false);
+        barcelonaRunway3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel52.setText("Airway Madrid-Barcelona:");
+
+        AirwayMadridBarcelona.setEditable(false);
+        AirwayMadridBarcelona.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel53.setText("Airway Barcelona-Madrid:");
+
+        AirwayBarcelonaMadrid.setEditable(false);
+        AirwayBarcelonaMadrid.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(55, 55, 55))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(AirwayBarcelonaMadrid, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AirwayMadridBarcelona, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(madridTaxiArea))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(101, 101, 101)
+                                        .addComponent(jLabel1))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel31)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(madridPassengers))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(madridHangar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(madridMaintenance))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(madridParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(madridGate2))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(madridGate3))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(madridGate1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel14)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(madridRunway1))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel13)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(madridRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel16)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridRunway4))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel15)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridRunway3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel10)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridGate4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel11)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridGate6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel9)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridGate5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(7, 7, 7))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel33)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(madridBusTownAirport, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel32)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(madridBusAirportTown, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                            .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel42)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate2))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel46)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate3))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel41)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(27, 27, 27)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel45)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate6))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel44)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate5))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel43)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaGate4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(95, 95, 95)
+                                        .addComponent(jLabel34))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel35)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaBusTownAirport, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel36)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaBusAirportTown, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel37)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaPassengers))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel38)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaHangar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel39)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaMaintenance))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel40)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaParkingArea)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel49)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel48)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaRunway1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel50)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaRunway4))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel51)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(barcelonaRunway3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel47)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(barcelonaTaxiArea, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(0, 30, Short.MAX_VALUE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(resumeButton)
+                .addGap(361, 361, 361))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(364, 364, 364)
+                .addComponent(jLabel52)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(366, 366, 366)
+                .addComponent(jLabel53)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addContainerGap(261, Short.MAX_VALUE))
+                    .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resumeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel34)
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel36)
+                            .addComponent(barcelonaBusTownAirport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barcelonaBusAirportTown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel37)
+                            .addComponent(barcelonaPassengers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel38)
+                            .addComponent(barcelonaHangar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39)
+                            .addComponent(barcelonaMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel40)
+                            .addComponent(barcelonaParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel41)
+                                    .addComponent(barcelonaGate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel42)
+                                    .addComponent(barcelonaGate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel46)
+                                    .addComponent(barcelonaGate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(barcelonaGate4)
+                                    .addComponent(jLabel43))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel44)
+                                    .addComponent(barcelonaGate5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel45)
+                                    .addComponent(barcelonaGate6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel47)
+                            .addComponent(barcelonaTaxiArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel48)
+                            .addComponent(jLabel51)
+                            .addComponent(barcelonaRunway1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barcelonaRunway3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel49)
+                            .addComponent(jLabel50)
+                            .addComponent(barcelonaRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(barcelonaRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(madridBusTownAirport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridBusAirportTown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel33))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel31)
+                            .addComponent(madridPassengers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(madridHangar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(madridMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(madridParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10)
+                            .addComponent(madridGate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridGate4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(madridGate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridGate5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel11)
+                            .addComponent(madridGate3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridGate6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(madridTaxiArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(madridRunway1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridRunway3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel16)
+                            .addComponent(madridRunway2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(madridRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AirwayMadridBarcelona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AirwayBarcelonaMadrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void madridParkingAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridParkingAreaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_madridParkingAreaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void madridHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridHangarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_madridHangarActionPerformed
+
+    private void madridMaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridMaintenanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_madridMaintenanceActionPerformed
+
+    private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resumeButtonActionPerformed
+
+    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pauseButtonActionPerformed
+
+    private void barcelonaHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaHangarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barcelonaHangarActionPerformed
+
+    private void barcelonaMaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaMaintenanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barcelonaMaintenanceActionPerformed
+
+    private void barcelonaParkingAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaParkingAreaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barcelonaParkingAreaActionPerformed
+
+    private void madridPassengersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridPassengersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_madridPassengersActionPerformed
+
+    private void madridBusTownAirportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridBusTownAirportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_madridBusTownAirportActionPerformed
+
+    private void barcelonaBusAirportTownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaBusAirportTownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barcelonaBusAirportTownActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,11 +805,84 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField AirwayBarcelonaMadrid;
+    private javax.swing.JTextField AirwayMadridBarcelona;
+    private javax.swing.JTextField barcelonaBusAirportTown;
+    private javax.swing.JTextField barcelonaBusTownAirport;
+    private javax.swing.JTextField barcelonaGate1;
+    private javax.swing.JTextField barcelonaGate2;
+    private javax.swing.JTextField barcelonaGate3;
+    private javax.swing.JTextField barcelonaGate4;
+    private javax.swing.JTextField barcelonaGate5;
+    private javax.swing.JTextField barcelonaGate6;
+    private javax.swing.JTextField barcelonaHangar;
+    private javax.swing.JTextField barcelonaMaintenance;
+    private javax.swing.JTextField barcelonaParkingArea;
+    private javax.swing.JTextField barcelonaPassengers;
+    private javax.swing.JTextField barcelonaRunway1;
+    private javax.swing.JTextField barcelonaRunway2;
+    private javax.swing.JTextField barcelonaRunway3;
+    private javax.swing.JTextField barcelonaRunway4;
+    private javax.swing.JTextField barcelonaTaxiArea;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField madridBusAirportTown;
+    private javax.swing.JTextField madridBusTownAirport;
+    private javax.swing.JTextField madridGate1;
+    private javax.swing.JTextField madridGate2;
+    private javax.swing.JTextField madridGate3;
+    private javax.swing.JTextField madridGate4;
+    private javax.swing.JTextField madridGate5;
+    private javax.swing.JTextField madridGate6;
+    private javax.swing.JTextField madridHangar;
+    private javax.swing.JTextField madridMaintenance;
+    private javax.swing.JTextField madridParkingArea;
+    private javax.swing.JTextField madridPassengers;
+    private javax.swing.JTextField madridRunway1;
+    private javax.swing.JTextField madridRunway2;
+    private javax.swing.JTextField madridRunway3;
+    private javax.swing.JTextField madridRunway4;
+    private javax.swing.JTextField madridTaxiArea;
+    private javax.swing.JButton pauseButton;
+    private javax.swing.JButton resumeButton;
     // End of variables declaration//GEN-END:variables
 }
