@@ -12,13 +12,16 @@ import java.util.List;
  * @author THINKPAD
  */
 public class TaxiArea {
-    private List<Airplane> airplanes = new ArrayList<>();
+    private List<Airplane> airplanes;
 
     public TaxiArea() {
+
     }
-
     
-
+    public void pilotChecks() {
+        
+    }
+    
     public List<Airplane> getAirplanes() {
         return airplanes;
     }

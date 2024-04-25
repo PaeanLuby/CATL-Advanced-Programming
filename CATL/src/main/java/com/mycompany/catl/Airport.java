@@ -15,7 +15,7 @@ public class Airport {
     private Parking parking;
     private MaintenanceHall maintenanceHall; 
     private BoardingGates boardingGates;
-    private Runway[] runways;
+    private Runways runways;
     
 //    private BoardingGates boardingBG;
 //    private BoardingGates landingBG;
@@ -23,12 +23,12 @@ public class Airport {
 //    private BoardingGates universalBG2;
 //    private BoardingGates universalBG3;
 //    private BoardingGates universalBG4;
-//    private Runway runway1;
-//    private Runway runway2;
-//    private Runway runway3;
-//    private Runway runway4;
+//    private Runways runway1;
+//    private Runways runway2;
+//    private Runways runway3;
+//    private Runways runway4;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runway[] runways) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runway runway1, Runway runway2, Runway runway3, Runway runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runways runway1, Runways runway2, Runways runway3, Runways runway4) {
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -100,18 +100,18 @@ public class Airport {
         return boardingGates;
     }
     
-    public void setBoardingGate(int index, BoardingGates bG) {
-        //boardingGates[index] = bG;
+//    public void setBoardingGate(int index, BoardingGates bG) {
+//        //boardingGates[index] = bG;
+//    }
+//    
+    public Runways getRunways() {
+        return runways;
     }
-    
-    public Runway getRunway(int index) {
-        return runways[index];
-    }
-    
-    public void setRunway(int index, Runway rW) {
-        runways[index] = rW;
-    }
-    
+//    
+//    public void setRunways(int index, Runways rW) {
+//        runways[index] = rW;
+//    }
+//    
     
 
 //    public BoardingGates getBoardingBG() {
@@ -162,35 +162,35 @@ public class Airport {
 //        this.universalBG4 = universalBG4;
 //    }
 //
-//    public Runway getRunway1() {
+//    public Runways getRunway1() {
 //        return runway1;
 //    }
 //
-//    public void setRunway1(Runway runway1) {
+//    public void setRunway1(Runways runway1) {
 //        this.runway1 = runway1;
 //    }
 //
-//    public Runway getRunway2() {
+//    public Runways getRunway2() {
 //        return runway2;
 //    }
 //
-//    public void setRunway2(Runway runway2) {
+//    public void setRunway2(Runways runway2) {
 //        this.runway2 = runway2;
 //    }
 //
-//    public Runway getRunway3() {
+//    public Runways getRunway3() {
 //        return runway3;
 //    }
 //
-//    public void setRunway3(Runway runway3) {
+//    public void setRunway3(Runways runway3) {
 //        this.runway3 = runway3;
 //    }
 //
-//    public Runway getRunway4() {
+//    public Runways getRunway4() {
 //        return runway4;
 //    }
 //
-//    public void setRunway4(Runway runway4) {
+//    public void setRunway4(Runways runway4) {
 //        this.runway4 = runway4;
 //    }
     

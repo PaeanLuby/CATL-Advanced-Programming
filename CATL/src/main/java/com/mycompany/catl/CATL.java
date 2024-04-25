@@ -26,20 +26,10 @@ public class CATL {
         Airway Bar_Mad = new Airway();
         BoardingGates boardingGatesMadrid = new BoardingGates(1); //1 is exclusively for landing
         BoardingGates landingGatesMadrid = new BoardingGates(0); //0 is exclusively for boarding
-        Runway[] runwaysMadrid = new Runway[4];
+        Runways runwaysMadrid = new Runways();
         BoardingGates boardingGatesBarcelona = new BoardingGates(1); //1 is exclusively for landing
         BoardingGates landingGatesBarcelona = new BoardingGates(0); //0 is exclusively for boarding
-        Runway[] runwaysBarcelona = new Runway[4]; //
-        
-//                
-//        for (int i = 0; i < 6; i++) {
-//            boardingGatesMadrid[i] = new BoardingGates(i);
-//            boardingGatesBarcelona[i] = new BoardingGates(i);
-//            if (i < 4) {
-//                runwaysMadrid[i] = new Runway();
-//                runwaysBarcelona[i] = new Runway();
-//            }
-//        }
+        Runways runwaysBarcelona = new Runways(); //
         
         //Madrid class
         Hangar hangarMadrid = new Hangar();

@@ -6,6 +6,8 @@ package com.mycompany.catl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,15 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class Parking {
-    private List<Airplane> airplanes = new ArrayList<>();
+    Queue<Airplane> airplanes = new ConcurrentLinkedQueue<Airplane>();
     private Lock parkingLock=new ReentrantLock();
 
-    public List<Airplane> getAirplanes() {
+    public Queue<Airplane> getAirplanes() {
         return airplanes;
-    }
-
-    public void setAirplanes(List<Airplane> airplanes) {
-        this.airplanes = airplanes;
     }
     
     /**
@@ -35,8 +33,8 @@ public class Parking {
         this.parkingLock.lock();          //lock to avoid mutual exclusion between threads
         boolean added = false;
         try{
-            added = this.airplanes.add(airplane); //add the airplane at the end of the list
-            System.out.println("Airplane was added to parking: " + added);
+            added = this.airplanes.offer(airplane); //add the airplane at the end of the list
+            System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking: " + added);
         } catch(Exception e) {
         } finally{
             parkingLock.unlock();             //unlock the lock
@@ -50,20 +48,12 @@ public class Parking {
     * @return the airplane that we take out
     */
     public Airplane releaseAirplane(Airplane airplane){ //We don't need to lock it because with the FIFO strategy it is our airplane or it isn't 
-        parkingLock.lock();
-        while(this.airplanes.indexOf(airplane)!= 0){}//While the first airplane is not our plane we don't do anything
-        try {
-            if(this.airplanes.getFirst()==airplane){ //If the first airplane is our airplane
-                System.out.println("Successfully removed the airplane from parking.");
-                return this.airplanes.removeFirst(); //we remove it and return it
+            if(this.airplanes.peek()==airplane){ //If the first airplane is our airplane
+                System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from parking.");
+                return this.airplanes.poll(); //we remove it and return it
             } else {
-                System.out.println("Error getting a plane from parking!");
+                System.out.println("Error getting plane " + airplane.getIdentifier() + " from parking!");
                 return null;
             }  
-        } catch (Error e) {
-            return null;
-        } finally {
-            parkingLock.unlock();
-        }
     }
 }

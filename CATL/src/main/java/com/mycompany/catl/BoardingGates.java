@@ -6,7 +6,6 @@ package com.mycompany.catl;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -22,14 +21,12 @@ public class BoardingGates {
     private Lock access;
     private int remainingAttempts;
     private int excludedGate;
-    private Condition gateAvailable;
     
     public BoardingGates(int excludedGate) {
         this.type = type; //0 boarding, 1 landing, 2 both
         this.access = new ReentrantLock();
         this.gates = new Airplane[6];
         this.excludedGate = excludedGate;
-        this.gateAvailable = access.newCondition();
     }
     
     public int enterGate(Airplane airplane) throws InterruptedException {
@@ -38,7 +35,7 @@ public class BoardingGates {
         while (gate == -1) {
             for (int i = 0; i < 6; i++) {
             if (gates[i] == null && i != excludedGate) {
-                System.out.println("Space " + i + " available.");
+                System.out.println("Space " + i + " available in the boarding gate.");
                 gates[i] = airplane;
                 gate = i;
                 System.out.println("Plane " + airplane.getIdentifier() + " entered into boarding gate " + i);

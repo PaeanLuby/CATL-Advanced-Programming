@@ -69,7 +69,10 @@ public class Airplane extends Thread {
                 System.out.println("Plane " + identifier + " successfully boarded.");   
                 this.log.write("Plane " + identifier + " successfully boarded.");
                 airport.getBoardingGates().releaseGate(this);
-
+                long checkDuration = (long) (1 + Math.random() * 4);
+                while (airport.getRunways().enterRunway(this) == -1) {
+                    
+                }
                     //return true; //Boarding successful
             } catch (InterruptedException e){
             } finally {
