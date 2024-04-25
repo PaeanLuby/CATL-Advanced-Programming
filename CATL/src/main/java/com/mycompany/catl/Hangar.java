@@ -78,4 +78,16 @@ public class Hangar {
         }
         return airplane;                            //return the airplane
     }
+    /**
+    * It transform the hangar array into a String
+    * 
+    * @return a string of the airplanes in the hangar
+    */
+    public String hangarToString(){
+        String answer="";
+        for(int i=0;i<airplanes.size();i++){
+            answer=answer+airplanes.get(i).getIdentifier()+", ";
+        }
+        return answer;
+    }
 }

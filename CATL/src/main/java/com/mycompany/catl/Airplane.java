@@ -36,15 +36,39 @@ public class Airplane extends Thread {
         System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
         this.log.write("Airplane " + identifier + " with capacity " + capacity + " has been created.");
     }
+    /**
+    * Graphical interface output of the hangar
+    */
+    public void graphicalHangar(){
+        if(this.getCity()=="Madrid"){
+                    gf.setMadridHangar(airport.getHangar().hangarToString());
+                }
+                else{
+                    gf.setBarcelonaHangar(airport.getHangar().hangarToString());
+                }
+    }
+    /**
+    * Graphical interface output of the parking
+    */
+    public void graphicalParking(){
+        if(this.getCity()=="Madrid"){
+                    gf.setMadridParking(airport.getParking().parkingToString());
+                }
+                else{
+                    gf.setBarcelonaParking(airport.getParking().parkingToString());
+                }
+    }
     
     public void run(){
         while(true) {
             //Airplane creation in the Hangar
             if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
-            
+            this.graphicalHangar();
             this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
             //Airplane moves to the Parking Area
             airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
+            this.graphicalHangar();
+            this.graphicalParking();
             this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
 
             try {

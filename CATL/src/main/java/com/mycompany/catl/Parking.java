@@ -66,4 +66,16 @@ public class Parking {
             parkingLock.unlock();
         }
     }
+    /**
+    * It transform the parking array into a String
+    * 
+    * @return a string of the airplanes in the parking
+    */
+    public String parkingToString(){
+        String answer="";
+        for(int i=0;i<airplanes.size();i++){
+            answer=answer+airplanes.get(i).getIdentifier()+", ";
+        }
+        return answer;
+    }
 }
