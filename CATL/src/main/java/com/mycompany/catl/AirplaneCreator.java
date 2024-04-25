@@ -47,6 +47,7 @@ public class AirplaneCreator extends Thread {
     
     public void run(){
         for(int i=0; i<8; i++){ //8000
+            gf.getGw().look(); //Check the pause/resume bottons
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -69,6 +70,7 @@ public class AirplaneCreator extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
+            gf.getGw().look(); //Check the pause/resume bottons
         }
     }
 }

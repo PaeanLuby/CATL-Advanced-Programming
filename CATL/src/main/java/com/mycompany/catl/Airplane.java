@@ -56,22 +56,26 @@ public class Airplane extends Thread {
     
     public void run(){
         while(true) {
+            gf.getGw().look(); //Check the pause/resume bottons
             //Airplane creation in the Hangar
             if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
             this.graphicalHangar();
+            gf.getGw().look(); //Check the pause/resume bottons
             this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
             //Airplane moves to the Parking Area
+            gf.getGw().look(); //Check the pause/resume bottons
             airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
             this.graphicalHangar();
             this.graphicalParking();
             this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
-
+            gf.getGw().look(); //Check the pause/resume bottons
             try {
                 airport.getParking().releaseAirplane(this);
                 airport.getBoardingGates().enterGate(this); //enter into free space
             } catch (InterruptedException ex) {
                 Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
             }
+            gf.getGw().look(); //Check the pause/resume bottons
             //boarding attempt
             try {
             int remainingAttempts = 3;
@@ -80,6 +84,7 @@ public class Airplane extends Thread {
                 this.setPassengers(airport.getPassengers()); //Take available passengers
                 long timeWait = (long) Math.random() * 4000 + 1000;
                 Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
+                gf.getGw().look(); //Check the pause/resume bottons
                 System.out.println("Not yet full. Attempts left: " + remainingAttempts);
                // this.log.write("Not yet full. Attempts left: " + remainingAttempts);
                     //return false; //Boarding in progress

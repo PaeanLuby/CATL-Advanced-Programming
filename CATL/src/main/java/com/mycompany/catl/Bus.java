@@ -47,9 +47,11 @@ public class Bus extends Thread{
         while (true){     
             try {
                 //Arrival to downtown
+                gf.getGw().look(); //Check the pause/resume bottons
                 this.log.write("The bus "+this.identifier+" has arrived to the city of "+this.getCity());
                 long sleepTime = (long)(Math.random() * 3000 + 2000);
-                sleep(sleepTime);                                                   
+                sleep(sleepTime);
+                gf.getGw().look(); //Check the pause/resume bottons
 
                 //Passengers access
                 long jumpIn = (long)(Math.random() * 50);
@@ -65,6 +67,7 @@ public class Bus extends Thread{
                 }
                 sleepTime = (long)(Math.random() * 500 + 500);
                 sleep(sleepTime);
+                gf.getGw().look(); //Check the pause/resume bottons
                 
                 //Arrival to airport 
                 passengersLock.lock();
@@ -87,6 +90,7 @@ public class Bus extends Thread{
                 //Wait for passengers
                 sleepTime = (long)(Math.random() * 3000 + 2000);
                 sleep(sleepTime);
+                gf.getGw().look(); //Check the pause/resume bottons
                 
                 //Passengers from the airport enter the bus
                 jumpIn = (long)(Math.random() * 50);
@@ -121,6 +125,7 @@ public class Bus extends Thread{
                 }
                 sleepTime = (long)(Math.random() * 5000 + 5000);
                 sleep(sleepTime);
+                gf.getGw().look(); //Check the pause/resume bottons
                 
                 //Arrival to downtown bus-stop
                 this.log.write("The bus "+this.identifier+" has arrived to the downtown of "+this.getCity()+" with "+passengers+" passengers.");

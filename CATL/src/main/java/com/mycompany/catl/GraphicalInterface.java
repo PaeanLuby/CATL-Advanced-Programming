@@ -739,11 +739,21 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_madridMaintenanceActionPerformed
 
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        // TODO add your handling code here:
+        if(!resumePressed) //If not pressed
+        {                 
+            resumePressed =true;             //we change it to pulsed
+            pausePressed= false;
+            gw.open();    //Close the gateway for paiters
+        }
     }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        // TODO add your handling code here:
+        if(!pausePressed) //If not pressed
+        {                 
+            resumePressed =false;             //we change it to pulsed
+            pausePressed=true;
+            gw.close();    //Close the gateway for paiters
+        }
     }//GEN-LAST:event_pauseButtonActionPerformed
 
     private void barcelonaHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaHangarActionPerformed
@@ -780,6 +790,13 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private Lock lockBarcelonaHangar = new ReentrantLock();
     private Lock lockMadridParking = new ReentrantLock();
     private Lock lockBarcelonaParking = new ReentrantLock();
+    private Gateway gw= new Gateway();
+    private boolean resumePressed = false;
+    private boolean pausePressed = false;
+
+    public Gateway getGw() {
+        return gw;
+    }
     
     public void setMadridPassengers(int madridPassengers) {
         this.madridPassengers.setText(String.valueOf(madridPassengers));
