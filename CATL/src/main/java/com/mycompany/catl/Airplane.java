@@ -4,11 +4,6 @@
  */
 package com.mycompany.catl;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,12 +103,6 @@ public class Airplane extends Thread {
         //airport.getBoardingGate(index).startBoarding(this); //capacity initially not reached 
        // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
        
-       //Closing buffer
-//        try {
-//            writerBuffer.close();
-//        } catch (IOException e) {
-//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-//        }
     }
     
     

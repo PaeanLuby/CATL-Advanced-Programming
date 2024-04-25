@@ -1,118 +1,223 @@
 
-2024-04-25T18:21:42.666918800: Airplane QD-0000 with capacity 109 has been created.
-2024-04-25T18:21:42.678944100: Airplane DI-0001 with capacity 208 has been created.
-2024-04-25T18:21:42.681672600: Airplane CE-0002 with capacity 248 has been created.
-2024-04-25T18:21:42.686318100: Airplane CG-0003 with capacity 256 has been created.
-2024-04-25T18:21:42.690525900: Airplane LC-0004 with capacity 276 has been created.
-2024-04-25T18:21:42.694126900: Airplane AJ-0005 with capacity 259 has been created.
-2024-04-25T18:21:42.694656300: The bus B-0000 has arrived to the city of Madrid
-2024-04-25T18:21:42.696739900: Airplane EO-0006 with capacity 147 has been created.
-2024-04-25T18:21:42.700417400: Airplane CS-0007 with capacity 131 has been created.
-2024-04-25T18:21:42.743979200: The airplane QD-0000 has been created in the hangar of the airport of: Madrid
-2024-04-25T18:21:42.744509400: The airplane DI-0001 has been created in the hangar of the airport of: Barcelona
-2024-04-25T18:21:42.773583800: The airplane CG-0003 has been created in the hangar of the airport of: Barcelona
-2024-04-25T18:21:42.774099300: The airplane LC-0004 has been created in the hangar of the airport of: Madrid
-2024-04-25T18:21:42.812312400: The airplane AJ-0005 has been created in the hangar of the airport of: Barcelona
-2024-04-25T18:21:42.820130200: The airplane CE-0002 has been created in the hangar of the airport of: Madrid
-2024-04-25T18:21:42.831228800: The airplane EO-0006 has been created in the hangar of the airport of: Madrid
-2024-04-25T18:21:42.832775: The airplane EO-0006 leaves the hangar and enters the parking in the airport of: Madrid
-2024-04-25T18:21:42.833286300: The airplane QD-0000 leaves the hangar and enters the parking in the airport of: Madrid
-2024-04-25T18:21:42.838606700: The airplane AJ-0005 leaves the hangar and enters the parking in the airport of: Barcelona
-2024-04-25T18:21:42.854488: The airplane LC-0004 leaves the hangar and enters the parking in the airport of: Madrid
-2024-04-25T18:21:42.860237600: The airplane CS-0007 has been created in the hangar of the airport of: Barcelona
-2024-04-25T18:21:42.877807300: The airplane CE-0002 leaves the hangar and enters the parking in the airport of: Madrid
-2024-04-25T18:21:42.880388800: The airplane DI-0001 leaves the hangar and enters the parking in the airport of: Barcelona
-2024-04-25T18:21:42.885590500: The airplane CG-0003 leaves the hangar and enters the parking in the airport of: Barcelona
-2024-04-25T18:21:43.574815: The bus B-0001 has arrived to the city of Barcelona
-2024-04-25T18:21:44.106784: The bus B-0002 has arrived to the city of Madrid
-2024-04-25T18:21:44.628758500: The bus B-0003 has arrived to the city of Barcelona
-2024-04-25T18:21:45.221396400: The bus B-0004 has arrived to the city of Madrid
-2024-04-25T18:21:45.747471700: The bus B-0005 has arrived to the city of Barcelona
-2024-04-25T18:21:46.058644: 43 passengers have accessed to the bus B-0000 that initiates its route towards the airport of Madrid
-2024-04-25T18:21:46.475249400: The bus B-0006 has arrived to the city of Madrid
-2024-04-25T18:21:46.591704700: Number of airport passengers is: 43
-2024-04-25T18:21:46.598326300: The bus B-0000 has arrived to the airport of Madrid with 43 passengers.
-2024-04-25T18:21:47.032123900: The bus B-0007 has arrived to the city of Barcelona
-2024-04-25T18:21:47.114892600: 45 passengers have accessed to the bus B-0003 that initiates its route towards the airport of Barcelona
-2024-04-25T18:21:47.594926100: 24 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
-2024-04-25T18:21:47.978408800: Number of airport passengers is: 45
-2024-04-25T18:21:47.978408800: The bus B-0003 has arrived to the airport of Barcelona with 45 passengers.
-2024-04-25T18:21:48.097307300: Number of airport passengers is: 69
-2024-04-25T18:21:48.097814800: The bus B-0001 has arrived to the airport of Barcelona with 24 passengers.
-2024-04-25T18:21:48.258113200: 8 passengers have accessed to the bus B-0002 that initiates its route towards the airport of Madrid
-2024-04-25T18:21:48.430773100: 24 passengers have accessed to the bus B-0004 that initiates its route towards the airport of Madrid
-2024-04-25T18:21:48.456822300: 10 passengers have accessed to the bus B-0005 that initiates its route towards the airport of Barcelona
-2024-04-25T18:21:48.754581500: 46 passengers have accessed to the bus B-0000 that initiates its route towards the downtown of Madrid
-2024-04-25T18:21:48.754581500: Number of airport passengers is: 0
-2024-04-25T18:21:48.866893700: Number of airport passengers is: 8
-2024-04-25T18:21:48.866893700: The bus B-0002 has arrived to the airport of Madrid with 8 passengers.
-2024-04-25T18:21:49.312250800: Number of airport passengers is: 79
-2024-04-25T18:21:49.312250800: The bus B-0005 has arrived to the airport of Barcelona with 10 passengers.
-2024-04-25T18:21:49.388843700: Number of airport passengers is: 32
-2024-04-25T18:21:49.388843700: The bus B-0004 has arrived to the airport of Madrid with 24 passengers.
-2024-04-25T18:21:49.982241500: 17 passengers have accessed to the bus B-0003 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:21:49.982241500: Number of airport passengers is: 62
-2024-04-25T18:21:50.525949500: 21 passengers have accessed to the bus B-0001 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:21:50.526457300: Number of airport passengers is: 41
-2024-04-25T18:21:50.839623300: 16 passengers have accessed to the bus B-0006 that initiates its route towards the airport of Madrid
-2024-04-25T18:21:51.658965300: Number of airport passengers is: 48
-2024-04-25T18:21:51.658965300: The bus B-0006 has arrived to the airport of Madrid with 16 passengers.
-2024-04-25T18:21:51.745608800: 2 passengers have accessed to the bus B-0007 that initiates its route towards the airport of Barcelona
-2024-04-25T18:21:51.791485600: 11 passengers have accessed to the bus B-0004 that initiates its route towards the downtown of Madrid
-2024-04-25T18:21:51.791485600: Number of airport passengers is: 37
-2024-04-25T18:21:51.900504500: 46 passengers have accessed to the bus B-0005 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:21:51.901014100: Number of airport passengers is: 0
-2024-04-25T18:21:52.482930700: Number of airport passengers is: 2
-2024-04-25T18:21:52.483438200: The bus B-0007 has arrived to the airport of Barcelona with 2 passengers.
-2024-04-25T18:21:52.801632: 14 passengers have accessed to the bus B-0002 that initiates its route towards the downtown of Madrid
-2024-04-25T18:21:52.801632: Number of airport passengers is: 23
-2024-04-25T18:21:54.684780100: 13 passengers have accessed to the bus B-0006 that initiates its route towards the downtown of Madrid
-2024-04-25T18:21:54.684780100: Number of airport passengers is: 10
-2024-04-25T18:21:55.025340: 17 passengers have accessed to the bus B-0007 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:21:55.025340: Number of airport passengers is: 0
-2024-04-25T18:21:56.024955100: The bus B-0000 has arrived to the downtown of Madrid with 46 passengers.
-2024-04-25T18:21:56.024955100: The bus B-0000 has arrived to the city of Madrid
-2024-04-25T18:21:57.381724900: The bus B-0001 has arrived to the downtown of Barcelona with 21 passengers.
-2024-04-25T18:21:57.381724900: The bus B-0001 has arrived to the city of Barcelona
-2024-04-25T18:21:57.774517800: The bus B-0003 has arrived to the downtown of Barcelona with 17 passengers.
-2024-04-25T18:21:57.774517800: The bus B-0003 has arrived to the city of Barcelona
-2024-04-25T18:21:59.585008100: 21 passengers have accessed to the bus B-0000 that initiates its route towards the airport of Madrid
-2024-04-25T18:21:59.881095400: The bus B-0004 has arrived to the downtown of Madrid with 11 passengers.
-2024-04-25T18:21:59.881095400: The bus B-0004 has arrived to the city of Madrid
-2024-04-25T18:22:00.138697200: The bus B-0006 has arrived to the downtown of Madrid with 13 passengers.
-2024-04-25T18:22:00.138697200: The bus B-0006 has arrived to the city of Madrid
-2024-04-25T18:22:00.147336700: Number of airport passengers is: 31
-2024-04-25T18:22:00.147342700: The bus B-0000 has arrived to the airport of Madrid with 21 passengers.
-2024-04-25T18:22:00.516803100: The bus B-0005 has arrived to the downtown of Barcelona with 46 passengers.
-2024-04-25T18:22:00.516803100: The bus B-0005 has arrived to the city of Barcelona
-2024-04-25T18:22:00.859709800: 48 passengers have accessed to the bus B-0003 that initiates its route towards the airport of Barcelona
-2024-04-25T18:22:01.025212100: The bus B-0007 has arrived to the downtown of Barcelona with 17 passengers.
-2024-04-25T18:22:01.025720400: The bus B-0007 has arrived to the city of Barcelona
-2024-04-25T18:22:01.327941800: 19 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
-2024-04-25T18:22:01.532774600: Number of airport passengers is: 48
-2024-04-25T18:22:01.532774600: The bus B-0003 has arrived to the airport of Barcelona with 48 passengers.
-2024-04-25T18:22:01.631236: The bus B-0002 has arrived to the downtown of Madrid with 14 passengers.
-2024-04-25T18:22:01.631236: The bus B-0002 has arrived to the city of Madrid
-2024-04-25T18:22:01.902367500: Number of airport passengers is: 67
-2024-04-25T18:22:01.902367500: The bus B-0001 has arrived to the airport of Barcelona with 19 passengers.
-2024-04-25T18:22:03.035234600: 15 passengers have accessed to the bus B-0006 that initiates its route towards the airport of Madrid
-2024-04-25T18:22:03.740211700: 28 passengers have accessed to the bus B-0007 that initiates its route towards the airport of Barcelona
-2024-04-25T18:22:03.801065400: Number of airport passengers is: 46
-2024-04-25T18:22:03.801573300: The bus B-0006 has arrived to the airport of Madrid with 15 passengers.
-2024-04-25T18:22:04.148551: 26 passengers have accessed to the bus B-0000 that initiates its route towards the downtown of Madrid
-2024-04-25T18:22:04.149059900: Number of airport passengers is: 20
-2024-04-25T18:22:04.214241900: 31 passengers have accessed to the bus B-0004 that initiates its route towards the airport of Madrid
-2024-04-25T18:22:04.309388: Number of airport passengers is: 95
-2024-04-25T18:22:04.309388: The bus B-0007 has arrived to the airport of Barcelona with 28 passengers.
-2024-04-25T18:22:04.414760100: 0 passengers have accessed to the bus B-0005 that initiates its route towards the airport of Barcelona
-2024-04-25T18:22:04.848546200: Number of airport passengers is: 51
-2024-04-25T18:22:04.848546200: The bus B-0004 has arrived to the airport of Madrid with 31 passengers.
-2024-04-25T18:22:05.000448200: Number of airport passengers is: 95
-2024-04-25T18:22:05.000448200: The bus B-0005 has arrived to the airport of Barcelona with 0 passengers.
-2024-04-25T18:22:06.212766100: 41 passengers have accessed to the bus B-0003 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:22:06.212766100: Number of airport passengers is: 54
-2024-04-25T18:22:06.296624500: 40 passengers have accessed to the bus B-0002 that initiates its route towards the airport of Madrid
-2024-04-25T18:22:06.815810900: 20 passengers have accessed to the bus B-0001 that initiates its route towards the downtown of Barcelona
-2024-04-25T18:22:06.816320300: Number of airport passengers is: 34
-2024-04-25T18:22:07.097030100: Number of airport passengers is: 91
-2024-04-25T18:22:07.097030100: The bus B-0002 has arrived to the airport of Madrid with 40 passengers.
+2024-04-25T18:47:42.145604600: Airplane UV-0000 with capacity 227 has been created.
+2024-04-25T18:47:42.191903300: The bus B-0000 has arrived to the city of Madrid
+2024-04-25T18:47:42.239200500: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:42.249474200: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:42.855559200: The bus B-0001 has arrived to the city of Barcelona
+2024-04-25T18:47:43.676100600: The bus B-0002 has arrived to the city of Madrid
+2024-04-25T18:47:43.694139300: Airplane IL-0001 with capacity 292 has been created.
+2024-04-25T18:47:43.697780: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:43.698291700: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:44.423563100: The bus B-0003 has arrived to the city of Barcelona
+2024-04-25T18:47:45.258390: Plane UV-0000 successfully boarded.
+2024-04-25T18:47:45.258899400: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:45.260431700: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:45.538181700: 9 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
+2024-04-25T18:47:45.550546900: Airplane HX-0002 with capacity 116 has been created.
+2024-04-25T18:47:45.552606900: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:45.553628200: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:46.407404800: 35 passengers have accessed to the bus B-0000 that initiates its route towards the airport of Madrid
+2024-04-25T18:47:46.442621800: Number of airport passengers is: 9
+2024-04-25T18:47:46.449935800: The bus B-0001 has arrived to the airport of Barcelona with 9 passengers.
+2024-04-25T18:47:46.701654200: Plane IL-0001 successfully boarded.
+2024-04-25T18:47:46.702169600: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:46.703190600: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:46.769094900: Airplane MT-0003 with capacity 253 has been created.
+2024-04-25T18:47:46.771739400: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:46.772766700: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:47.184493: 39 passengers have accessed to the bus B-0002 that initiates its route towards the airport of Madrid
+2024-04-25T18:47:47.220797300: Number of airport passengers is: 35
+2024-04-25T18:47:47.220797300: The bus B-0000 has arrived to the airport of Madrid with 35 passengers.
+2024-04-25T18:47:47.354141300: 35 passengers have accessed to the bus B-0003 that initiates its route towards the airport of Barcelona
+2024-04-25T18:47:47.900310700: Number of airport passengers is: 44
+2024-04-25T18:47:47.900310700: The bus B-0003 has arrived to the airport of Barcelona with 35 passengers.
+2024-04-25T18:47:48.119543200: Number of airport passengers is: 74
+2024-04-25T18:47:48.120057500: The bus B-0002 has arrived to the airport of Madrid with 39 passengers.
+2024-04-25T18:47:48.301946100: Plane UV-0000 successfully boarded.
+2024-04-25T18:47:48.302454400: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:48.303475200: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:48.593630500: Plane HX-0002 successfully boarded.
+2024-04-25T18:47:48.594140200: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:48.595162700: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:49.556273700: Airplane RG-0004 with capacity 238 has been created.
+2024-04-25T18:47:49.558330100: The airplane RG-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:49.559347300: The airplane RG-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:49.754319900: Plane IL-0001 successfully boarded.
+2024-04-25T18:47:49.754837300: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:49.755861700: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:49.824892: Plane MT-0003 successfully boarded.
+2024-04-25T18:47:49.825405300: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:49.825918600: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:50.701336100: 8 passengers have accessed to the bus B-0003 that initiates its route towards the downtown of Barcelona
+2024-04-25T18:47:50.701336100: Number of airport passengers is: 36
+2024-04-25T18:47:51.118884900: 23 passengers have accessed to the bus B-0001 that initiates its route towards the downtown of Barcelona
+2024-04-25T18:47:51.118902700: Number of airport passengers is: 13
+2024-04-25T18:47:51.386095600: Plane UV-0000 successfully boarded.
+2024-04-25T18:47:51.386614400: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:51.387641100: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:51.682777800: Plane HX-0002 successfully boarded.
+2024-04-25T18:47:51.683288500: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:51.684309900: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:51.754321600: Airplane WK-0005 with capacity 286 has been created.
+2024-04-25T18:47:51.758487: The airplane WK-0005 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:51.759000300: The airplane WK-0005 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:51.783516: 48 passengers have accessed to the bus B-0000 that initiates its route towards the downtown of Madrid
+2024-04-25T18:47:51.783516: Number of airport passengers is: 26
+2024-04-25T18:47:52.198584100: 39 passengers have accessed to the bus B-0002 that initiates its route towards the downtown of Madrid
+2024-04-25T18:47:52.199103200: Number of airport passengers is: 0
+2024-04-25T18:47:52.644904500: Plane RG-0004 successfully boarded.
+2024-04-25T18:47:52.645415400: The airplane RG-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:52.646440200: The airplane RG-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:52.771265900: Plane IL-0001 successfully boarded.
+2024-04-25T18:47:52.771775: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:52.772286300: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:52.844343600: Plane MT-0003 successfully boarded.
+2024-04-25T18:47:52.844850700: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:52.845360700: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:53.111759700: Airplane HQ-0006 with capacity 114 has been created.
+2024-04-25T18:47:53.113301400: The airplane HQ-0006 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:53.113809500: The airplane HQ-0006 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:54.389720900: Plane UV-0000 successfully boarded.
+2024-04-25T18:47:54.390232100: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:54.391258400: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:54.687509500: Plane HX-0002 successfully boarded.
+2024-04-25T18:47:54.688023300: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:54.689045800: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:54.777182800: Plane WK-0005 successfully boarded.
+2024-04-25T18:47:54.777693600: The airplane WK-0005 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:54.778205300: The airplane WK-0005 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:55.648406800: Plane RG-0004 successfully boarded.
+2024-04-25T18:47:55.648932900: The airplane RG-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:55.649441800: The airplane RG-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:55.757593900: Airplane EO-0007 with capacity 282 has been created.
+2024-04-25T18:47:55.760199700: The airplane EO-0007 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:55.760712400: The airplane EO-0007 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:55.789658800: Plane IL-0001 successfully boarded.
+2024-04-25T18:47:55.790172800: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:55.790684900: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:55.863762200: Plane MT-0003 successfully boarded.
+2024-04-25T18:47:55.864269300: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:55.864782500: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:56.116136200: Plane HQ-0006 successfully boarded.
+2024-04-25T18:47:56.116649: The airplane HQ-0006 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:56.117165800: The airplane HQ-0006 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:57.392409400: Plane UV-0000 successfully boarded.
+2024-04-25T18:47:57.392923800: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:57.393437500: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:57.516031300: The bus B-0000 has arrived to the downtown of Madrid with 48 passengers.
+2024-04-25T18:47:57.516031300: The bus B-0000 has arrived to the city of Madrid
+2024-04-25T18:47:57.517659400: The bus B-0002 has arrived to the downtown of Madrid with 39 passengers.
+2024-04-25T18:47:57.517659400: The bus B-0002 has arrived to the city of Madrid
+2024-04-25T18:47:57.690339800: Plane HX-0002 successfully boarded.
+2024-04-25T18:47:57.690854900: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:57.691892100: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:57.794386100: Plane WK-0005 successfully boarded.
+2024-04-25T18:47:57.794891500: The airplane WK-0005 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:57.794905: The airplane WK-0005 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:58.652240300: Plane RG-0004 successfully boarded.
+2024-04-25T18:47:58.652756900: The airplane RG-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:58.653781: The airplane RG-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:47:58.779350: Plane EO-0007 successfully boarded.
+2024-04-25T18:47:58.779861800: The airplane EO-0007 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:58.780378300: The airplane EO-0007 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:58.809112800: Plane IL-0001 successfully boarded.
+2024-04-25T18:47:58.809624100: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:58.810136900: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:58.853709200: The bus B-0003 has arrived to the downtown of Barcelona with 8 passengers.
+2024-04-25T18:47:58.853709200: The bus B-0003 has arrived to the city of Barcelona
+2024-04-25T18:47:58.881128400: Plane MT-0003 successfully boarded.
+2024-04-25T18:47:58.881638700: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:47:58.882739400: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:47:59.118485400: Plane HQ-0006 successfully boarded.
+2024-04-25T18:47:59.118998100: The airplane HQ-0006 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:47:59.119509300: The airplane HQ-0006 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:48:00.291950700: The bus B-0001 has arrived to the downtown of Barcelona with 23 passengers.
+2024-04-25T18:48:00.291950700: The bus B-0001 has arrived to the city of Barcelona
+2024-04-25T18:48:00.395695100: Plane UV-0000 successfully boarded.
+2024-04-25T18:48:00.396209800: The airplane UV-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:48:00.396721800: The airplane UV-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:48:00.693888: Plane HX-0002 successfully boarded.
+2024-04-25T18:48:00.694401700: The airplane HX-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:48:00.694951800: The airplane HX-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:48:00.810701700: Plane WK-0005 successfully boarded.
+2024-04-25T18:48:00.811219300: The airplane WK-0005 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:48:00.811736300: The airplane WK-0005 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:48:00.845132600: 21 passengers have accessed to the bus B-0002 that initiates its route towards the airport of Madrid
+2024-04-25T18:48:01.425881500: Number of airport passengers is: 21
+2024-04-25T18:48:01.425881500: The bus B-0002 has arrived to the airport of Madrid with 21 passengers.
+2024-04-25T18:48:01.656017: Plane RG-0004 successfully boarded.
+2024-04-25T18:48:01.656532400: The airplane RG-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:48:01.657046100: The airplane RG-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:48:01.799237400: Plane EO-0007 successfully boarded.
+2024-04-25T18:48:01.799761400: The airplane EO-0007 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:48:01.800271100: The airplane EO-0007 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:48:01.819163100: 48 passengers have accessed to the bus B-0000 that initiates its route towards the airport of Madrid
+2024-04-25T18:48:01.828798700: Plane IL-0001 successfully boarded.
+2024-04-25T18:48:01.829315900: The airplane IL-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:48:01.829829800: The airplane IL-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:48:01.899080: Plane MT-0003 successfully boarded.
+2024-04-25T18:48:01.899594100: The airplane MT-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:48:01.900119200: The airplane MT-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:49:52.390873: Airplane SO-0000 with capacity 142 has been created.
+2024-04-25T18:49:52.396483700: The bus B-0000 has arrived to the city of Madrid
+2024-04-25T18:49:52.465077500: The airplane SO-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:52.473799900: The airplane SO-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:52.809066400: The bus B-0001 has arrived to the city of Barcelona
+2024-04-25T18:49:53.546344100: The bus B-0002 has arrived to the city of Madrid
+2024-04-25T18:49:53.867184800: Airplane AN-0001 with capacity 139 has been created.
+2024-04-25T18:49:53.870260300: The airplane AN-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:49:53.871281800: The airplane AN-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:49:54.111548300: The bus B-0003 has arrived to the city of Barcelona
+2024-04-25T18:49:55.483340: Plane SO-0000 successfully boarded.
+2024-04-25T18:49:55.484360900: The airplane SO-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:55.484870300: The airplane SO-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:55.774359300: 10 passengers have accessed to the bus B-0000 that initiates its route towards the airport of Madrid
+2024-04-25T18:49:56.618780300: Number of airport passengers is: 10
+2024-04-25T18:49:56.623868200: The bus B-0000 has arrived to the airport of Madrid with 10 passengers.
+2024-04-25T18:49:56.640281700: Airplane IL-0002 with capacity 257 has been created.
+2024-04-25T18:49:56.643357200: The airplane IL-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:56.643866900: The airplane IL-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:56.684862800: 31 passengers have accessed to the bus B-0003 that initiates its route towards the airport of Barcelona
+2024-04-25T18:49:56.836472600: 44 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
+2024-04-25T18:49:56.873342700: Plane AN-0001 successfully boarded.
+2024-04-25T18:49:56.873853800: The airplane AN-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:49:56.874876400: The airplane AN-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:49:57.397636700: Number of airport passengers is: 44
+2024-04-25T18:49:57.397636700: The bus B-0001 has arrived to the airport of Barcelona with 44 passengers.
+2024-04-25T18:49:57.517216400: Number of airport passengers is: 75
+2024-04-25T18:49:57.517216400: The bus B-0003 has arrived to the airport of Barcelona with 31 passengers.
+2024-04-25T18:49:57.636632100: 5 passengers have accessed to the bus B-0002 that initiates its route towards the airport of Madrid
+2024-04-25T18:49:57.652004400: Airplane JI-0003 with capacity 220 has been created.
+2024-04-25T18:49:57.653532600: The airplane JI-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:49:57.654549200: The airplane JI-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:49:58.273061200: Number of airport passengers is: 15
+2024-04-25T18:49:58.273061200: The bus B-0002 has arrived to the airport of Madrid with 5 passengers.
+2024-04-25T18:49:58.499563900: Plane SO-0000 successfully boarded.
+2024-04-25T18:49:58.500074300: The airplane SO-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:58.501627500: The airplane SO-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:58.644274500: 35 passengers have accessed to the bus B-0000 that initiates its route towards the downtown of Madrid
+2024-04-25T18:49:58.644792300: Number of airport passengers is: 0
+2024-04-25T18:49:59.645086600: Plane IL-0002 successfully boarded.
+2024-04-25T18:49:59.645598100: The airplane IL-0002 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:59.646623800: The airplane IL-0002 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:59.849545400: Airplane MF-0004 with capacity 214 has been created.
+2024-04-25T18:49:59.851588100: The airplane MF-0004 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:49:59.852613500: The airplane MF-0004 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:49:59.963915600: Plane AN-0001 successfully boarded.
+2024-04-25T18:49:59.964426500: The airplane AN-0001 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:49:59.965446400: The airplane AN-0001 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:50:00.281686500: 24 passengers have accessed to the bus B-0001 that initiates its route towards the downtown of Barcelona
+2024-04-25T18:50:00.281686500: Number of airport passengers is: 51
+2024-04-25T18:50:00.750242600: Plane JI-0003 successfully boarded.
+2024-04-25T18:50:00.750753700: The airplane JI-0003 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:50:00.751263900: The airplane JI-0003 leaves the hangar and enters the parking in the airport of: Barcelona
+2024-04-25T18:50:01.503714600: Plane SO-0000 successfully boarded.
+2024-04-25T18:50:01.504235300: The airplane SO-0000 has been created in the hangar of the airport of: Madrid
+2024-04-25T18:50:01.504746900: The airplane SO-0000 leaves the hangar and enters the parking in the airport of: Madrid
+2024-04-25T18:50:01.642908100: 44 passengers have accessed to the bus B-0002 that initiates its route towards the downtown of Madrid
+2024-04-25T18:50:01.642908100: Number of airport passengers is: 0
+2024-04-25T18:50:01.908232100: 43 passengers have accessed to the bus B-0003 that initiates its route towards the downtown of Barcelona
+2024-04-25T18:50:01.908232100: Number of airport passengers is: 8
+2024-04-25T18:50:02.365239100: Airplane FU-0005 with capacity 193 has been created.
+2024-04-25T18:50:02.366793700: The airplane FU-0005 has been created in the hangar of the airport of: Barcelona
+2024-04-25T18:50:02.367822600: The airplane FU-0005 leaves the hangar and enters the parking in the airport of: Barcelona

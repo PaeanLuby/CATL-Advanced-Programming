@@ -770,12 +770,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_barcelonaBusAirportTownActionPerformed
 
-    public void setMadridPassengers(int madridPassengers) {
-        this.madridPassengers.setText(String.valueOf(madridPassengers));
-    }
-    public void setBarcelonaPassengers(int madridPassengers) {
-        this.barcelonaPassengers.setText(String.valueOf(madridPassengers));
-    }
+    //All set methods for the graphical interface avoiding mutual exclusion when necessary
     
     private Lock lockMadridBusTownAirport = new ReentrantLock();
     private Lock lockBarcelonaBusTownAirport = new ReentrantLock();
@@ -786,7 +781,13 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private Lock lockMadridParking = new ReentrantLock();
     private Lock lockBarcelonaParking = new ReentrantLock();
     
-    
+    public void setMadridPassengers(int madridPassengers) {
+        this.madridPassengers.setText(String.valueOf(madridPassengers));
+    }
+    public void setBarcelonaPassengers(int madridPassengers) {
+        this.barcelonaPassengers.setText(String.valueOf(madridPassengers));
+    }
+     
     public void  setMadridBusTownAirport(String bus){
         lockMadridBusTownAirport.lock();
         try{
@@ -869,6 +870,55 @@ public class GraphicalInterface extends javax.swing.JFrame {
             lockBarcelonaParking.unlock();
         }
     }
+    
+    public void setMadridGate1(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate2(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate3(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate4(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate5(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate6(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setBarcelonaGate1(String gate){
+        this.barcelonaGate1.setText(gate);
+    }
+
+    public void setBarcelonaGate2(String gate){
+        this.barcelonaGate2.setText(gate);
+    }
+
+    public void setBarcelonaGate3(String gate){
+        this.barcelonaGate3.setText(gate);
+    }
+
+    public void setBarcelonaGate4(String gate){
+        this.barcelonaGate4.setText(gate);
+    }
+
+    public void setBarcelonaGate5(String gate){
+        this.barcelonaGate5.setText(gate);
+    }
+
+    public void setBarcelonaGate6(String gate){
+        this.barcelonaGate6.setText(gate);
+    }
+
 
     /**
      * @param args the command line arguments

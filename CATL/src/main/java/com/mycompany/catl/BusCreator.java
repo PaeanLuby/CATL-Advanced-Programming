@@ -32,7 +32,7 @@ public class BusCreator extends Thread{
 
     
     public void run(){
-        for(int i=0; i<8; i++){ //4000
+        for(int i=0; i<4; i++){ //4000
             Bus bus;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -53,12 +53,6 @@ public class BusCreator extends Thread{
             } catch (InterruptedException ex) {
                 Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-//            try {
-//                sleep(15000);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         }
     }
 }

@@ -85,6 +85,7 @@ public class Hangar {
     */
     public String hangarToString(){
         String answer="";
+      //  System.out.println("----------------"+airplanes.size()+"-------------------");
         for(int i=0;i<airplanes.size();i++){
             answer=answer+airplanes.get(i).getIdentifier()+", ";
         }

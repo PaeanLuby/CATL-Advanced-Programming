@@ -63,17 +63,12 @@ public class AirplaneCreator extends Thread {
             }
             airplane.start();
             
-            long sleepTime = (long)(Math.random() * 2 + 1);  //random between 1 and 3. Temporarily modified for testing
+            long sleepTime = (long)(Math.random() * 2000 + 1000);  //random between 1 and 3
             try {
                 sleep(sleepTime);    //sleeps between 1 and 3 second between each bus
             } catch (InterruptedException ex) {
                 Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
-//            try {
-//                sleep(15000);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         }
     }
 }
