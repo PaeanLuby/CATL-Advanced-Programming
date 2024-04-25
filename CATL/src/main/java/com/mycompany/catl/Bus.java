@@ -42,7 +42,7 @@ public class Bus extends Thread{
 
     
     public void run(){
-       // while (true){     
+        while (true){     
             try {
                 //Arrival to downtown
                 this.log.write("The bus "+this.identifier+" has arrived to the city of "+this.getCity());
@@ -101,6 +101,6 @@ public class Bus extends Thread{
             } catch (InterruptedException ex) {
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
             }
-        //}
+        }
     } 
 }

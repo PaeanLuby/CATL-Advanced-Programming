@@ -41,7 +41,8 @@ public class BoardingGates {
                 System.out.println("Space " + i + " available.");
                 gates[i] = airplane;
                 gate = i;
-                System.out.println("Plane entered into boarding gate " + i);
+                System.out.println("Plane " + airplane.getIdentifier() + " entered into boarding gate " + i);
+                break;
             }
             } 
         } 
@@ -51,8 +52,10 @@ public class BoardingGates {
     
     public void releaseGate(Airplane airplane) {
         access.lock();
+        System.out.println("False");
         for(int i = 0; i < 6; i++) { 
             if (gates[i] == airplane) {
+                System.out.println("True");
                 gates[i] = null;
                 break;
             }

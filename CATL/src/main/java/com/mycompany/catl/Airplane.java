@@ -36,43 +36,44 @@ public class Airplane extends Thread {
     }
     
     public void run(){
+        while(true) {
+            //Airplane creation in the Hangar
+            if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
+            this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
+            //Airplane moves to the Parking Area
+            airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
+            this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
 
-        //Airplane creation in the Hangar
-        if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
-        this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
-        //Airplane moves to the Parking Area
-        airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
-        this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
-
-        try {
-            airport.getParking().releaseAirplane(this);
-            airport.getBoardingGates().enterGate(this); //enter into free space
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //boarding attempt
-        try {
-        int remainingAttempts = 3;
-        while (capacity >= airport.getPassengers() && remainingAttempts > 0) {
-            remainingAttempts--;
-            this.setPassengers(airport.getPassengers()); //Take available passengers
-            long timeWait = (long) Math.random() * 4000 + 1000;
-            Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
-            System.out.println("Not yet full. Attempts left: " + remainingAttempts);
-            this.log.write("Not yet full. Attempts left: " + remainingAttempts);
-                //return false; //Boarding in progress
-            } 
-
-            for (int i = 0; i < passengers; i++) {
-                   Thread.sleep((long) Math.random()*2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
+            try {
+                airport.getParking().releaseAirplane(this);
+                airport.getBoardingGates().enterGate(this); //enter into free space
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Plane " + identifier + " successfully boarded.");   
-            this.log.write("Plane " + identifier + " successfully boarded.");
-            airport.getBoardingGates().releaseGate(this);
-                
-                //return true; //Boarding successful
-        } catch (InterruptedException e){
-        } finally {
+            //boarding attempt
+            try {
+            int remainingAttempts = 3;
+            while (capacity >= airport.getPassengers() && remainingAttempts > 0) {
+                remainingAttempts--;
+                this.setPassengers(airport.getPassengers()); //Take available passengers
+                long timeWait = (long) Math.random() * 4000 + 1000;
+                Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
+                System.out.println("Not yet full. Attempts left: " + remainingAttempts);
+                this.log.write("Not yet full. Attempts left: " + remainingAttempts);
+                    //return false; //Boarding in progress
+                } 
+
+                for (int i = 0; i < passengers; i++) {
+                       Thread.sleep((long) Math.random()*2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                }
+                System.out.println("Plane " + identifier + " successfully boarded.");   
+                this.log.write("Plane " + identifier + " successfully boarded.");
+                airport.getBoardingGates().releaseGate(this);
+
+                    //return true; //Boarding successful
+            } catch (InterruptedException e){
+            } finally {
+            }
         }
         
 
