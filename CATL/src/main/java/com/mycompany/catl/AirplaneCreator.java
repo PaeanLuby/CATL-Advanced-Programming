@@ -44,7 +44,7 @@ public class AirplaneCreator extends Thread {
     }
     
     public void run(){
-        for(int i=0; i<8; i++){ //8000
+        for(int i=0; i<8000; i++){ //8000
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -61,7 +61,7 @@ public class AirplaneCreator extends Thread {
             }
             airplane.start();
             
-            long sleepTime = (long)(Math.random() * 2 + 1);  //random between 1 and 3. Temporarily modified for testing
+            long sleepTime = (long)(Math.random() * 2000 + 1000);  //random between 1 and 3. Temporarily modified for testing
             try {
                 sleep(sleepTime);    //sleeps between 1 and 3 second between each bus
             } catch (InterruptedException ex) {

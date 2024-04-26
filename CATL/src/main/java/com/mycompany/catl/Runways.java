@@ -24,7 +24,7 @@ public class Runways {
         access.lock();
         int runway = -1;
         while (runway == -1) {
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 4; i++) {
             if (runways[i] == null) {
                 System.out.println("Space " + i + " available in the runway.");
                 runways[i] = airplane;

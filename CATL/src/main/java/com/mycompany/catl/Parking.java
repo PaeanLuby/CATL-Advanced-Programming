@@ -35,11 +35,16 @@ public class Parking {
         try{
             added = this.airplanes.offer(airplane); //add the airplane at the end of the list
             System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking: " + added);
+            System.out.println("Current airplanes are: ");
+            for(Airplane plane : airplanes) {
+                System.out.println(airplane.getIdentifier());
+            }
         } catch(Exception e) {
         } finally{
             parkingLock.unlock();             //unlock the lock
         } return added;
     }
+    
     
     /**
     * It takes the airplane from the parking area with FIFO strategy

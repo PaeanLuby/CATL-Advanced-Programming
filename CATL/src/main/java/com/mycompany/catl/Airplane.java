@@ -45,7 +45,6 @@ public class Airplane extends Thread {
             this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
 
             try {
-                airport.getParking().releaseAirplane(this);
                 airport.getBoardingGates().enterGate(this); //enter into free space
             } catch (InterruptedException ex) {
                 Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,9 +68,13 @@ public class Airplane extends Thread {
                 System.out.println("Plane " + identifier + " successfully boarded.");   
                 this.log.write("Plane " + identifier + " successfully boarded.");
                 airport.getBoardingGates().releaseGate(this);
-                long checkDuration = (long) (1 + Math.random() * 4);
+                long checkDuration = (long) (1 + Math.random() * 4); //Check for period between 1 and 5 seconds
+                airport.getTaxiArea().enterTaxiArea(this); //Enter taxi area
+                int timesChecked = 0;
                 while (airport.getRunways().enterRunway(this) == -1) {
-                    
+                    airport.getTaxiArea().pilotChecks(timesChecked, this);
+                    checkDuration = (long) (1 + Math.random() * 4);
+                    timesChecked++;
                 }
                     //return true; //Boarding successful
             } catch (InterruptedException e){

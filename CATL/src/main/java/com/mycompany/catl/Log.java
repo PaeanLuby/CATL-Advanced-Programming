@@ -26,27 +26,34 @@ public class Log {
 
     public Log() {
         try {
-        // Crear un FileWriter con el nombre del archivo, utilizando true para permitir agregar al final del archivo
+        // Create a FileWriter with the file name, using true to allow appending to the end of the file
         writer = new FileWriter(airportEvolution, true);
-        // Crear un BufferedWriter para escribir en el archivo
+        // Create a BufferedWriter to write in the file
         writerBuffer = new BufferedWriter(writer);
     } catch (IOException e) {
         System.err.println("Error al abrir el archivo: " + e.getMessage());
     }
     }
-
+    
+    /**
+    * It writes what ever you want in the log avoiding mutual exclusion
+    * 
+    * @param text the text that you want to write
+    */
     public void write(String text){
         textLock.lock(); //lock the log for writing
         try{
-            LocalDateTime date = LocalDateTime.now();
-            writerBuffer.write(date+": "+text);
-            writerBuffer.newLine();
+            LocalDateTime date = LocalDateTime.now(); //take the date to the second
+            writerBuffer.write(date+": "+text); //write date: text
+            writerBuffer.newLine();             //new line
         } catch(Exception e) {
         } finally {
-            textLock.unlock();
+            textLock.unlock();//unlock the log
         }
     }
-    
+    /**
+    * It closes the buffer and the filewriter
+    */
     public void close() {
         try {
             if (writerBuffer != null) {

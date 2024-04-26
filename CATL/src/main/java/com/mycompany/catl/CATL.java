@@ -47,10 +47,12 @@ public class CATL {
         Lock madridPassengersLock = new ReentrantLock();
         Lock barcelonaPassengersLock = new ReentrantLock();
         
+       // GraphicalInterface gf = new GraphicalInterface();
 
         AirplaneCreator airplaneCreator = new  AirplaneCreator(log,madrid,barcelona);
         BusCreator busCreator = new BusCreator(log,madrid,barcelona,madridPassengersLock,barcelonaPassengersLock);
         
+        //If the program is finished or interrupted the log is automaticly closed to avoid the loss of information
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             airplaneCreator.interrupt();
             busCreator.interrupt();
@@ -59,15 +61,6 @@ public class CATL {
         
         airplaneCreator.start();
         busCreator.start();
-        
-//        try {
-//            airplaneCreator.join();
-//            busCreator.join();
-//            log.close();
-//            System.out.println("THE END BBY");
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(CATL.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
     }
 }

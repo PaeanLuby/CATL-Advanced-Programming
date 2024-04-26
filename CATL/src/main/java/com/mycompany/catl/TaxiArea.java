@@ -15,11 +15,15 @@ public class TaxiArea {
     private List<Airplane> airplanes;
 
     public TaxiArea() {
-
+        airplanes = new ArrayList<>();
     }
     
-    public void pilotChecks() {
-        
+    public void enterTaxiArea(Airplane airplane) {
+        airplanes.add(airplane);
+    }
+    
+    public void pilotChecks(int num, Airplane airplane) {
+        System.out.println("Pilot check " + num + " for airplane " + airplane.getIdentifier());
     }
     
     public List<Airplane> getAirplanes() {
