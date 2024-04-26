@@ -4,11 +4,6 @@
  */
 package com.mycompany.catl;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,32 +18,63 @@ public class Airplane extends Thread {
     private Log log;
     private Airport airport;
     private int boardingGateNumber;
+    private GraphicalInterface gf;
     
-    public Airplane(int capacity, String identifier, Log log, Airport airport) {
+    public Airplane(int capacity, String identifier, Log log, Airport airport,GraphicalInterface gf) {
         this.capacity = capacity;
         this.passengers = 0;
         this.identifier = identifier;
         this.log = log;
         this.airport = airport;
+        this.gf=gf;
         this.boardingGateNumber = -1;
         System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
         this.log.write("Airplane " + identifier + " with capacity " + capacity + " has been created.");
     }
+    /**
+    * Graphical interface output of the hangar
+    */
+    public void graphicalHangar(){
+        if(this.getCity()=="Madrid"){
+                    gf.setMadridHangar(airport.getHangar().hangarToString());
+                }
+                else{
+                    gf.setBarcelonaHangar(airport.getHangar().hangarToString());
+                }
+    }
+    /**
+    * Graphical interface output of the parking
+    */
+    public void graphicalParking(){
+        if(this.getCity()=="Madrid"){
+                    gf.setMadridParking(airport.getParking().parkingToString());
+                }
+                else{
+                    gf.setBarcelonaParking(airport.getParking().parkingToString());
+                }
+    }
     
     public void run(){
         while(true) {
+            gf.getGw().look(); //Check the pause/resume bottons
             //Airplane creation in the Hangar
             if (!airport.getHangar().addAirplane(this)){System.out.println("ERROR inserting the plane in the hangar");} //possible error detection
+            this.graphicalHangar();
+            gf.getGw().look(); //Check the pause/resume bottons
             this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
             //Airplane moves to the Parking Area
+            gf.getGw().look(); //Check the pause/resume bottons
             airport.getParking().addAirplane(airport.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
+            this.graphicalHangar();
+            this.graphicalParking();
             this.log.write("The airplane "+this.identifier+" leaves the hangar and enters the parking in the airport of: "+this.getCity());
-
+            gf.getGw().look(); //Check the pause/resume bottons
             try {
                 airport.getBoardingGates().enterGate(this); //enter into free space
             } catch (InterruptedException ex) {
                 Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
             }
+            gf.getGw().look(); //Check the pause/resume bottons
             //boarding attempt
             try {
             int remainingAttempts = 3;
@@ -57,8 +83,9 @@ public class Airplane extends Thread {
                 this.setPassengers(airport.getPassengers()); //Take available passengers
                 long timeWait = (long) Math.random() * 4000 + 1000;
                 Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
+                gf.getGw().look(); //Check the pause/resume bottons
                 System.out.println("Not yet full. Attempts left: " + remainingAttempts);
-                this.log.write("Not yet full. Attempts left: " + remainingAttempts);
+               // this.log.write("Not yet full. Attempts left: " + remainingAttempts);
                     //return false; //Boarding in progress
                 } 
 
@@ -87,12 +114,6 @@ public class Airplane extends Thread {
         //airport.getBoardingGate(index).startBoarding(this); //capacity initially not reached 
        // airport.getBoardingGate().addAirplane(airport.getParking().takeAirplane(this));
        
-       //Closing buffer
-//        try {
-//            writerBuffer.close();
-//        } catch (IOException e) {
-//            System.err.println("Error al cerrar el BufferedWriter: " + e.getMessage());
-//        }
     }
     
     

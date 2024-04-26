@@ -4,22 +4,22 @@
  */
 package com.mycompany.catl;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  *
  * @author THINKPAD
  */
 public class GraphicalInterface extends javax.swing.JFrame {
-    //private Airport madrid;
-    //private Airport barcelona;
-
     /**
      * Creates new form GraphicalInterface
      */
-    public GraphicalInterface(){//Airport madrid, Airport Barcelona) {
+    public GraphicalInterface() {
         initComponents();
-        //this.madrid=madrid;
-        //this.barcelona=barcelona;
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +53,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
         jLabel33 = new javax.swing.JLabel();
         madridMaintenance = new javax.swing.JTextField();
         madridHangar = new javax.swing.JTextField();
-        madridParkingArea = new javax.swing.JTextField();
+        madridParking = new javax.swing.JTextField();
         madridGate1 = new javax.swing.JTextField();
         madridGate4 = new javax.swing.JTextField();
         madridGate2 = new javax.swing.JTextField();
@@ -81,7 +81,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         barcelonaMaintenance = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
-        barcelonaParkingArea = new javax.swing.JTextField();
+        barcelonaParking = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         barcelonaGate1 = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
@@ -181,11 +181,11 @@ public class GraphicalInterface extends javax.swing.JFrame {
             }
         });
 
-        madridParkingArea.setEditable(false);
-        madridParkingArea.setBackground(new java.awt.Color(255, 255, 255));
-        madridParkingArea.addActionListener(new java.awt.event.ActionListener() {
+        madridParking.setEditable(false);
+        madridParking.setBackground(new java.awt.Color(255, 255, 255));
+        madridParking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                madridParkingAreaActionPerformed(evt);
+                madridParkingActionPerformed(evt);
             }
         });
 
@@ -238,6 +238,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         madridPassengers.setEditable(false);
         madridPassengers.setBackground(new java.awt.Color(255, 255, 255));
+        madridPassengers.setText("0");
         madridPassengers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 madridPassengersActionPerformed(evt);
@@ -266,6 +267,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         barcelonaPassengers.setEditable(false);
         barcelonaPassengers.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaPassengers.setText("0");
 
         jLabel38.setText("Hangar:");
 
@@ -289,11 +291,11 @@ public class GraphicalInterface extends javax.swing.JFrame {
 
         jLabel40.setText("Parking Area:");
 
-        barcelonaParkingArea.setEditable(false);
-        barcelonaParkingArea.setBackground(new java.awt.Color(255, 255, 255));
-        barcelonaParkingArea.addActionListener(new java.awt.event.ActionListener() {
+        barcelonaParking.setEditable(false);
+        barcelonaParking.setBackground(new java.awt.Color(255, 255, 255));
+        barcelonaParking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                barcelonaParkingAreaActionPerformed(evt);
+                barcelonaParkingActionPerformed(evt);
             }
         });
 
@@ -397,7 +399,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(madridParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(madridParking, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -515,7 +517,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel40)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(barcelonaParkingArea)))
+                                        .addComponent(barcelonaParking)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel49)
@@ -544,8 +546,8 @@ public class GraphicalInterface extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(pauseButton)
+                .addGap(25, 25, 25)
                 .addComponent(resumeButton)
                 .addGap(361, 361, 361))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -594,7 +596,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
-                            .addComponent(barcelonaParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(barcelonaParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -660,7 +662,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(madridParkingArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(madridParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -724,9 +726,9 @@ public class GraphicalInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void madridParkingAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridParkingAreaActionPerformed
+    private void madridParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridParkingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_madridParkingAreaActionPerformed
+    }//GEN-LAST:event_madridParkingActionPerformed
 
     private void madridHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridHangarActionPerformed
         // TODO add your handling code here:
@@ -737,11 +739,21 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_madridMaintenanceActionPerformed
 
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        // TODO add your handling code here:
+        if(!resumePressed) //If not pressed
+        {                 
+            resumePressed =true;             //we change it to pulsed
+            pausePressed= false;
+            gw.open();    //Close the gateway for paiters
+        }
     }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        // TODO add your handling code here:
+        if(!pausePressed) //If not pressed
+        {                 
+            resumePressed =false;             //we change it to pulsed
+            pausePressed=true;
+            gw.close();    //Close the gateway for paiters
+        }
     }//GEN-LAST:event_pauseButtonActionPerformed
 
     private void barcelonaHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaHangarActionPerformed
@@ -752,9 +764,9 @@ public class GraphicalInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_barcelonaMaintenanceActionPerformed
 
-    private void barcelonaParkingAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaParkingAreaActionPerformed
+    private void barcelonaParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaParkingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_barcelonaParkingAreaActionPerformed
+    }//GEN-LAST:event_barcelonaParkingActionPerformed
 
     private void madridPassengersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridPassengersActionPerformed
         // TODO add your handling code here:
@@ -767,6 +779,163 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private void barcelonaBusAirportTownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcelonaBusAirportTownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_barcelonaBusAirportTownActionPerformed
+
+    //All set methods for the graphical interface avoiding mutual exclusion when necessary
+    
+    private Lock lockMadridBusTownAirport = new ReentrantLock();
+    private Lock lockBarcelonaBusTownAirport = new ReentrantLock();
+    private Lock lockMadridBusAirportTown = new ReentrantLock();
+    private Lock lockBarcelonaBusAirportTown = new ReentrantLock();
+    private Lock lockMadridHangar = new ReentrantLock();
+    private Lock lockBarcelonaHangar = new ReentrantLock();
+    private Lock lockMadridParking = new ReentrantLock();
+    private Lock lockBarcelonaParking = new ReentrantLock();
+    private Gateway gw= new Gateway();
+    private boolean resumePressed = false;
+    private boolean pausePressed = false;
+
+    public Gateway getGw() {
+        return gw;
+    }
+    
+    public void setMadridPassengers(int madridPassengers) {
+        this.madridPassengers.setText(String.valueOf(madridPassengers));
+    }
+    public void setBarcelonaPassengers(int madridPassengers) {
+        this.barcelonaPassengers.setText(String.valueOf(madridPassengers));
+    }
+     
+    public void  setMadridBusTownAirport(String bus){
+        lockMadridBusTownAirport.lock();
+        try{
+            this.madridBusTownAirport.setText(bus);
+        }catch(Exception e) {}
+        finally{
+            lockMadridBusTownAirport.unlock();
+        }
+    }
+
+    public void setBarcelonaBusTownAirport(String bus) {
+        lockBarcelonaBusTownAirport.lock();
+        try {
+            this.barcelonaBusTownAirport.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockBarcelonaBusTownAirport.unlock();
+        }
+    }
+
+    public void setMadridBusAirportTown(String bus) {
+        lockMadridBusAirportTown.lock();
+        try {
+            this.madridBusAirportTown.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockMadridBusAirportTown.unlock();
+        }
+    }
+
+    public void setBarcelonaBusAirportTown(String bus) {
+        lockBarcelonaBusAirportTown.lock();
+        try {
+            this.barcelonaBusAirportTown.setText(bus);
+        } catch (Exception e) {
+        } finally {
+            lockBarcelonaBusAirportTown.unlock();
+        }
+    }
+    
+    public void setMadridHangar(String hangar){
+        lockMadridHangar.lock();
+        try{
+            this.madridHangar.setText(hangar);
+        } catch (Exception e) {
+        } finally {
+            lockMadridHangar.unlock();
+        }
+    }
+    
+    public void setBarcelonaHangar(String hangar) {
+        lockBarcelonaHangar.lock();
+        try {
+            this.barcelonaHangar.setText(hangar);
+        }catch (Exception e) {
+            // Aquí podrías manejar la excepción si lo deseas
+        }finally {
+            lockBarcelonaHangar.unlock();
+            }
+    }
+    
+    public void setMadridParking(String parking) {
+        lockMadridParking.lock();
+        try {
+            this.madridParking.setText(parking);
+        } catch (Exception e) {
+            // Aquí podrías manejar la excepción si lo deseas
+        } finally {
+            lockMadridParking.unlock();
+        }
+    }
+
+    public void setBarcelonaParking(String parking) {
+        lockBarcelonaParking.lock();
+        try {
+            this.barcelonaParking.setText(parking);
+        } catch (Exception e) {
+            // Aquí podrías manejar la excepción si lo deseas
+        } finally {
+            lockBarcelonaParking.unlock();
+        }
+    }
+    
+    public void setMadridGate1(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate2(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate3(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate4(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate5(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setMadridGate6(String gate){
+        this.madridGate1.setText(gate);
+    }
+    
+    public void setBarcelonaGate1(String gate){
+        this.barcelonaGate1.setText(gate);
+    }
+
+    public void setBarcelonaGate2(String gate){
+        this.barcelonaGate2.setText(gate);
+    }
+
+    public void setBarcelonaGate3(String gate){
+        this.barcelonaGate3.setText(gate);
+    }
+
+    public void setBarcelonaGate4(String gate){
+        this.barcelonaGate4.setText(gate);
+    }
+
+    public void setBarcelonaGate5(String gate){
+        this.barcelonaGate5.setText(gate);
+    }
+
+    public void setBarcelonaGate6(String gate){
+        this.barcelonaGate6.setText(gate);
+    }
+
 
     /**
      * @param args the command line arguments
@@ -816,7 +985,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private javax.swing.JTextField barcelonaGate6;
     private javax.swing.JTextField barcelonaHangar;
     private javax.swing.JTextField barcelonaMaintenance;
-    private javax.swing.JTextField barcelonaParkingArea;
+    private javax.swing.JTextField barcelonaParking;
     private javax.swing.JTextField barcelonaPassengers;
     private javax.swing.JTextField barcelonaRunway1;
     private javax.swing.JTextField barcelonaRunway2;
@@ -874,7 +1043,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private javax.swing.JTextField madridGate6;
     private javax.swing.JTextField madridHangar;
     private javax.swing.JTextField madridMaintenance;
-    private javax.swing.JTextField madridParkingArea;
+    private javax.swing.JTextField madridParking;
     private javax.swing.JTextField madridPassengers;
     private javax.swing.JTextField madridRunway1;
     private javax.swing.JTextField madridRunway2;
