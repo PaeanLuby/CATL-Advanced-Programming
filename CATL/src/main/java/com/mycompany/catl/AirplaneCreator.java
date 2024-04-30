@@ -21,13 +21,11 @@ public class AirplaneCreator extends Thread {
     private Log log;
     private Airport madrid;
     private Airport barcelona;
-    private GraphicalInterface gf;
 
-    public AirplaneCreator(Log log, Airport madrid, Airport barcelona,GraphicalInterface gf) {
+    public AirplaneCreator(Log log, Airport madrid, Airport barcelona) {
         this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
-        this.gf = gf;
     }
     /**
     * Create a random identifier
@@ -47,7 +45,6 @@ public class AirplaneCreator extends Thread {
     
     public void run(){
         for(int i=0; i<8000; i++){ //8000
-            gf.getGw().look(); //Check the pause/resume bottons
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -57,20 +54,24 @@ public class AirplaneCreator extends Thread {
             int capacity = (int)(Math.random() * 200)+100;
             
             if (i%2==0){                   //Even identifier for Madrid
-                airplane= new Airplane(capacity,identifier,log,madrid,gf);
+                airplane= new Airplane(capacity,identifier,log,madrid);
             }
             else{                         //Odd identifier for Barcelona
-                airplane= new Airplane(capacity,identifier,log,barcelona,gf);
+                airplane= new Airplane(capacity,identifier,log,barcelona);
             }
             airplane.start();
-            long sleepTime = (long)(Math.random() * 2000 + 1000);  //random between 1 and 3
-
+            
+            long sleepTime = (long)(Math.random() * 2000 + 1000);  //random between 1 and 3. Temporarily modified for testing
             try {
                 sleep(sleepTime);    //sleeps between 1 and 3 second between each bus
             } catch (InterruptedException ex) {
                 Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            gf.getGw().look(); //Check the pause/resume bottons
+//            try {
+//                sleep(15000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 }

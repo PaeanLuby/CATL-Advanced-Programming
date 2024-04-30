@@ -19,21 +19,18 @@ public class BusCreator extends Thread{
     private Lock madridPassengersLock;
     private Airport barcelona;
     private Lock barcelonaPassengersLock;
-    private GraphicalInterface gf;
 
-    public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock,GraphicalInterface gf) {
+    public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock) {
         this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
         this.madridPassengersLock = madridPassengersLock;
         this.barcelonaPassengersLock = barcelonaPassengersLock;
-        this.gf=gf;
     }
 
     
     public void run(){
         for(int i=0; i<4000; i++){ //4000
-            gf.getGw().look(); //Check the pause/resume bottons
             Bus bus;
             String identifier = String.valueOf(i);
             while (identifier.length()!=4){ //If the identifier doesn't have 4 digits
@@ -41,10 +38,10 @@ public class BusCreator extends Thread{
             }
             identifier="B-"+identifier;    //We add B-
             if (i%2==0){                   //Even identifier for Madrid
-                bus= new Bus(identifier,log,madrid,madridPassengersLock,gf);
+                bus= new Bus(identifier,log,madrid,madridPassengersLock);
             }
             else{                         //Odd identifier for Barcelona
-                bus= new Bus(identifier,log,barcelona,barcelonaPassengersLock,gf);
+                bus= new Bus(identifier,log,barcelona,barcelonaPassengersLock);
             }
             bus.start();
             
@@ -54,7 +51,12 @@ public class BusCreator extends Thread{
             } catch (InterruptedException ex) {
                 Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            gf.getGw().look(); //Check the pause/resume bottons
+            
+//            try {
+//                sleep(15000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 }
