@@ -1,4 +1,5 @@
 com\mycompany\catl\GraphicalInterface$10.class
+GraphicalInterface\form.class
 com\mycompany\catl\Hangar.class
 com\mycompany\catl\Log.class
 com\mycompany\catl\Runways.class
@@ -7,6 +8,7 @@ com\mycompany\catl\GraphicalInterface$2.class
 com\mycompany\catl\GraphicalInterface.class
 com\mycompany\catl\Airport.class
 com\mycompany\catl\GraphicalInterface$8.class
+com\mycompany\catl\Gateway.class
 com\mycompany\catl\GraphicalInterface$12.class
 com\mycompany\catl\CATL.class
 com\mycompany\catl\Airplane.class

@@ -6,6 +6,7 @@ package com.mycompany.catl;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,6 +19,7 @@ public class BoardingGates {
     //private boolean landing;
     private int type;
     private Airplane[] gates;
+    private Condition available;
     private Lock access;
     private int remainingAttempts;
     private int excludedGate;
@@ -27,35 +29,45 @@ public class BoardingGates {
         this.access = new ReentrantLock();
         this.gates = new Airplane[6];
         this.excludedGate = excludedGate;
+        this.available = access.newCondition();
+
     }
     
-    public int enterGate(Airplane airplane) throws InterruptedException {
+    public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
         access.lock();
         int gate = -1;
-        while (gate == -1) {
-            for (int i = 0; i < 6; i++) {
-            if (gates[i] == null && i != excludedGate) {
-                System.out.println("Space " + i + " available in the boarding gate.");
-                gates[i] = airplane.getAirport().getParking().releaseAirplane(airplane);
-                gate = i;
-                System.out.println("Plane " + airplane.getIdentifier() + " entered into boarding gate " + i);
-                break;
+        try {
+            while (gate == -1) {
+                for (int i = 0; i < 6; i++) {
+                    if (gates[i] == null && i != excludedGate) {
+                        System.out.println("Space " + i + " available in the boarding gate.");
+                        gates[i] = airplane.getAirport(airport).getParking().releaseAirplane(airplane);
+                        return i;
+                    }
+                } 
+                available.await();
             }
-            } 
+        } finally {
+            access.unlock();
         } 
-        access.unlock();
+        
         return gate;
     }
     
-    public void releaseGate(Airplane airplane) {
+    public Airplane releaseGate(Airplane airplane) {
         access.lock();
-        for(int i = 0; i < 6; i++) { 
+        try {
+            for(int i = 0; i < 6; i++) { 
             if (gates[i] == airplane) {
                 gates[i] = null;
-                break;
+                available.signal();
+                return airplane;
             }
+            }
+            return null;
+        } finally {
+            access.unlock();
         }
-        access.unlock();
     }
 
     

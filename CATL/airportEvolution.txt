@@ -1,6 +1,0 @@
-2024-04-18T11:37:43.047646300: The bus B-0001 has arrived to the city of Barcelona
-2024-04-18T11:37:47.852800500: 1 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
-2024-04-18T11:37:53.357058200: The bus B-0001 has arrived to the airport of Barcelona
-2024-04-18T11:42:39.798663400: The bus B-0001 has arrived to the city of Barcelona
-2024-04-18T11:42:44.374651800: 37 passengers have accessed to the bus B-0001 that initiates its route towards the airport of Barcelona
-2024-04-18T11:42:50.753557400: The bus B-0001 has arrived to the airport of Barcelona

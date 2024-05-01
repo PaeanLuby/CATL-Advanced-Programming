@@ -5,11 +5,13 @@
 package com.mycompany.catl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.Iterator;  
 
 /**
  *
@@ -17,32 +19,29 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class Parking {
-    Queue<Airplane> airplanes = new ConcurrentLinkedQueue<Airplane>();
-    private Lock parkingLock=new ReentrantLock();
+    private ConcurrentLinkedQueue<Airplane> airplanes;
+    private Lock parkingLock;
 
-    public Queue<Airplane> getAirplanes() {
-        return airplanes;
+    public Parking (){
+        parkingLock = new ReentrantLock();
+        airplanes = new ConcurrentLinkedQueue<Airplane>();
     }
-    
+
     /**
     * It adds an airplane into the parking 
     * 
     * @param airplane the new airplane
     */
-    public boolean addAirplane(Airplane airplane){
+    public void addAirplane(Airplane airplane){
         this.parkingLock.lock();          //lock to avoid mutual exclusion between threads
-        boolean added = false;
         try{
-            added = this.airplanes.offer(airplane); //add the airplane at the end of the list
-            System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking: " + added);
-            System.out.println("Current airplanes are: ");
-            for(Airplane plane : airplanes) {
-                System.out.println(airplane.getIdentifier());
-            }
+            this.airplanes.offer(airplane); //add the airplane at the end of the list
+            System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
+            System.out.println("Current airplanes are: " + toString());
         } catch(Exception e) {
         } finally{
             parkingLock.unlock();             //unlock the lock
-        } return added;
+        } 
     }
     
     
@@ -60,5 +59,22 @@ public class Parking {
                 System.out.println("Error getting plane " + airplane.getIdentifier() + " from parking!");
                 return null;
             }  
+    }
+    
+    /**
+    * It transform the parking array into a String
+    * 
+    * @return a string of the airplanes in the parking
+    */
+    @Override
+    public String toString(){
+        StringBuilder allPlanes = new StringBuilder();
+        Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
+
+        while(newIterator.hasNext()) {  
+        String currPlane = newIterator.next().getIdentifier(); 
+        allPlanes.append(currPlane.concat(" "));
+    }
+    return allPlanes.toString();
     }
 }

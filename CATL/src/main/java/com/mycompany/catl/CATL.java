@@ -22,13 +22,11 @@ public class CATL {
         Log log = new Log();
         //Creation of Madrid and Barcelonaairport:
         //Shared class
-        Airway Mad_Bar = new Airway();
-        Airway Bar_Mad = new Airway();
-        BoardingGates boardingGatesMadrid = new BoardingGates(1); //1 is exclusively for landing
-        BoardingGates landingGatesMadrid = new BoardingGates(0); //0 is exclusively for boarding
+        Airway Mad_Bar = new Airway("Mad_Bar");
+        Airway Bar_Mad = new Airway("Bar_Mad");
+        BoardingGates boardingGatesMadrid = new BoardingGates(1); //1 is exclusively for landing. 0 is exclusively for boarding
         Runways runwaysMadrid = new Runways();
-        BoardingGates boardingGatesBarcelona = new BoardingGates(1); //1 is exclusively for landing
-        BoardingGates landingGatesBarcelona = new BoardingGates(0); //0 is exclusively for boarding
+        BoardingGates boardingGatesBarcelona = new BoardingGates(1); //1 is exclusively for landing. 0 is exclusively for boarding
         Runways runwaysBarcelona = new Runways(); //
         
         //Madrid class
@@ -47,10 +45,11 @@ public class CATL {
         Lock madridPassengersLock = new ReentrantLock();
         Lock barcelonaPassengersLock = new ReentrantLock();
         
-       // GraphicalInterface gf = new GraphicalInterface();
+        GraphicalInterface gf = new GraphicalInterface();
+        gf.setVisible(true);
 
-        AirplaneCreator airplaneCreator = new  AirplaneCreator(log,madrid,barcelona);
-        BusCreator busCreator = new BusCreator(log,madrid,barcelona,madridPassengersLock,barcelonaPassengersLock);
+        AirplaneCreator airplaneCreator = new  AirplaneCreator(log,madrid,barcelona,gf);
+        BusCreator busCreator = new BusCreator(log,madrid,barcelona,madridPassengersLock,barcelonaPassengersLock,gf);
         
         //If the program is finished or interrupted the log is automaticly closed to avoid the loss of information
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -61,6 +60,5 @@ public class CATL {
         
         airplaneCreator.start();
         busCreator.start();
-
     }
 }
