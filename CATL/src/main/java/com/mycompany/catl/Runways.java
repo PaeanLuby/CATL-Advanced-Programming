@@ -34,7 +34,6 @@ public class Runways {
                 System.out.println("Space " + i + " available in the runway.");
                 runways[i] = airplane;
                 runway = i;
-                System.out.println("Plane " + airplane.getIdentifier() + " entered into runway " + i);
                 break;
             }
         }

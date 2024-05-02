@@ -83,12 +83,14 @@ public class Airplane extends Thread {
     }
 
     public void run() {
+        //while(true) {
         try {
             lifeCycle(airportFirst, airportSecond);
+            lifeCycle(airportSecond, airportFirst);
         } catch (InterruptedException ex) {
             Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        //}
     }
 
     public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException {
@@ -117,7 +119,6 @@ public class Airplane extends Thread {
 
         gf.getGw().look(); //Check the pause/resume bottons
         //boarding attempt
-        try {
             int remainingAttempts = 3;
             while (capacity >= airport1.getPassengers() && remainingAttempts > 0) {
                 remainingAttempts--;
@@ -129,13 +130,13 @@ public class Airplane extends Thread {
             }
             System.out.println("Airplane " + identifier + " is ready to start boarding.");
             for (int i = 0; i < passengers; i++) {
-                Thread.sleep((long) Math.random() * 2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                Thread.sleep((long) Math.random() * 2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
             }
-            System.out.println("Plane " + identifier + " successfully boarded.");
-            this.log.write("Plane " + identifier + " successfully boarded.");
+            System.out.println("Airplane " + identifier + " successfully boarded.");
+            this.log.write("Airplane " + identifier + " successfully boarded.");
             airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
             System.out.println("Pilot check for airplane " + this.getIdentifier());
-            Thread.sleep((long) (1 + Math.random() * 4)); //Check for period between 1 and 5 seconds
+            Thread.sleep((long) (1000 + Math.random() * 4)); //Check for period between 1 and 5 seconds
             airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this)); //
             System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
             Thread.sleep((long) Math.random() * 2 + 1); //Final checks between 1 and 3 seconds
@@ -145,21 +146,23 @@ public class Airplane extends Thread {
             Thread.sleep((long) Math.random() * 15 + 15); //Flight between 15 and 30 seconds
             //Airport 2
             //Attempt to access runway of the other airport
+            this.setLanding(true); //Set landing to true
             System.out.println("Airplane " + this.getIdentifier() + " requested runway for landing.");
             int runway = airport2.getRunways().enterRunway(this);
             while (runway == -1) {
-                runway = airport2.getRunways().enterRunway(this);
                 System.out.println("");
-                Thread.sleep((long) Math.random() * 4 + 1); //Detour random time between 1 and 5 seconds
+                Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
                 System.out.println("Airplane " + this.getIdentifier() + " taking a detour.");
+                runway = airport2.getRunways().enterRunway(this);
             }
             System.out.println("Airplane " + this.getIdentifier() + " entered into runway " + runway);
-            Thread.sleep((long) Math.random() * 4 + 1); //Land for a  random time between 1 and 5 seconds
+            Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
             airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
-            airport2.getBoardingGates().enterGate(this, airport2); //Leave taxi area and enter boarding gate
-            System.out.println("Airplane " + this.getIdentifier() + "flying between boarding gate and taxi area.");
-            Thread.sleep((long) Math.random() * 2 + 3); //Cover distance between runway and boarding gate
-            System.out.println("Airplane " + identifier + " is ready to start boarding.");
+            
+            System.out.println("Airplane " + this.getIdentifier() + " flying between boarding gate and taxi area.");
+            Thread.sleep((long) Math.random() * 2000 + 3000); //Cover distance between runway and boarding gate
+            System.out.println("Airplane " + identifier + " is ready to start debarking.");
+            airport2.getBoardingGates().enterGate(this, airport2);
             for (int i = 0; i < passengers; i++) {
                 Thread.sleep((long) Math.random() * 4 + 1); //Each passanger's transference from the airplane between 1 and 5 seconds 
             }
@@ -168,42 +171,22 @@ public class Airplane extends Thread {
             Thread.sleep((long) (1 + Math.random() * 4)); //Check for period between 1 and 5 seconds
 
             System.out.println("Airplane " + this.getIdentifier() + " going through maintenance hall door.");
+            Thread.sleep(1000); //Airplane takes 1 second to go through maintanence hall door
+            this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2);
             //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
-            if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up
+            if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up'
+                System.out.println("Airplane " + this.getIdentifier() + " going in for a deep inspection.");
                 Thread.sleep((long) Math.random() * 5 + 5); //Inspection takes random time between 5 and 10 seconds
-
+            } else {
+                System.out.println("Airplane " + this.getIdentifier() + " going in for a quick inspection.");
+                Thread.sleep((long) Math.random() * 1 + 4); //Inspection takes random time between 1 and 5 seconds
             }
-
-        } catch (InterruptedException e) {
-        }
-
-        for (int i = 0; i < passengers; i++) {
-            Thread.sleep((long) Math.random() * 200 + 100); //Each passanger's transference to the airplane between 1 and 3 seconds 
-        }
-        System.out.println("Plane " + identifier + " successfully boarded.");
-        this.log.write("Plane " + identifier + " successfully boarded.");
-        airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
-        long checkDuration = (long) (1000 + Math.random() * 4000); //Check for period between 1 and 5 second
-        int timesChecked = 0;
-        while (airport1.getRunways().enterRunway(this) == -1) {
-            System.out.println("Pilot check " + timesChecked + " for airplane " + this.getIdentifier());
-            checkDuration = (long) (1000 + Math.random() * 4000);
-            timesChecked++;
-        }
-        System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
-        Thread.sleep((long) Math.random() * 200 + 1000); //Final checks between 1 and 3 seconds
-        System.out.println("Airplane " + this.getIdentifier() + " is taking off.");
-        Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
-        getAirway(airport1).enterAirway(this);
-        Thread.sleep((long) Math.random() * 15000 + 15000); //Flight between 15 and 30 seconds
-        //Airport 2
-        //Attempt to access runway of the other airport
-        int runway = this.getAirport(airport2).getRunways().enterRunway(this);
-        while (runway == -1) {
-            runway = this.getAirport(airport2).getRunways().enterRunway(this);
-            Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
-        }
-        Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
+            //Airplane decides to rest in hangar or continue life cycle
+            int choice = 1 + (int) (Math.random() * 2); //50% chance
+            if (choice == 1) { //if choice 1, rest in hangar 
+                Thread.sleep((long) Math.random() * 15 + 15);
+            } //else, continue with airports reversed
+            airport2.getHangar().releaseAirplane(this); //take airplane from hangar
     }
 
     public int getCapacity() {
@@ -260,6 +243,14 @@ public class Airplane extends Thread {
         } else {
             return "Barcelona";
         }
+    }
+    
+    public boolean getLanding() {
+        return landing;
+    }
+    
+    public void setLanding(boolean landing) {
+        this.landing = landing;
     }
 
 }

@@ -20,34 +20,35 @@ public class BoardingGates {
     //private boolean landing;
     private int type;
     private Airplane[] gates;
-    private Condition available;
-    private Lock access;
     private int remainingAttempts;
-    private int excludedGate;
 
     public BoardingGates(int excludedGate) {
         this.type = type; //0 boarding, 1 landing, all others both
-        this.access = new ReentrantLock(true); //Fair lock
         this.gates = new Airplane[6];
-        this.excludedGate = excludedGate;
-        this.available = access.newCondition();
-
     }
 
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
         int gate = -1;
-        gates[excludedGate] = new Airplane();
+        int excludedGate = 0; //if boarding excludedGate is 0
+        if (airplane.getLanding()) {
+            excludedGate = 1; //if landing excludedGate is 1
+        }
+        gates[excludedGate] = new Airplane(); //fill gate with airplane so that it's not null
         synchronized (this) {
             while (!Arrays.asList(gates).contains(null)) {
                 wait();
             }
         }
         for (int i = 0; i < 6; i++) {
-            if (gates[i] == null) {
+            if (gates[i] == null) { 
                 gate = i;
-                gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
+                if (!airplane.getLanding()) {
+                    gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
+                } else {
+                    gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane); //Pull first airplane from taxi area
+                }
                 break;
-            }
+            } 
         }
         System.out.println("Space " + gate + " available in the boarding gate.");
 
@@ -63,8 +64,7 @@ public class BoardingGates {
                 notifyAll();
                 return airplane;
             }
-            return null;
         }
-
+        return null;
     }
 }
