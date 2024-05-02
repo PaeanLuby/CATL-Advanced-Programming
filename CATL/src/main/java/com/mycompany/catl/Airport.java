@@ -7,16 +7,17 @@ package com.mycompany.catl;
 import java.util.concurrent.Semaphore;
 
 public class Airport {
+
     private int passengers;
     private Hangar hangar;
     private Airway Mad_Bar;
     private Airway Bar_Mad;
     private TaxiArea taxiArea;
     private Parking parking;
-    private MaintenanceHall maintenanceHall; 
+    private MaintenanceHall maintenanceHall;
     private BoardingGates boardingGates;
     private Runways runways;
-    
+
     public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runways runway1, Runways runway2, Runways runway3, Runways runway4) {
         this.passengers = 0;
         this.hangar = hangar;
@@ -84,7 +85,7 @@ public class Airport {
     public void setMaintenanceHall(MaintenanceHall maintenanceHall) {
         this.maintenanceHall = maintenanceHall;
     }
-    
+
     public BoardingGates getBoardingGates() {
         return boardingGates;
     }
@@ -93,6 +94,4 @@ public class Airport {
         return runways;
     }
 
-    
-   
 }

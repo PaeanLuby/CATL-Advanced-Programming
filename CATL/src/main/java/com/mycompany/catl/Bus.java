@@ -42,6 +42,7 @@ public class Bus extends Thread {
             return "Barcelona";
         }
     }
+
     @Override
     public void run() {
         while (true) {

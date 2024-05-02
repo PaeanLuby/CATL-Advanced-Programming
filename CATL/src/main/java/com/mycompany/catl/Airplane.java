@@ -101,7 +101,7 @@ public class Airplane extends Thread {
         this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
         gf.getGw().look(); //Check the pause/resume bottons
         try {
-            airport1.getBoardingGates().enterGate(airport1.getParking().releaseAirplane(this), airport1); //enter into free space
+            airport1.getBoardingGates().enterGate(this, airport1); //enter into free space
         } catch (InterruptedException ex) {
             Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,7 +123,7 @@ public class Airplane extends Thread {
             this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
             gf.getGw().look(); //Check the pause/resume bottons
 
-            //Boartdin gates
+            //Boarding gates
             try {
                 airport1.getBoardingGates().enterGate(this, airport1); //enter into free space
             } catch (InterruptedException ex) {
@@ -171,7 +171,7 @@ public class Airplane extends Thread {
                 System.out.println("Airplane " + this.getIdentifier() + " entered into runway " + runway);
                 Thread.sleep((long) Math.random() * 4 + 1); //Land for a  random time between 1 and 5 seconds
                 airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
-                airport2.getBoardingGates().enterGate(airport2.getTaxiArea().releaseAirplane(this), airport2); //Leave taxi area and enter boarding gate
+                airport2.getBoardingGates().enterGate(this, airport2); //Leave taxi area and enter boarding gate
                 System.out.println("Airplane " + this.getIdentifier() + "flying between boarding gate and taxi area.");
                 Thread.sleep((long) Math.random() * 2 + 3); //Cover distance between runway and boarding gate
                 System.out.println("Airplane " + identifier + " is ready to start boarding.");

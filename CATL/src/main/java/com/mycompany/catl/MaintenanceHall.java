@@ -15,9 +15,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class MaintenanceHall {
 
     BlockingQueue airplanes = new ArrayBlockingQueue<Airplane>(20);
+
     public MaintenanceHall() {
-        
-        
+
     }
-    
+
 }

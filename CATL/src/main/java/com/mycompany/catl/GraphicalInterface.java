@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author THINKPAD
  */
 public class GraphicalInterface extends javax.swing.JFrame {
+
     /**
      * Creates new form GraphicalInterface
      */
@@ -19,7 +20,6 @@ public class GraphicalInterface extends javax.swing.JFrame {
         initComponents();
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -739,19 +739,19 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_madridMaintenanceActionPerformed
 
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        if(!resumePressed) //If not pressed
-        {                 
-            resumePressed =true;             //we change it to pulsed
-            pausePressed= false;
+        if (!resumePressed) //If not pressed
+        {
+            resumePressed = true;             //we change it to pulsed
+            pausePressed = false;
             gw.open();    //Close the gateway for paiters
         }
     }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        if(!pausePressed) //If not pressed
-        {                 
-            resumePressed =false;             //we change it to pulsed
-            pausePressed=true;
+        if (!pausePressed) //If not pressed
+        {
+            resumePressed = false;             //we change it to pulsed
+            pausePressed = true;
             gw.close();    //Close the gateway for paiters
         }
     }//GEN-LAST:event_pauseButtonActionPerformed
@@ -781,7 +781,6 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_barcelonaBusAirportTownActionPerformed
 
     //All set methods for the graphical interface avoiding mutual exclusion when necessary
-    
     private Lock lockMadridBusTownAirport = new ReentrantLock();
     private Lock lockBarcelonaBusTownAirport = new ReentrantLock();
     private Lock lockMadridBusAirportTown = new ReentrantLock();
@@ -790,27 +789,28 @@ public class GraphicalInterface extends javax.swing.JFrame {
     private Lock lockBarcelonaHangar = new ReentrantLock();
     private Lock lockMadridParking = new ReentrantLock();
     private Lock lockBarcelonaParking = new ReentrantLock();
-    private Gateway gw= new Gateway();
+    private Gateway gw = new Gateway();
     private boolean resumePressed = false;
     private boolean pausePressed = false;
 
     public Gateway getGw() {
         return gw;
     }
-    
+
     public void setMadridPassengers(int madridPassengers) {
         this.madridPassengers.setText(String.valueOf(madridPassengers));
     }
+
     public void setBarcelonaPassengers(int madridPassengers) {
         this.barcelonaPassengers.setText(String.valueOf(madridPassengers));
     }
-     
-    public void  setMadridBusTownAirport(String bus){
+
+    public void setMadridBusTownAirport(String bus) {
         lockMadridBusTownAirport.lock();
-        try{
+        try {
             this.madridBusTownAirport.setText(bus);
-        }catch(Exception e) {}
-        finally{
+        } catch (Exception e) {
+        } finally {
             lockMadridBusTownAirport.unlock();
         }
     }
@@ -844,28 +844,28 @@ public class GraphicalInterface extends javax.swing.JFrame {
             lockBarcelonaBusAirportTown.unlock();
         }
     }
-    
-    public void setMadridHangar(String hangar){
+
+    public void setMadridHangar(String hangar) {
         lockMadridHangar.lock();
-        try{
+        try {
             this.madridHangar.setText(hangar);
         } catch (Exception e) {
         } finally {
             lockMadridHangar.unlock();
         }
     }
-    
+
     public void setBarcelonaHangar(String hangar) {
         lockBarcelonaHangar.lock();
         try {
             this.barcelonaHangar.setText(hangar);
-        }catch (Exception e) {
+        } catch (Exception e) {
             // Aquí podrías manejar la excepción si lo deseas
-        }finally {
+        } finally {
             lockBarcelonaHangar.unlock();
-            }
+        }
     }
-    
+
     public void setMadridParking(String parking) {
         lockMadridParking.lock();
         try {
@@ -887,55 +887,54 @@ public class GraphicalInterface extends javax.swing.JFrame {
             lockBarcelonaParking.unlock();
         }
     }
-    
-    public void setMadridGate1(String gate){
+
+    public void setMadridGate1(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setMadridGate2(String gate){
+
+    public void setMadridGate2(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setMadridGate3(String gate){
+
+    public void setMadridGate3(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setMadridGate4(String gate){
+
+    public void setMadridGate4(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setMadridGate5(String gate){
+
+    public void setMadridGate5(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setMadridGate6(String gate){
+
+    public void setMadridGate6(String gate) {
         this.madridGate1.setText(gate);
     }
-    
-    public void setBarcelonaGate1(String gate){
+
+    public void setBarcelonaGate1(String gate) {
         this.barcelonaGate1.setText(gate);
     }
 
-    public void setBarcelonaGate2(String gate){
+    public void setBarcelonaGate2(String gate) {
         this.barcelonaGate2.setText(gate);
     }
 
-    public void setBarcelonaGate3(String gate){
+    public void setBarcelonaGate3(String gate) {
         this.barcelonaGate3.setText(gate);
     }
 
-    public void setBarcelonaGate4(String gate){
+    public void setBarcelonaGate4(String gate) {
         this.barcelonaGate4.setText(gate);
     }
 
-    public void setBarcelonaGate5(String gate){
+    public void setBarcelonaGate5(String gate) {
         this.barcelonaGate5.setText(gate);
     }
 
-    public void setBarcelonaGate6(String gate){
+    public void setBarcelonaGate6(String gate) {
         this.barcelonaGate6.setText(gate);
     }
-
 
     /**
      * @param args the command line arguments

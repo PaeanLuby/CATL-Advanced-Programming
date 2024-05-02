@@ -15,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author THINKPAD
  */
 public class BoardingGates {
+
     //private boolean boarding;
     //private boolean landing;
     private int type;
@@ -23,16 +24,16 @@ public class BoardingGates {
     private Lock access;
     private int remainingAttempts;
     private int excludedGate;
-    
+
     public BoardingGates(int excludedGate) {
-        this.type = type; //0 boarding, 1 landing, 2 both
-        this.access = new ReentrantLock();
+        this.type = type; //0 boarding, 1 landing, all others both
+        this.access = new ReentrantLock(true); //Fair lock
         this.gates = new Airplane[6];
         this.excludedGate = excludedGate;
         this.available = access.newCondition();
 
     }
-    
+
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
         access.lock();
         int gate = -1;
@@ -41,15 +42,15 @@ public class BoardingGates {
                 available.await();
             }
             gate = Arrays.asList(gates).indexOf(null);
-            gates[gate] = airplane;
+            gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
             System.out.println("Space " + gate + " available in the boarding gate.");
         } finally {
             access.unlock();
-        } 
-        
+        }
+
         return gate;
     }
-    
+
     public Airplane releaseGate(Airplane airplane) throws NullPointerException {
         access.lock();
         try {
@@ -63,11 +64,7 @@ public class BoardingGates {
             }
         } finally {
             available.signal();
-            access.unlock();   
+            access.unlock();
         }
     }
 }
-
-    
-    
-

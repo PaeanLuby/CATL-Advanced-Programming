@@ -13,52 +13,40 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author THINKPAD
  */
 public class Gateway {
-    private boolean close=false;
+
+    private boolean close = false;
     private Lock lock = new ReentrantLock();
     private Condition stop = lock.newCondition();
 
-    public void look()
-    {
-        try
-        {
+    public void look() {
+        try {
             lock.lock();
-            while(close)
-            {
-                try
-                {
+            while (close) {
+                try {
                     stop.await();
-                } catch(InterruptedException ie){ }
+                } catch (InterruptedException ie) {
+                }
             }
-        }
-        finally
-        {
+        } finally {
             lock.unlock();
         }
     }
-    
-    public void open()
-    {
-        try
-        {
+
+    public void open() {
+        try {
             lock.lock();
-            close=false;
+            close = false;
             stop.signalAll();
-        }
-        finally
-        {
+        } finally {
             lock.unlock();
         }
     }
-    
-    public void close()
-    {
-        try
-        {
+
+    public void close() {
+        try {
             lock.lock();
-            close=true;
-        }
-        finally
-        {
+            close = true;
+        } finally {
             lock.unlock();
         }
     }
