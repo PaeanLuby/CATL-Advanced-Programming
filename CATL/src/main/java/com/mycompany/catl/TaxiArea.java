@@ -36,9 +36,9 @@ public class TaxiArea {
 
     public Airplane releaseAirplane(Airplane airplane) {
         if (this.airplanes.remove(airplane)) {
-            System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from parking.");
+            System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from taxi area.");
         } else {
-            System.out.println("Error removing airplane from parking.");
+            System.out.println("Error removing airplane from taxi area.");
         }
         return airplane; //we remove it and return it
     }

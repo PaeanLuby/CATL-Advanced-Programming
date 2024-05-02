@@ -12,6 +12,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.Iterator;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.Condition;
 
 /**
  *
@@ -19,12 +22,14 @@ import java.util.Iterator;
  */
 public class Parking {
 
-    private ConcurrentLinkedQueue<Airplane> airplanes;
+    private BlockingQueue<Airplane> airplanes;
     private Lock parkingLock;
+    private Condition notFirst;
 
     public Parking() {
-        parkingLock = new ReentrantLock();
-        airplanes = new ConcurrentLinkedQueue<Airplane>();
+        airplanes = new LinkedBlockingQueue<Airplane>();
+        parkingLock = new ReentrantLock(true);
+        notFirst = parkingLock.newCondition();
     }
 
     /**
@@ -32,16 +37,10 @@ public class Parking {
      *
      * @param airplane the new airplane
      */
-    public void addAirplane(Airplane airplane) {
-        this.parkingLock.lock();          //lock to avoid mutual exclusion between threads
-        try {
-            this.airplanes.offer(airplane); //add the airplane at the end of the list
-            System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
-            System.out.println("Current airplanes are: " + toString());
-        } catch (Exception e) {
-        } finally {
-            parkingLock.unlock();             //unlock the lock
-        }
+    public void addAirplane(Airplane airplane) throws InterruptedException {
+        this.airplanes.put(airplane); //add the airplane at the end of the list
+        System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
+        System.out.println("Current airplanes are: " + toString());
     }
 
     /**
@@ -61,17 +60,16 @@ public class Parking {
      */
     public Airplane releaseAirplane(Airplane airplane) throws InterruptedException {
         parkingLock.lock();
-        synchronized (parkingLock) {
-            while (airplanes.peek() != airplane) {
-                parkingLock.wait();
-            }
-            // Airplane is at the front of the queue and can proceed
-            Airplane removedAirplane = airplanes.poll(); // Remove the airplane from the queue
-            parkingLock.notifyAll(); // Notify next airplane in the queue
-            System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
-            System.out.println("Current airplanes are: " + toString());
-            return removedAirplane;
+        while (airplanes.isEmpty() || !airplanes.peek().equals(airplane)) {
+            notFirst.await();
         }
+        // Airplane is at the front of the queue and can proceed
+        Airplane removedAirplane = airplanes.take(); // Remove the airplane from the queue
+        notFirst.signalAll();
+        System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
+        System.out.println("Current airplanes in parking are: " + toString());
+        parkingLock.unlock();
+        return removedAirplane;
     }
 
     /**
@@ -83,7 +81,6 @@ public class Parking {
     public String toString() {
         StringBuilder allPlanes = new StringBuilder();
         Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
-
         while (newIterator.hasNext()) {
             String currPlane = newIterator.next().getIdentifier();
             allPlanes.append(currPlane.concat(" "));

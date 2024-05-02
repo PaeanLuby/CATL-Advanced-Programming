@@ -35,36 +35,36 @@ public class BoardingGates {
     }
 
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
-        access.lock();
         int gate = -1;
-        try {
-            while (!Arrays.asList(gates).contains(null)) { //While there's no opening, signal to wait
-                available.await();
+        gates[excludedGate] = new Airplane();
+        synchronized (this) {
+            while (!Arrays.asList(gates).contains(null)) {
+                wait();
             }
-            gate = Arrays.asList(gates).indexOf(null);
-            gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
-            System.out.println("Space " + gate + " available in the boarding gate.");
-        } finally {
-            access.unlock();
         }
+        for (int i = 0; i < 6; i++) {
+            if (gates[i] == null) {
+                gate = i;
+                gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
+                break;
+            }
+        }
+        System.out.println("Space " + gate + " available in the boarding gate.");
 
         return gate;
     }
 
     public Airplane releaseGate(Airplane airplane) throws NullPointerException {
-        access.lock();
-        try {
-            int planeIndex = Arrays.asList(gates).indexOf(airplane);
-            System.out.println(planeIndex);
+        int planeIndex = Arrays.asList(gates).indexOf(airplane);
+        System.out.println(planeIndex);
+        synchronized (this) {
             if (planeIndex != -1) {
                 gates[planeIndex] = null;
+                notifyAll();
                 return airplane;
-            } else {
-                return null;
             }
-        } finally {
-            available.signal();
-            access.unlock();
+            return null;
         }
+
     }
 }
