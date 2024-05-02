@@ -27,6 +27,7 @@ public class Airplane extends Thread {
     private GraphicalInterface gf;
     private boolean mAD; //Whether the airway is Mad_Bar
     private boolean landing; //whether the plane is landing
+    private boolean actualAirport; //true when it is in Madrid, false in Barcelona
 
     
     public Airplane(int capacity, String identifier, Log log, Airport airportFirst, Airport airportSecond, GraphicalInterface gf, boolean mAD) {
@@ -39,29 +40,35 @@ public class Airplane extends Thread {
         this.gf=gf;
         this.mAD = mAD;
         this.landing = false; //all airplanes start as boarding
+        if (Character.getNumericValue(this.identifier.charAt(6)) % 2 == 0) {
+            this.actualAirport=true;
+        } else {
+            this.actualAirport=false;
+        }
         System.out.println("Airplane " + identifier + " with capacity " + capacity + " has been created.");
         this.log.write("Airplane " + identifier + " with capacity " + capacity + " has been created.");
+        
     }
     /**
     * Graphical interface output of the hangar
     */
-    public void graphicalHangar(Airport airport1, Airport airport2){
-        if(this.getCity()=="Madrid"){
-                    gf.setMadridHangar(airport1.getHangar().toString());
+    public void graphicalHangar(boolean actualAirport, Airport airport){
+        if(actualAirport){
+                    gf.setMadridHangar(airport.getHangar().toString());
                 }
                 else{
-                    gf.setBarcelonaHangar(airport2.getHangar().toString());
+                    gf.setBarcelonaHangar(airport.getHangar().toString());
                 }
     }
     /**
     * Graphical interface output of the parking
     */
-    public void graphicalParking(Airport airport1, Airport airport2){
-        if(this.getCity()=="Madrid"){
-                    gf.setMadridParking(airport1.getParking().toString());
+    public void graphicalParking(boolean actualAirport, Airport airport){
+        if(actualAirport){
+                    gf.setMadridParking(airport.getParking().toString());
                 }
                 else{
-                    gf.setBarcelonaParking(airport2.getParking().toString());
+                    gf.setBarcelonaParking(airport.getParking().toString());
                 }
     }
     
@@ -79,17 +86,19 @@ public class Airplane extends Thread {
             gf.getGw().look(); //Check the pause/resume bottons
             //Airplane creation in the Hangar
             airport1.getHangar().addAirplane(this);
-            this.graphicalHangar(airport1, airport2);
-            
+            this.graphicalHangar(this.actualAirport,airport1);
             gf.getGw().look(); //Check the pause/resume bottons
             this.log.write("The airplane "+this.identifier+" has been created in the hangar of the airport of: "+this.getCity());
+            
             //Airplane moves to the Parking Area
             gf.getGw().look(); //Check the pause/resume bottons
             airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this)); //taking the airplane from the hangar and put in it in Parking Area
-            this.graphicalHangar(airport1, airport1);
-            this.graphicalParking(airport1, airport2);
+            this.graphicalHangar(this.actualAirport,airport1);
+            this.graphicalParking(this.actualAirport,airport1);
             this.log.write("The airplane "+ this.identifier +" leaves the hangar and enters the parking in the airport of: "+this.getCity());
             gf.getGw().look(); //Check the pause/resume bottons
+            
+            //Boartdin gates
             try {
                 airport1.getBoardingGates().enterGate(this, airport1); //enter into free space
             } catch (InterruptedException ex) {
@@ -108,37 +117,37 @@ public class Airplane extends Thread {
                 System.out.println("Not yet full. Attempts left: " + remainingAttempts);
                 } 
 
-                for (int i = 0; i < passengers; i++) {
-                       Thread.sleep((long) Math.random()*200 + 100); //Each passanger's transference to the airplane between 1 and 3 seconds 
-                }
-                System.out.println("Plane " + identifier + " successfully boarded.");   
-                this.log.write("Plane " + identifier + " successfully boarded.");
-                airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
-                long checkDuration = (long) (1000 + Math.random() * 4000); //Check for period between 1 and 5 second
-                int timesChecked = 0;
-                while (airport1.getRunways().enterRunway(this) == -1) {
-                    System.out.println("Pilot check " + timesChecked + " for airplane " + this.getIdentifier());
-                    checkDuration = (long) (1000 + Math.random() * 4000);
-                    timesChecked++;
-                }
-                System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
-                Thread.sleep((long) Math.random() * 200 + 1000); //Final checks between 1 and 3 seconds
-                System.out.println("Airplane " + this.getIdentifier() + " is taking off.");
-                Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
-                getAirway(airport1).enterAirway(this);
-                Thread.sleep((long) Math.random() * 15000 + 15000); //Flight between 15 and 30 seconds
-                //Airport 2
-                //Attempt to access runway of the other airport
-                int runway = this.getAirport(airport2).getRunways().enterRunway(this);
-                while (runway == -1) {
-                    runway = this.getAirport(airport2).getRunways().enterRunway(this);
-                    Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
-                }
-                Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
-                
-            } catch (InterruptedException e){
-            } finally {
+            for (int i = 0; i < passengers; i++) {
+                   Thread.sleep((long) Math.random()*200 + 100); //Each passanger's transference to the airplane between 1 and 3 seconds 
             }
+            System.out.println("Plane " + identifier + " successfully boarded.");   
+            this.log.write("Plane " + identifier + " successfully boarded.");
+            airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
+            long checkDuration = (long) (1000 + Math.random() * 4000); //Check for period between 1 and 5 second
+            int timesChecked = 0;
+            while (airport1.getRunways().enterRunway(this) == -1) {
+                System.out.println("Pilot check " + timesChecked + " for airplane " + this.getIdentifier());
+                checkDuration = (long) (1000 + Math.random() * 4000);
+                timesChecked++;
+            }
+            System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
+            Thread.sleep((long) Math.random() * 200 + 1000); //Final checks between 1 and 3 seconds
+            System.out.println("Airplane " + this.getIdentifier() + " is taking off.");
+            Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
+            getAirway(airport1).enterAirway(this);
+            Thread.sleep((long) Math.random() * 15000 + 15000); //Flight between 15 and 30 seconds
+            //Airport 2
+            //Attempt to access runway of the other airport
+            int runway = this.getAirport(airport2).getRunways().enterRunway(this);
+            while (runway == -1) {
+                runway = this.getAirport(airport2).getRunways().enterRunway(this);
+                Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
+            }
+            Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
+
+        } catch (InterruptedException e){
+        } finally {
+        }
     }
 
     public int getCapacity() {
