@@ -4,13 +4,20 @@
  */
 package com.mycompany.catl;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  *
  * @author THINKPAD
  */
 public class MaintenanceHall {
 
+    BlockingQueue airplanes = new ArrayBlockingQueue<Airplane>(20);
     public MaintenanceHall() {
+        
+        
     }
     
 }

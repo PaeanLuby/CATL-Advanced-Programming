@@ -4,6 +4,8 @@
  */
 package com.mycompany.catl;
 
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,18 +15,20 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Runways {
     private Airplane[] runways;
-    private Lock access;
-   
+    private Semaphore full;
+    private Semaphore mutualExclusion; 
+    
     public Runways() {
         runways = new Airplane[4]; //runway can fit 4 airplanes
-        this.access = new ReentrantLock();
+        mutualExclusion = new Semaphore(1);
+        full = new Semaphore(4);
     }
     
-    public int enterRunway(Airplane airplane) {
-        access.lock();
+    public int enterRunway(Airplane airplane) throws InterruptedException {
+        full.acquire();
+        mutualExclusion.acquire();
         int runway = -1;
-        while (runway == -1) {
-            for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             if (runways[i] == null) {
                 System.out.println("Space " + i + " available in the runway.");
                 runways[i] = airplane;
@@ -32,10 +36,25 @@ public class Runways {
                 System.out.println("Plane " + airplane.getIdentifier() + " entered into runway " + i);
                 break;
             }
-            } 
         } 
-        access.unlock();
+        mutualExclusion.release(); 
         return runway;
     }
     
+    public Airplane releaseRunway(Airplane airplane) throws InterruptedException {
+        mutualExclusion.acquire();
+        try {
+            for(int i = 0; i < 4; i++) { 
+            if (runways[i].equals(airplane)) {
+                runways[i] = null;
+                return airplane;
+            }
+        }
+        return null;
+        } finally {
+            full.release();
+            mutualExclusion.release();
+        }
+    }
+
 }

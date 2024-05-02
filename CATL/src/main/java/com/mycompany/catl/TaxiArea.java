@@ -20,11 +20,9 @@
      }
 
      public void enterTaxiArea(Airplane airplane) {
-         taxiLock.lock();
          airplanes.offer(airplane);
          System.out.println("Airplane " + airplane.getIdentifier() + " is in the taxi area.");
          System.out.println("Current airplanes in taxi area are:" + toString());
-         taxiLock.unlock();
      }
  
      public ConcurrentLinkedQueue<Airplane> getAirplanes() {
@@ -33,6 +31,15 @@
 
      public void setAirplanes(ConcurrentLinkedQueue<Airplane> airplanes) {
          this.airplanes = airplanes;
+     }
+     
+     public Airplane releaseAirplane(Airplane airplane) {
+            if (this.airplanes.remove(airplane)) {
+                System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from parking.");
+            } else {
+                System.out.println("Error removing airplane from parking.");
+            }
+            return airplane; //we remove it and return it
      }
  
      @Override

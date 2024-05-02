@@ -13,6 +13,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.Iterator;  
 
+
 /**
  *
  * @author THINKPAD
@@ -51,15 +52,30 @@ public class Parking {
     * @param airplane the airplane that we want to take out from the parking
     * @return the airplane that we take out
     */
-    public Airplane releaseAirplane(Airplane airplane){ //We don't need to lock it because with the FIFO strategy it is our airplane or it isn't 
-            if(this.airplanes.peek()==airplane){ //If the first airplane is our airplane
-                System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from parking.");
-                return this.airplanes.poll(); //we remove it and return it
+    /**
+* It removes and returns the airplane from the front of the parking area if it matches the requested airplane.
+* This ensures the FIFO strategy is maintained.
+*
+* @param airplane the airplane that we want to take out from the parking
+* @return the airplane that was removed if it was at the front, otherwise null
+*/
+    public Airplane releaseAirplane(Airplane airplane){ 
+        parkingLock.lock();
+        try {
+            if (!airplanes.isEmpty() && airplanes.peek().equals(airplane)) {
+                Airplane removedAirplane = airplanes.poll(); // Removes and returns the head of the queue
+                System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
+                System.out.println("Current airplanes are: " + toString());
+                return removedAirplane;
             } else {
-                System.out.println("Error getting plane " + airplane.getIdentifier() + " from parking!");
+                System.out.println("Error: Only the first airplane in the queue can be removed. " + airplane.getIdentifier() + " is not at the front.");
                 return null;
-            }  
+            }
+        } finally {
+            parkingLock.unlock();
+        }
     }
+
     
     /**
     * It transform the parking array into a String

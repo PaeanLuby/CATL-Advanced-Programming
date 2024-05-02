@@ -37,16 +37,12 @@ public class BoardingGates {
         access.lock();
         int gate = -1;
         try {
-            while (gate == -1) {
-                for (int i = 0; i < 6; i++) {
-                    if (gates[i] == null && i != excludedGate) {
-                        System.out.println("Space " + i + " available in the boarding gate.");
-                        gates[i] = airplane.getAirport(airport).getParking().releaseAirplane(airplane);
-                        return i;
-                    }
-                } 
+            while (!Arrays.asList(gates).contains(null)) { //While there's no opening, signal to wait
                 available.await();
             }
+            gate = Arrays.asList(gates).indexOf(null);
+            gates[gate] = airplane;
+            System.out.println("Space " + gate + " available in the boarding gate.");
         } finally {
             access.unlock();
         } 
@@ -54,22 +50,24 @@ public class BoardingGates {
         return gate;
     }
     
-    public Airplane releaseGate(Airplane airplane) {
+    public Airplane releaseGate(Airplane airplane) throws NullPointerException {
         access.lock();
         try {
-            for(int i = 0; i < 6; i++) { 
-            if (gates[i] == airplane) {
-                gates[i] = null;
-                available.signal();
+            int planeIndex = Arrays.asList(gates).indexOf(airplane);
+            System.out.println(planeIndex);
+            if (planeIndex != -1) {
+                gates[planeIndex] = null;
                 return airplane;
+            } else {
+                return null;
             }
-            }
-            return null;
         } finally {
-            access.unlock();
+            available.signal();
+            access.unlock();   
         }
     }
+}
 
     
     
-}
+
