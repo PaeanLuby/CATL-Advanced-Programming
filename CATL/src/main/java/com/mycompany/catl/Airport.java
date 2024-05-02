@@ -17,8 +17,9 @@ public class Airport {
     private MaintenanceHall maintenanceHall;
     private BoardingGates boardingGates;
     private Runways runways;
+    private String name;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runways runway1, Runways runway2, Runways runway3, Runways runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runways runway1, Runways runway2, Runways runway3, Runways runway4) {
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -28,6 +29,7 @@ public class Airport {
         this.maintenanceHall = maintenanceHall;
         this.boardingGates = boardingGates;
         this.runways = runways;
+        this.name = name;
     }
 
     public int getPassengers() {
@@ -92,6 +94,10 @@ public class Airport {
 
     public Runways getRunways() {
         return runways;
+    }
+    
+    public String toString() {
+        return this.name;
     }
 
 }

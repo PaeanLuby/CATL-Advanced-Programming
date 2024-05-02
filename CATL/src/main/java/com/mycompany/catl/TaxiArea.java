@@ -3,7 +3,10 @@ package com.mycompany.catl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -13,11 +16,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class TaxiArea {
 
-    private ConcurrentLinkedQueue<Airplane> airplanes;
+    private BlockingQueue<Airplane> airplanes;
     private Lock taxiLock = new ReentrantLock();
 
     public TaxiArea() {
-        airplanes = new ConcurrentLinkedQueue<Airplane>();
+        airplanes = new LinkedBlockingQueue<Airplane>();
     }
 
     public void enterTaxiArea(Airplane airplane) {
@@ -26,11 +29,11 @@ public class TaxiArea {
         System.out.println("Current airplanes in taxi area are:" + toString());
     }
 
-    public ConcurrentLinkedQueue<Airplane> getAirplanes() {
+    public BlockingQueue<Airplane> getAirplanes() {
         return airplanes;
     }
 
-    public void setAirplanes(ConcurrentLinkedQueue<Airplane> airplanes) {
+    public void setAirplanes(BlockingQueue<Airplane> airplanes) {
         this.airplanes = airplanes;
     }
 

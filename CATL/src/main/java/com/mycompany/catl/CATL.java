@@ -33,13 +33,13 @@ public class CATL {
         MaintenanceHall maintenanceHallMadrid = new MaintenanceHall();
         Parking parkingMadrid = new Parking();
         TaxiArea taxiMadrid = new TaxiArea();
-        Airport madrid = new Airport(hangarMadrid, Mad_Bar, Bar_Mad, taxiMadrid, parkingMadrid, maintenanceHallMadrid, boardingGatesMadrid, runwaysMadrid);
+        Airport madrid = new Airport(hangarMadrid, Mad_Bar, Bar_Mad, taxiMadrid, parkingMadrid, maintenanceHallMadrid, boardingGatesMadrid, runwaysMadrid, "MAD");
         //Barcelona class
         Hangar hangarBarcelona = new Hangar();
         MaintenanceHall maintenanceHallBarcelona = new MaintenanceHall();
         Parking parkingBarcelona = new Parking();
         TaxiArea taxiBarcelona = new TaxiArea();
-        Airport barcelona = new Airport(hangarBarcelona, Mad_Bar, Bar_Mad, taxiBarcelona, parkingBarcelona, maintenanceHallBarcelona, boardingGatesBarcelona, runwaysBarcelona);
+        Airport barcelona = new Airport(hangarBarcelona, Mad_Bar, Bar_Mad, taxiBarcelona, parkingBarcelona, maintenanceHallBarcelona, boardingGatesBarcelona, runwaysBarcelona, "BAC");
 
         Lock madridPassengersLock = new ReentrantLock();
         Lock barcelonaPassengersLock = new ReentrantLock();

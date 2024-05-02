@@ -28,7 +28,8 @@ public class BoardingGates {
     }
 
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
-        int gate = -1;
+        //gateLock.lock();
+        int gate = -2;
         int excludedGate = 0; //if boarding excludedGate is 0
         if (airplane.getLanding()) {
             excludedGate = 1; //if landing excludedGate is 1
@@ -38,20 +39,21 @@ public class BoardingGates {
             while (!Arrays.asList(gates).contains(null)) {
                 wait();
             }
-        }
-        for (int i = 0; i < 6; i++) {
-            if (gates[i] == null) { 
-                gate = i;
-                if (!airplane.getLanding()) {
-                    gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
-                } else {
-                    gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane); //Pull first airplane from taxi area
-                }
-                break;
+       
+            for (int i = 0; i < 6; i++) {
+                if (gates[i] == null) { 
+                    gate = i;
+                    if (!airplane.getLanding()) {
+                        gates[gate] = airplane.getAirport(airport).getParking().releaseAirplane(airplane); //Pull first airplane from parking
+                    } else {
+                        gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane); //Pull first airplane from taxi area
+                    }
+                    break;
             } 
+            }
         }
         System.out.println("Space " + gate + " available in the boarding gate.");
-
+        //gateLock.unlock();
         return gate;
     }
 

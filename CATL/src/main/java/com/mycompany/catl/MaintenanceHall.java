@@ -29,12 +29,14 @@ public class MaintenanceHall {
             wait();
         }
         airplanes.put(airplane.getAirport(airport).getParking().releaseAirplane(airplane)); //Pull first airplane from parking
+        System.out.println("Airplane " + airplane + " successfully entered into maintenance hall.");
     }
 
     public Airplane releaseHall(Airplane airplane) throws InterruptedException {
         synchronized (this) {
             if(airplanes.remove(airplane)) {
                 notifyAll();
+                System.out.println("Airplane " + airplane + " successfully exiting the maintenance hall.");
                 return airplane;
             } else {
             return null;

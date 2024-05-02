@@ -81,6 +81,43 @@ public class Airplane extends Thread {
             gf.setBarcelonaParking(airport.getParking().toString());
         }
     }
+    
+    public void graphicalBoardingGate(int gate,boolean actualAirport, Airport airport){
+        if (actualAirport) {
+            if(gate==0){
+                gf.setMadridGate1(this.identifier);
+            }else if (gate==1){
+                gf.setMadridGate2(this.identifier);
+            }else if (gate==2){
+                gf.setMadridGate3(this.identifier);
+            }else if (gate==3){
+                gf.setMadridGate4(this.identifier);
+            }else if (gate==4){
+                gf.setMadridGate5(this.identifier);
+            }else if (gate==5){
+                gf.setMadridGate6(this.identifier);
+            }else{
+                System.out.println("ERROR in boarding gates graphicalBoardingGate");
+            }
+        } else {
+            if(gate == 0) {
+                gf.setBarcelonaGate1(this.identifier);
+            } else if (gate == 1) {
+                gf.setBarcelonaGate2(this.identifier);
+            } else if (gate == 2) {
+                gf.setBarcelonaGate3(this.identifier);
+            } else if (gate == 3) {
+                gf.setBarcelonaGate4(this.identifier);
+            } else if (gate == 4) {
+                gf.setBarcelonaGate5(this.identifier);
+            } else if (gate == 5) {
+                gf.setBarcelonaGate6(this.identifier);
+            } else {
+                System.out.println("ERROR in boarding gates graphicalBoardingGate");
+            }
+        }
+    }
+
 
     public void run() {
         //while(true) {
@@ -111,8 +148,11 @@ public class Airplane extends Thread {
         this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
         gf.getGw().look(); //Check the pause/resume bottons
 
+        int gate=-1;
         try {
-            airport1.getBoardingGates().enterGate(this, airport1); //enter into free space
+            gate=airport1.getBoardingGates().enterGate(this, airport1); //enter into free space
+            this.graphicalBoardingGate(gate, this.actualAirport, airport1);
+
         } catch (InterruptedException ex) {
             Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -150,7 +190,6 @@ public class Airplane extends Thread {
             System.out.println("Airplane " + this.getIdentifier() + " requested runway for landing.");
             int runway = airport2.getRunways().enterRunway(this);
             while (runway == -1) {
-                System.out.println("");
                 Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
                 System.out.println("Airplane " + this.getIdentifier() + " taking a detour.");
                 runway = airport2.getRunways().enterRunway(this);
@@ -187,6 +226,9 @@ public class Airplane extends Thread {
                 Thread.sleep((long) Math.random() * 15 + 15);
             } //else, continue with airports reversed
             airport2.getHangar().releaseAirplane(this); //take airplane from hangar
+            this.switchAirway(); //switch airway to opposite
+            this.setLanding(false);
+            System.out.println("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
     }
 
     public int getCapacity() {
