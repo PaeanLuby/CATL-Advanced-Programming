@@ -160,7 +160,7 @@ public class Airplane extends Thread {
         gf.getGw().look(); //Check the pause/resume bottons
         //boarding attempt
             int remainingAttempts = 3;
-            while (capacity >= airport1.getPassengers() && remainingAttempts > 0) {
+            while (capacity >= airport1.getPassengers() && remainingAttempts > 0) { //while plane hasnt reached capacity 
                 remainingAttempts--;
                 this.setPassengers(airport1.getPassengers()); //Take available passengers
                 long timeWait = (long) Math.random() * 4 + 1;
@@ -188,7 +188,8 @@ public class Airplane extends Thread {
             //Attempt to access runway of the other airport
             this.setLanding(true); //Set landing to true
             System.out.println("Airplane " + this.getIdentifier() + " requested runway for landing.");
-            int runway = airport2.getRunways().enterRunway(this);
+            //Take airplane from airway and put into runway
+            int runway = airport2.getRunways().enterRunway(getAirway(airport2).releaseAirplane(this));
             while (runway == -1) {
                 Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
                 System.out.println("Airplane " + this.getIdentifier() + " taking a detour.");
@@ -204,7 +205,7 @@ public class Airplane extends Thread {
             airport2.getBoardingGates().enterGate(this, airport2);
             for (int i = 0; i < passengers; i++) {
                 Thread.sleep((long) Math.random() * 4 + 1); //Each passanger's transference from the airplane between 1 and 5 seconds 
-            }
+            } 
             airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this));
             System.out.println("Pilot check for airplane " + this.getIdentifier());
             Thread.sleep((long) (1 + Math.random() * 4)); //Check for period between 1 and 5 seconds

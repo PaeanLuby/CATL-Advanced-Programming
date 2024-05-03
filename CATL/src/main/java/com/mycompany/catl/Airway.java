@@ -24,11 +24,19 @@ public class Airway {
     }
 
     public void enterAirway(Airplane airplane) {
-        this.airwayLock.lock();          //lock to avoid mutual exclusion between threads
         this.airplanes.offer(airplane); //add the airplane at the end of the list
         System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
         System.out.println("Current airplanes in airway are: " + toString());
-        airwayLock.unlock();             //unlock the lock
+    }
+    
+    public Airplane releaseAirplane(Airplane airplane) {
+        if (airplanes.remove(airplane)) {
+            System.out.println("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
+            return airplane;
+        } else {
+            System.out.println("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
+            return null;
+        }
     }
 
     public Queue<Airplane> getAirplanes() {

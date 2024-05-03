@@ -4,6 +4,7 @@
  */
 package com.mycompany.catl;
 
+import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -43,15 +44,18 @@ public class Runways {
 
     public Airplane releaseRunway(Airplane airplane) throws InterruptedException {
         mutualExclusion.acquire();
+        int index = -1;
         try {
-            for (int i = 0; i < 4; i++) {
-                if (runways[i].equals(airplane)) {
-                    runways[i] = null;
-                    return airplane;
-                }
+            index = Arrays.asList(runways).indexOf(airplane); {
+            if(index != -1) {
+                runways[index] = null;
+                return airplane;
+            } else {
+                return null;
             }
-            return null;
-        } finally {
+            }
+        } 
+        finally {
             full.release();
             mutualExclusion.release();
         }

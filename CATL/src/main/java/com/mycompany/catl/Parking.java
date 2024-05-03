@@ -24,12 +24,12 @@ public class Parking {
 
     private BlockingQueue<Airplane> airplanes;
     private Lock parkingLock;
-    private Condition notFirst;
+    private Condition first;
 
     public Parking() {
         airplanes = new LinkedBlockingQueue<Airplane>();
-        parkingLock = new ReentrantLock(true);
-        notFirst = parkingLock.newCondition();
+        parkingLock = new ReentrantLock();
+        first = parkingLock.newCondition();
     }
 
     /**
@@ -38,9 +38,10 @@ public class Parking {
      * @param airplane the new airplane
      */
     public void addAirplane(Airplane airplane) throws InterruptedException {
+        parkingLock.lock();
         this.airplanes.put(airplane); //add the airplane at the end of the list
         System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
-        System.out.println("Current airplanes are: " + toString());
+        parkingLock.unlock();
     }
 
     /**
@@ -58,17 +59,19 @@ public class Parking {
      * @return the airplane that was removed if it was at the front, otherwise
      * null
      */
-    public Airplane releaseAirplane(Airplane airplane) throws InterruptedException {
-        parkingLock.lock();
-        while (airplanes.isEmpty() || !airplanes.peek().equals(airplane)) {
-            notFirst.await();
+    public synchronized Airplane releaseAirplane(Airplane airplane) throws InterruptedException {
+        //parkingLock.lock();
+        Airplane removedAirplane = null;
+        while (!airplanes.isEmpty() && airplanes.peek() != airplane) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane is " + airplanes.peek().getIdentifier());
+                wait();
         }
         // Airplane is at the front of the queue and can proceed
-        Airplane removedAirplane = airplanes.take(); // Remove the airplane from the queue
-        notFirst.signalAll();
+        removedAirplane = airplanes.take(); // Remove the airplane from the queue
         System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
+        notifyAll();
         System.out.println("Current airplanes in parking are: " + toString());
-        parkingLock.unlock();
+        //parkingLock.unlock();
         return removedAirplane;
     }
 
