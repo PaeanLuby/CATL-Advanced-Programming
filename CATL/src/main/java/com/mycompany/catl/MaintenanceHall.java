@@ -5,6 +5,7 @@
 package com.mycompany.catl;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -40,6 +41,19 @@ public class MaintenanceHall {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder allPlanes = new StringBuilder();
+        Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
+
+        while (newIterator.hasNext()) {
+            String currPlane = newIterator.next().getIdentifier();
+            allPlanes.append(currPlane.concat(" "));
+        }
+        return allPlanes.toString();
+
     }
 }
 
