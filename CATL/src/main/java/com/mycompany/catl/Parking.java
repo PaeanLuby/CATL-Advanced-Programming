@@ -22,12 +22,14 @@ import java.util.concurrent.locks.Condition;
  */
 public class Parking {
 
-    private BlockingQueue<Airplane> airplanes;
+    private BlockingQueue<Airplane> airplanesForBoarding;
+    private BlockingQueue<Airplane> airplanesForMaintenance;
     private Lock parkingLock;
     private Condition first;
 
     public Parking() {
-        airplanes = new LinkedBlockingQueue<Airplane>();
+        airplanesForBoarding = new LinkedBlockingQueue<Airplane>();
+        airplanesForMaintenance = new LinkedBlockingQueue<Airplane>();
         parkingLock = new ReentrantLock();
         first = parkingLock.newCondition();
     }
@@ -39,7 +41,12 @@ public class Parking {
      */
     public void addAirplane(Airplane airplane) throws InterruptedException {
         parkingLock.lock();
-        this.airplanes.put(airplane); //add the airplane at the end of the list
+        if (!airplane.getLanding()) { //if airplane boarding send to boarding queue
+            this.airplanesForBoarding.put(airplane); //add the airplane at the end of the list
+        } else {
+            this.airplanesForMaintenance.put(airplane); //add the airplane at the end of the list
+        }
+            
         System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
         parkingLock.unlock();
     }
@@ -59,20 +66,37 @@ public class Parking {
      * @return the airplane that was removed if it was at the front, otherwise
      * null
      */
-    public synchronized Airplane releaseAirplane(Airplane airplane) throws InterruptedException {
+    public synchronized Airplane releaseAirplaneForBoarding(Airplane airplane) throws InterruptedException {
         //parkingLock.lock();
         Airplane removedAirplane = null;
-        while (!airplanes.isEmpty() && airplanes.peek() != airplane) {
-                System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane is " + airplanes.peek().getIdentifier());
+        while ((!airplanesForBoarding.isEmpty() && airplanesForBoarding.peek() != airplane)) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane is " + airplanesForBoarding.peek().getIdentifier());
                 wait();
         }
+
         // Airplane is at the front of the queue and can proceed
-        removedAirplane = airplanes.take(); // Remove the airplane from the queue
+        removedAirplane = airplanesForBoarding.take(); // Remove the airplane from the queue
         System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
         notifyAll();
         System.out.println("Current airplanes in parking are: " + toString());
         //parkingLock.unlock();
-        return removedAirplane;
+        return removedAirplane;  
+    }
+    
+    public synchronized Airplane releaseAirplaneForMaintenance(Airplane airplane) throws InterruptedException {
+        Airplane removedAirplane = null;
+        while ((!airplanesForMaintenance.isEmpty() && airplanesForMaintenance.peek() != airplane)) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane is " + airplanesForMaintenance.peek().getIdentifier());
+                wait();
+        }
+
+        // Airplane is at the front of the queue and can proceed
+        removedAirplane = airplanesForMaintenance.take(); // Remove the airplane from the queue
+        System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
+        notifyAll();
+        System.out.println("Current airplanes in parking are: " + toString());
+        //parkingLock.unlock();
+        return removedAirplane; 
     }
 
     /**
@@ -83,11 +107,16 @@ public class Parking {
     @Override
     public String toString() {
         StringBuilder allPlanes = new StringBuilder();
-        Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
-        while (newIterator.hasNext()) {
-            String currPlane = newIterator.next().getIdentifier();
+        Iterator<Airplane> boardingIterator = airplanesForBoarding.iterator(); // Create a new iterator
+        Iterator<Airplane> maintenanceIterator = airplanesForMaintenance.iterator(); // Create a new iterator
+        while (boardingIterator.hasNext()) {
+            String currPlane = boardingIterator.next().getIdentifier();
             allPlanes.append(currPlane.concat(" "));
-        }
+        } 
+        while (maintenanceIterator.hasNext()) {
+            String currPlane = maintenanceIterator.next().getIdentifier();
+            allPlanes.append(currPlane.concat(" "));
+        } 
         return allPlanes.toString();
     }
 }

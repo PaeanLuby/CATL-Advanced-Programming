@@ -19,34 +19,27 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MaintenanceHall {
 
     BlockingQueue airplanes;
-    
+
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
     }
-    
-    public void enterHall(Airplane airplane, Airport airport) throws InterruptedException {
+
+    public synchronized void enterHall(Airplane airplane, Airport airport) throws InterruptedException {
         while (airplanes.remainingCapacity() == 0) { //Wait until there's spacein the queue to add an element
             wait();
         }
-        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplane(airplane)); //Pull first airplane from parking
+        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane)); //Pull first airplane from parking
         System.out.println("Airplane " + airplane + " successfully entered into maintenance hall.");
     }
 
-    public Airplane releaseHall(Airplane airplane) throws InterruptedException {
-        synchronized (this) {
-            if(airplanes.remove(airplane)) {
-                notifyAll();
-                System.out.println("Airplane " + airplane + " successfully exiting the maintenance hall.");
-                return airplane;
-            } else {
+    public synchronized Airplane releaseHall(Airplane airplane) throws InterruptedException {
+        if (airplanes.remove(airplane)) {
+            notifyAll();
+            System.out.println("Airplane " + airplane + " successfully exiting the maintenance hall.");
+            return airplane;
+        } else {
             return null;
-            }
         }
     }
-    
-
-
 }
-
-
 

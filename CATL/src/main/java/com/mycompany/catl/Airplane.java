@@ -134,10 +134,12 @@ public class Airplane extends Thread {
         numberFlights++; //Increment number of flights
         //while(true) {
         gf.getGw().look(); //Check the pause/resume bottons
-        //Airplane creation in the Hangar
+        
+    /*
+    * ================ ENTER HANGAR =================
+    */
         airport1.getHangar().addAirplane(this);
-        this.graphicalHangar(this.actualAirport, airport1);
-
+        this.graphicalHangar(this.actualAirport, airport1); //Update hangar GUI
         gf.getGw().look(); //Check the pause/resume bottons
         this.log.write("The airplane " + this.identifier + " has been created in the hangar of the airport of: " + this.getCity());
         //Airplane moves to the Parking Area
@@ -170,7 +172,7 @@ public class Airplane extends Thread {
             }
             System.out.println("Airplane " + identifier + " is ready to start boarding.");
             for (int i = 0; i < passengers; i++) {
-                Thread.sleep((long) Math.random() * 2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                Thread.sleep((long) Math.random() * 2 + 1); //Each passanger's transference to the airplane between 1 and 3 seconds 
             }
             System.out.println("Airplane " + identifier + " successfully boarded.");
             this.log.write("Airplane " + identifier + " successfully boarded.");
