@@ -244,178 +244,195 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER HANGAR OF STARTING AIRPORT =================
     */
-        if (numberFlights == 1) { //if flight is first flight
+    if (numberFlights == 1) { //if flight is first flight
         //Add airplane to hangar.
         airport1.getHangar().addAirplane(this);
         this.graphicalHangar(airport1); //Update hangar GUI. Airplane shpould display in hangar.
-        gf.getGw().look(); //Check the pause/resume bottons.
         this.log.write("The airplane " + this.identifier + " has been created in the hangar of the airport of: " + this.getCity());
         gf.getGw().look(); //Check the pause/resume bottons
-        }
+    }
                 
     /*
     * ================ ENTER PARKING OF STARTING AIRPORT =================
     */
-        airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this)); //Take the airplane from the hangar and put in it in parking.
-        this.graphicalHangar(airport1);
-        this.graphicalParking(airport1);
-        this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
-        gf.getGw().look(); //Check the pause/resume bottons
+    airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this)); //Take the airplane from the hangar and put in it in parking.
+    this.graphicalHangar(airport1);
+    this.graphicalParking(airport1);
+    this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
+    gf.getGw().look(); //Check the pause/resume bottons
                 
     /*
     * ================ ENTER BOARDING GATE OF STARTING AIRPORT =================
     */
-        int gate= -1; //Starts with no gate.
-        gate=airport1.getBoardingGates().enterGate(this, airport1); //Enter into free boarding gate from parking.
-        this.graphicalParking(airport1);
-        this.graphicalBoardingGate(gate, airport1,false);
-        gf.getGw().look(); //Check the pause/resume bottons
+    int gate= -1; //Starts with no gate.
+    gate=airport1.getBoardingGates().enterGate(this, airport1); //Enter into free boarding gate from parking.
+    this.graphicalParking(airport1);
+    this.graphicalBoardingGate(gate, airport1,false);
+    gf.getGw().look(); //Check the pause/resume bottons
         
     /*
     * ================ ATTEMPT TO BOARD AT STARTING AIRPORT =================
     */
-        int remainingAttempts = 3;
-        while (capacity >= airport1.getPassengers() && remainingAttempts > 0) { //while plane hasnt reached capacity 
-            remainingAttempts--;
-            this.setPassengers(airport1.getPassengers()); //Take available passengers
-            long timeWait = (long) Math.random() * 4000 + 1000;
-            Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
-            gf.getGw().look(); //Check the pause/resume bottons
-            System.out.println("Not yet full. Attempts left: " + remainingAttempts);
-        }
-        System.out.println("Airplane " + identifier + " is ready to start boarding.");
-        for (int i = 0; i < passengers; i++) {
-            Thread.sleep((long) Math.random() * 2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
-        }
-        System.out.println("Airplane " + identifier + " successfully boarded.");
-        this.log.write("Airplane " + identifier + " successfully boarded.");
+    int remainingAttempts = 3;
+    while (capacity >= airport1.getPassengers() && remainingAttempts > 0) { //while plane hasnt reached capacity 
+        remainingAttempts--;
+        this.setPassengers(airport1.getPassengers()); //Take available passengers
+        long timeWait = (long) Math.random() * 4000 + 1000;
+        Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
+        gf.getGw().look(); //Check the pause/resume bottons
+        System.out.println("Not yet full. Attempts left: " + remainingAttempts);
+    }
+    System.out.println("Airplane " + identifier + " is ready to start boarding.");
+    for (int i = 0; i < passengers; i++) {
+        Thread.sleep((long) Math.random() * 2000 + 1000); //Each passanger's transference to the airplane between 1 and 3 seconds 
+        gf.getGw().look(); //Check the pause/resume bottons
+    }
+    System.out.println("Airplane " + identifier + " successfully boarded.");
+    this.log.write("Airplane " + identifier + " successfully boarded.");
             
     /*
     * ================ ENTER TAXI AREA OF STARTING AIRPORT =================
     */
-        airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
-        this.graphicalBoardingGate(gate, airport1,true);
-        this.graphicalTaxiArea(airport1);
-        System.out.println("Pilot check for airplane " + this.getIdentifier());
-        Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
-        //RUNWAYS
-        int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
-        this.graphicalTaxiArea(airport1);
-        this.graphicalRunway(rw, airport1,false);
-        System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
-        Thread.sleep((long) Math.random() * 2000 + 1000); //Final checks between 1 and 3 seconds
-        System.out.println("Airplane " + this.getIdentifier() + " is taking off.");
-        Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
+    airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
+    this.graphicalBoardingGate(gate, airport1,true);
+    this.graphicalTaxiArea(airport1);
+    System.out.println("Pilot check for airplane " + this.getIdentifier());
+    Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
+
+    //RUNWAYS
+    int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
+    this.graphicalTaxiArea(airport1);
+    this.graphicalRunway(rw, airport1,false);
+    System.out.println("Airplane " + this.getIdentifier() + " completing final checks.");
+    Thread.sleep((long) Math.random() * 2000 + 1000); //Final checks between 1 and 3 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
+    System.out.println("Airplane " + this.getIdentifier() + " is taking off.");
+    Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
             
     /*
     * ================ ENTER RUNWAY OF STARTING AIRPORT =================
     */
-        getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
-        this.graphicalRunway(rw, airport1, true);
-        this.graphicalAirway(airport1); 
-        Thread.sleep((long) Math.random() * 1500 + 1500); //Flight between 15 and 30 seconds
-         
+    getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
+    this.graphicalRunway(rw, airport1, true);
+    this.graphicalAirway(airport1); 
+    Thread.sleep((long) Math.random() * 1500 + 1500); //Flight between 15 and 30 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
+
     /*
     * ================  REQUEST RUNWAY OF DESTINATION AIRPORT =================
     */
-        //Attempt to access runway of the other airport
-        System.out.println("Airplane " + this.getIdentifier() + " requested runway for landing.");
+    //Attempt to access runway of the other airport
+    System.out.println("Airplane " + this.getIdentifier() + " requested runway for landing.");
      
     /*
     * ================ ENTER RUNWAY OF DESTINATION AIRPORT =================
     */
-        this.setLanding(true); //Set landing to true
-        int runway = airport2.getRunways().enterRunway(this);
-        this.graphicalRunway(runway, airport2, false); 
-        if (runway != -1) {
-            getAirway(airport1).releaseAirplane(this);
-            this.graphicalAirway(airport1);
-        }
-        this.graphicalRunway(runway, airport2, false);
-        while (runway == -1) {
-            Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
-            System.out.println("Airplane " + this.getIdentifier() + " taking a detour.");
-            runway = airport2.getRunways().enterRunway(this);
-            this.graphicalRunway(runway, airport2, false);
-        }
+    this.setLanding(true); //Set landing to true
+    int runway = airport2.getRunways().enterRunway(this);
+    this.graphicalRunway(runway, airport2, false); 
+    if (runway != -1) {
         getAirway(airport1).releaseAirplane(this);
         this.graphicalAirway(airport1);
-        System.out.println("Airplane " + this.getIdentifier() + " entered into runway " + runway);
-        switchAirway();
+    }
+    this.graphicalRunway(runway, airport2, false);
+    while (runway == -1) {
+        Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
+        gf.getGw().look(); //Check the pause/resume bottons
+        System.out.println("Airplane " + this.getIdentifier() + " taking a detour.");
+        runway = airport2.getRunways().enterRunway(this);
+        this.graphicalRunway(runway, airport2, false);
+    }
+    getAirway(airport1).releaseAirplane(this);
+    this.graphicalAirway(airport1);
+    System.out.println("Airplane " + this.getIdentifier() + " entered into runway " + runway);
+    switchAirway();
                 
     /*
     * ================ LAND AT DESTINATION AIRPORT =================
     */
-        Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
+    Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
             
     /*
     * ================ ENTER TAXI AREA OF DESTINATION AIRPORT =================
     */
-        airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
-        this.graphicalRunway(runway, airport2, true);
-        this.graphicalTaxiArea(airport2);
+    airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
+    this.graphicalRunway(runway, airport2, true);
+    this.graphicalTaxiArea(airport2);
             
     /*
     * ================ ENTER BOARDING GATE OF DESTINATION AIRPORT =================
     */      
     
-        gate=airport2.getBoardingGates().enterGate(this, airport2);
-        System.out.println("Airplane " + this.getIdentifier() + " flying between taxi area and taxi boarding gate.");
-        Thread.sleep((long) Math.random() * 2000 + 3000); 
-        this.graphicalTaxiArea(airport2);
-        System.out.println("Airplane " + identifier + " is ready to start debarking.");
-        this.graphicalBoardingGate(gate, airport2, false);
+    gate=airport2.getBoardingGates().enterGate(this, airport2);
+    System.out.println("Airplane " + this.getIdentifier() + " flying between taxi area and taxi boarding gate.");
+    Thread.sleep((long) Math.random() * 2000 + 3000); 
+    gf.getGw().look(); //Check the pause/resume bottons
+    this.graphicalTaxiArea(airport2);
+    System.out.println("Airplane " + identifier + " is ready to start debarking.");
+    this.graphicalBoardingGate(gate, airport2, false);
     /*
     * ================ BEGIN DISEMBARKING =================
     */             
-        for (int i = 0; i < passengers; i++) {
-            Thread.sleep((long) Math.random() * 4000 + 1000); //Each passanger's transference from the airplane between 1 and 5 seconds 
-        } 
-            Thread.sleep((long) Math.random() * 4000 + 1000); //Each passenger's transference from the airplane between 1 and 5 seconds 
-                
+    for (int i = 0; i < passengers; i++) {
+        Thread.sleep((long) Math.random() * 4000 + 1000); //Each passanger's transference from the airplane between 1 and 5 seconds 
+        gf.getGw().look(); //Check the pause/resume bottons
+    } 
+    Thread.sleep((long) Math.random() * 4000 + 1000); //Each passenger's transference from the airplane between 1 and 5 seconds 
+    gf.getGw().look(); //Check the pause/resume bottons        
     /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
     */     
-        airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this));
-        this.graphicalBoardingGate(gate, airport2, true);
-        this.graphicalParking(airport2);
-        System.out.println("Pilot check for airplane " + this.getIdentifier());
-        Thread.sleep((long) (1 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
+    airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this));
+    this.graphicalBoardingGate(gate, airport2, true);
+    this.graphicalParking(airport2);
+    System.out.println("Pilot check for airplane " + this.getIdentifier());
+    Thread.sleep((long) (1 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
+    gf.getGw().look(); //Check the pause/resume bottons
+    
     /*
     * ================ GO TO THE MAINTENANCE HALL FOR INSPECTION =================
     */  
-            System.out.println("Airplane " + this.getIdentifier() + " going through maintenance hall door.");
-            Thread.sleep(1000); //Airplane takes 1 second to go through maintanence hall door
-            this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2);
-            this.graphicalParking(airport2);
-            this.graphicalMaintenanceHall(airport2);
-            
-            //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
-            if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up'
-                System.out.println("Airplane " + this.getIdentifier() + " going in for a deep inspection.");
-                Thread.sleep((long) Math.random() * 500 + 500); //Inspection takes random time between 5 and 10 seconds
-            } else {
-                System.out.println("Airplane " + this.getIdentifier() + " going in for a quick inspection.");
-                Thread.sleep((long) Math.random() * 1000 + 4000); //Inspection takes random time between 1 and 5 seconds
-            }
-            
-            //Airplane decides to rest in hangar or continue life cycle
-            int choice = 1 + (int) (Math.random() * 2000); //50% chance
-            if (choice == 1) { //if choice 1, rest in hangar 
-                airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
-                this.graphicalHangar(airport2);
-                this.graphicalMaintenanceHall(airport2);
-                Thread.sleep((long) Math.random() * 1500 + 1500);
-                this.graphicalHangar(airport2);
-                
-            } else {
-                airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
-                this.graphicalMaintenanceHall(airport2);
-                this.graphicalHangar(airport2);
-            }
-            
-            this.setLanding(false);
-            System.out.println("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
+    
+    System.out.println("Airplane " + this.getIdentifier() + " going through maintenance hall door.");
+    Thread.sleep(1000); //Airplane takes 1 second to go through maintanence hall door
+    gf.getGw().look(); //Check the pause/resume bottons
+    this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2);
+    this.graphicalParking(airport2);
+    this.graphicalMaintenanceHall(airport2);
+
+    //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
+    if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up'
+        System.out.println("Airplane " + this.getIdentifier() + " going in for a deep inspection.");
+        Thread.sleep((long) Math.random() * 500 + 500); //Inspection takes random time between 5 and 10 seconds
+        gf.getGw().look(); //Check the pause/resume bottons
+    } else {
+        System.out.println("Airplane " + this.getIdentifier() + " going in for a quick inspection.");
+        Thread.sleep((long) Math.random() * 1000 + 4000); //Inspection takes random time between 1 and 5 seconds
+        gf.getGw().look(); //Check the pause/resume bottons
+    }
+
+    //Airplane decides to rest in hangar or continue life cycle
+    int choice = 1 + (int) (Math.random() * 2000); //50% chance
+    if (choice == 1) { //if choice 1, rest in hangar 
+        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
+        this.graphicalHangar(airport2);
+        this.graphicalMaintenanceHall(airport2);
+        Thread.sleep((long) Math.random() * 1500 + 1500);
+        gf.getGw().look(); //Check the pause/resume bottons
+        this.graphicalHangar(airport2);
+
+    } else {
+        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
+        this.graphicalMaintenanceHall(airport2);
+        this.graphicalHangar(airport2);
+    }
+
+    this.setLanding(false);
+    System.out.println("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
+    gf.getGw().look(); //Check the pause/resume bottons
     }
 
     public int getCapacity() {
