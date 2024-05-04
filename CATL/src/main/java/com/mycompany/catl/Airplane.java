@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
@@ -227,11 +228,13 @@ public class Airplane extends Thread {
             
         } catch (InterruptedException ex) {
             Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
         }
         //}
     }
 
-    public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException {
+    public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException, RemoteException {
         numberFlights++; //Increment number of flights
         //while(true) {
         gf.getGw().look(); //Check the pause/resume bottons
@@ -295,7 +298,9 @@ public class Airplane extends Thread {
     Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
     gf.getGw().look(); //Check the pause/resume bottons
 
-    //RUNWAYS
+        /*
+    * ================ ENTER RUNWAY OF STARTING AIRPORT =================
+    */
     int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
     this.graphicalTaxiArea(airport1);
     this.graphicalRunway(rw, airport1,false);
@@ -307,7 +312,7 @@ public class Airplane extends Thread {
     gf.getGw().look(); //Check the pause/resume bottons
             
     /*
-    * ================ ENTER RUNWAY OF STARTING AIRPORT =================
+    * ================ ENTER AIRWAY OF STARTING AIRPORT =================
     */
     getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
     this.graphicalRunway(rw, airport1, true);

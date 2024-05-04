@@ -7,6 +7,7 @@ package com.mycompany.catl;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -128,6 +129,8 @@ public class Bus extends Thread {
                 this.log.write("The bus " + this.identifier + " has arrived to the downtown of " + this.getCity() + " with " + passengers + " passengers.");
                 passengers = 0;
             } catch (InterruptedException ex) {
+                Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

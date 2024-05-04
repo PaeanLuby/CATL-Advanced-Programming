@@ -58,5 +58,10 @@ public class MaintenanceHall {
         return allPlanes.toString();
 
     }
+
+    public BlockingQueue getAirplanes() {
+        return airplanes;
+    }
+    
 }
 

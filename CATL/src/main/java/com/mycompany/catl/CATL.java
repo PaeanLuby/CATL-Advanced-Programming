@@ -6,6 +6,10 @@ package com.mycompany.catl;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
@@ -17,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class CATL {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
         Log log = new Log();
         //Creation of Madrid and Barcelonaairport:
         //Shared class
@@ -43,9 +47,17 @@ public class CATL {
 
         Lock madridPassengersLock = new ReentrantLock();
         Lock barcelonaPassengersLock = new ReentrantLock();
-
+        
         GraphicalInterface gf = new GraphicalInterface();
         gf.setVisible(true);
+        
+        try{
+            Registry reg =LocateRegistry.createRegistry(1099);
+            Naming.rebind("//localhost/madrid", madrid);
+            Naming.rebind("//localhost/barcelona", barcelona);
+        }catch(Exception e){e.printStackTrace();}
+        
+
 
         AirplaneCreator airplaneCreator = new AirplaneCreator(log, madrid, barcelona, gf);
         BusCreator busCreator = new BusCreator(log, madrid, barcelona, madridPassengersLock, barcelonaPassengersLock, gf);
