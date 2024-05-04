@@ -17,17 +17,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Runways {
 
     private Airplane[] runways;
-    private Semaphore full;
     private Semaphore mutualExclusion;
 
     public Runways() {
         runways = new Airplane[4]; //runway can fit 4 airplanes
         mutualExclusion = new Semaphore(1);
-        full = new Semaphore(4);
     }
 
     public int enterRunway(Airplane airplane) throws InterruptedException {
-        full.acquire();
         mutualExclusion.acquire();
         int runway = -1;
         for (int i = 0; i < 4; i++) {
@@ -45,20 +42,19 @@ public class Runways {
     public Airplane releaseRunway(Airplane airplane) throws InterruptedException {
         mutualExclusion.acquire();
         int index = -1;
+        index = Arrays.asList(runways).indexOf(airplane); {
         try {
-            index = Arrays.asList(runways).indexOf(airplane); {
             if(index != -1) {
                 runways[index] = null;
                 return airplane;
             } else {
                 return null;
             }
-            }
-        } 
-        finally {
-            full.release();
+        } finally {
             mutualExclusion.release();
         }
+        
     }
 
+    }
 }

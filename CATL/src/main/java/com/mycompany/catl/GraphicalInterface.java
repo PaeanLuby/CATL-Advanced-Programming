@@ -418,16 +418,15 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                             .addComponent(jLabel10)
                                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(madridGate4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                            .addComponent(jLabel11)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(madridGate6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(madridGate4))
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                             .addComponent(jLabel9)
                                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                            .addComponent(madridGate5, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addGap(7, 7, 7))))
+                                                            .addComponent(madridGate5))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                            .addComponent(jLabel11)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                            .addComponent(madridGate6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel33)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -436,7 +435,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                             .addComponent(jLabel32)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(madridBusAirportTown, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                                     .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -456,17 +455,17 @@ public class GraphicalInterface extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addComponent(jLabel12)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(madridTaxiArea, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addGap(101, 101, 101)
                                                     .addComponent(jLabel1))
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jLabel5)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(madridParking, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(0, 77, Short.MAX_VALUE)))
+                                                    .addComponent(madridParking, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jLabel12)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(madridTaxiArea, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(0, 0, Short.MAX_VALUE)))
                                     .addGap(16, 16, 16)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -921,23 +920,23 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }
 
     public void setMadridGate2(String gate) {
-        this.madridGate1.setText(gate);
+        this.madridGate2.setText(gate);
     }
 
     public void setMadridGate3(String gate) {
-        this.madridGate1.setText(gate);
+        this.madridGate3.setText(gate);
     }
 
     public void setMadridGate4(String gate) {
-        this.madridGate1.setText(gate);
+        this.madridGate4.setText(gate);
     }
 
     public void setMadridGate5(String gate) {
-        this.madridGate1.setText(gate);
+        this.madridGate5.setText(gate);
     }
 
     public void setMadridGate6(String gate) {
-        this.madridGate1.setText(gate);
+        this.madridGate6.setText(gate);
     }
 
     public void setBarcelonaGate1(String gate) {
@@ -1016,20 +1015,20 @@ public class GraphicalInterface extends javax.swing.JFrame {
         this.barcelonaRunway4.setText(runway);
     }
     
-    public void setAirwayMadridBarcelona(String arway){
+    public void setAirwayMadridBarcelona(String airway){
         lockAirwayMadridBarcelona.lock();
         try{
-         this.airwayMadridBarcelona.setText(arway);
+         this.airwayMadridBarcelona.setText(airway);
         }catch (Exception e) {
         } finally {
             lockAirwayMadridBarcelona.unlock();
         }
     }
     
-    public void setAirwayBarcelonaMadrid(String arway) {
+    public void setAirwayBarcelonaMadrid(String airway) {
         lockAirwayBarcelonaMadrid.lock();
         try {
-            this.airwayBarcelonaMadrid.setText(arway);
+            this.airwayBarcelonaMadrid.setText(airway);
         } catch (Exception e) {
         } finally {
             lockAirwayBarcelonaMadrid.unlock();
