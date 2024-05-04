@@ -16,6 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author THINKPAD
  */
 public class BoardingGates {
+
     private int type;
     private Airplane[] gates;
     private int remainingAttempts;
@@ -30,42 +31,42 @@ public class BoardingGates {
     }
 
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
-        int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
         gateLock.lock();
-        printGates();
-        int gate = -1;
-        // Iterate to find the first available gate that is not the excluded gate
-        while (!isGatePresent(gates, airplane, excludedGate)) {
-            System.out.println("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
-            full.await();
-        }
-        for (int i = 0; i < gates.length; i++) {
-            if (gates[i] == null && i != excludedGate) {
-                // Found an open gate that's not excluded
-                gate = i;
-                if (excludedGate == 1) {
-                    gates[gate] = airport.getTaxiArea().releaseAirplane(airplane);
-                } else {
-                    gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane);
-                }
-                System.out.println("Space " + gate + " available in the boarding gate.");
-                break;
+        int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
+        try {
+            printGates();
+            int gate = isGatePresent(gates, excludedGate);
+            // Iterate to find the first available gate that is not the excluded gate
+            while (gate == -1) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
+                full.await();
+                gate = isGatePresent(gates, excludedGate);
             }
+            
+            if (excludedGate == 1) {
+                gates[gate] = airport.getTaxiArea().releaseAirplane(airplane);
+            } else {
+                gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane);
+            }
+            System.out.println("Space " + gate + " available in the boarding gate.");
+            return gate;
+            //If no gate was found, wait
+        } finally {
+            gateLock.unlock();
         }
-        //If no gate was found, wait
-        gateLock.unlock();
-        
-        return gate;
     }
 
     public Airplane releaseGate(Airplane airplane) throws InterruptedException {
         gateLock.lock();
-        int planeIndex = Arrays.asList(gates).indexOf(airplane);
-        System.out.println("Airplane " + airplane.getIdentifier() + " waiting to release boarding gate" + planeIndex);
-        gates[planeIndex] = null;
-        System.out.println("Airplane " + airplane.getIdentifier() + " released boarding gate " + planeIndex);
-        full.signalAll();
-        gateLock.unlock();
+        try {
+            int planeIndex = Arrays.asList(gates).indexOf(airplane);
+            System.out.println("Airplane " + airplane.getIdentifier() + " waiting to release boarding gate" + planeIndex);
+            gates[planeIndex] = null;
+            System.out.println("Airplane " + airplane.getIdentifier() + " released boarding gate " + planeIndex);
+            full.signalAll();
+        } finally {
+            gateLock.unlock();
+        }
         return airplane;
     }
 
@@ -79,13 +80,13 @@ public class BoardingGates {
             }
         }
     }
-    
-    private boolean isGatePresent(Airplane[] gates, Airplane airplane, int unusableGate) {
+
+    private int isGatePresent(Airplane[] gates, int unusableGate) {
         for (int i = 0; i < gates.length; i++) {
-            if (i != unusableGate && gates[i] == null) {  // Skip index 1 as it is not usable
-                return true;
+            if (i != unusableGate && gates[i] == null) {  // Skip index that is not usable
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 }

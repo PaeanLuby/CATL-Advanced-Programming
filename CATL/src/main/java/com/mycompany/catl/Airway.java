@@ -19,14 +19,17 @@ public class Airway {
     private String name;
 
     public Airway(String name) {
-        airplanes = new ConcurrentLinkedQueue<Airplane>();
+        airplanes = new ConcurrentLinkedQueue<Airplane>(); 
         this.name = name;
     }
 
     public void enterAirway(Airplane airplane) {
-        this.airplanes.add(airplane); //add the airplane at the end of the list
-        System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
-        System.out.println("Current airplanes in airway are: " + toString());
+        if(this.airplanes.offer(airplane)) { //add the airplane at the end of the list
+            System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
+            System.out.println("Current airplanes in airway are: " + toString());
+        } else {
+            System.err.println("Something happened while adding airplane " + airplane.getIdentifier() + " to airway.");
+        }
     }
     
     public Airplane releaseAirplane(Airplane airplane) {
