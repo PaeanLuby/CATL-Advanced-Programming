@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,13 +17,20 @@ import java.rmi.RemoteException;
  */
 public class DistributedProgrammingGUI extends javax.swing.JFrame {
 
+    RemoteInterface madridRi;
+    RemoteInterface barcelonaRi;
     /**
      * Creates new form DistributedProgrammingGUI
      */
     public DistributedProgrammingGUI() {
         initComponents();
+        try{
+            madridRi = (RemoteInterface) Naming.lookup("//localhost/madrid");
+            barcelonaRi = (RemoteInterface) Naming.lookup("//localhost/barcelona");
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -583,35 +592,67 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMadridCloseRunway1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridCloseRunway1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(0, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridCloseRunway1ActionPerformed
 
     private void buttonMadridOpenRunway1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridOpenRunway1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(0, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridOpenRunway1ActionPerformed
 
     private void buttonMadridCloseRunway2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridCloseRunway2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(1, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridCloseRunway2ActionPerformed
 
     private void buttonMadridOpenRunway2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridOpenRunway2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(1, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridOpenRunway2ActionPerformed
 
     private void buttonMadridCloseRunway3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridCloseRunway3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(2, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridCloseRunway3ActionPerformed
 
     private void buttonMadridCloseRunway4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridCloseRunway4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(3, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridCloseRunway4ActionPerformed
 
     private void buttonMadridOpenRunway4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridOpenRunway4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(3, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridOpenRunway4ActionPerformed
 
     private void buttonMadridOpenRunway3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMadridOpenRunway3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            madridRi.openClose(2, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonMadridOpenRunway3ActionPerformed
 
     private void madridHangarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_madridHangarActionPerformed
@@ -655,35 +696,67 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_barcelonaTaxiAreaActionPerformed
 
     private void buttonBarcelonaCloseRunway1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaCloseRunway1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(0, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaCloseRunway1ActionPerformed
 
     private void buttonBarcelonaOpenRunway1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaOpenRunway1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(0, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaOpenRunway1ActionPerformed
 
     private void buttonBarcelonaCloseRunway3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaCloseRunway3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(2, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaCloseRunway3ActionPerformed
 
     private void buttonBarcelonaOpenRunway3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaOpenRunway3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(2, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaOpenRunway3ActionPerformed
 
     private void buttonBarcelonaCloseRunway2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaCloseRunway2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(1, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaCloseRunway2ActionPerformed
 
     private void buttonBarcelonaOpenRunway2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaOpenRunway2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(1, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaOpenRunway2ActionPerformed
 
     private void buttonBarcelonaCloseRunway4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaCloseRunway4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(3, false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaCloseRunway4ActionPerformed
 
     private void buttonBarcelonaOpenRunway4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBarcelonaOpenRunway4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            barcelonaRi.openClose(3, true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttonBarcelonaOpenRunway4ActionPerformed
 
     private void AirwayMadridBarcelonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AirwayMadridBarcelonaActionPerformed
@@ -743,22 +816,20 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
         this.AirwayBarcelonaMadrid.setText(arway);
     }
     
-    public void set() throws RemoteException, NotBoundException, MalformedURLException{
-        RemoteInterface MadridRi = (RemoteInterface) Naming.lookup("//localhost/madrid");
-        RemoteInterface BarcelonaRi = (RemoteInterface) Naming.lookup("//localhost/barcelona");
+    public void set() throws RemoteException{
         while(true){
-            setMadridHangar(MadridRi.numHangar());
-            setMadridPassengers(MadridRi.getPassengers());
-            setMadridMaintenance(MadridRi.numMaintenance());
-            setMadridParking(MadridRi.numParking());
-            setMadridTaxiArea(MadridRi.numTaxiArea());
-            setBarcelonaHangar(BarcelonaRi.numHangar());
-            setBarcelonaPassengers(BarcelonaRi.getPassengers());
-            setBarcelonaMaintenance(BarcelonaRi.numMaintenance());
-            setBarcelonaParking(BarcelonaRi.numParking());
-            setBarcelonaTaxiArea(BarcelonaRi.numTaxiArea());
-            setAirwayMadridBarcelona(MadridRi.showMadBarAirway());
-            setAirwayBarcelonaMadrid(MadridRi.showBarMadAirway());
+            setMadridHangar(madridRi.numHangar());
+            setMadridPassengers(madridRi.getPassengers());
+            setMadridMaintenance(madridRi.numMaintenance());
+            setMadridParking(madridRi.numParking());
+            setMadridTaxiArea(madridRi.numTaxiArea());
+            setBarcelonaHangar(barcelonaRi.numHangar());
+            setBarcelonaPassengers(barcelonaRi.getPassengers());
+            setBarcelonaMaintenance(barcelonaRi.numMaintenance());
+            setBarcelonaParking(barcelonaRi.numParking());
+            setBarcelonaTaxiArea(barcelonaRi.numTaxiArea());
+            setAirwayMadridBarcelona(madridRi.showMadBarAirway());
+            setAirwayBarcelonaMadrid(madridRi.showBarMadAirway());
         }
     }
     /**

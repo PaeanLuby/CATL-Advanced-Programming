@@ -303,7 +303,9 @@ public class Airplane extends Thread {
     Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
     gf.getGw().look(); //Check the pause/resume bottons
 
-    //RUNWAYS
+        /*
+    * ================ ENTER RUNWAY OF STARTING AIRPORT =================
+    */
     int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
     this.graphicalTaxiArea(airport1);
     this.graphicalRunway(rw, airport1,false);
@@ -315,7 +317,7 @@ public class Airplane extends Thread {
     gf.getGw().look(); //Check the pause/resume bottons
             
     /*
-    * ================ ENTER RUNWAY OF STARTING AIRPORT =================
+    * ================ ENTER AIRWAY OF STARTING AIRPORT =================
     */
     getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
     this.graphicalRunway(rw, airport1, true);

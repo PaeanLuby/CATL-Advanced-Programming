@@ -19,4 +19,5 @@ public interface RemoteInterface extends Remote{
     public int numTaxiArea() throws RemoteException;
     public String showMadBarAirway() throws RemoteException;
     public String showBarMadAirway() throws RemoteException;
+    public void openClose(int runway,boolean opCl) throws RemoteException;
 }

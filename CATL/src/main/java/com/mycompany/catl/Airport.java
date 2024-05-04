@@ -131,5 +131,14 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
         String airway = this.Bar_Mad.toString();
         return airway;
     }
+    
+    /* It opens or closes an airway
+    * 
+    * @param runway its the runway that is going to be oppendes or closed
+    *@param opCl If it is true it opens the runway, if it is false it closes the runway 
+    */
+    public void openClose(int runway,boolean opCl) throws RemoteException{
+        this.runways.openClose(runway, opCl);
+    }
 
 }
