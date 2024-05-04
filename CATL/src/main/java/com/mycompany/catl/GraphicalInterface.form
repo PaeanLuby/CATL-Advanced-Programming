@@ -109,20 +109,19 @@
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="madridGate4" min="-2" pref="108" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="madridGate6" min="-2" pref="108" max="-2" attributes="0"/>
+                                                              <Component id="madridGate4" max="32767" attributes="0"/>
                                                           </Group>
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                                               <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="madridGate5" min="-2" pref="108" max="-2" attributes="0"/>
+                                                              <Component id="madridGate5" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" attributes="0">
+                                                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="madridGate6" min="-2" pref="115" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
-                                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -136,7 +135,7 @@
                                               <Component id="madridBusAirportTown" min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                                      <EmptySpace pref="65" max="32767" attributes="0"/>
                                       <Component id="filler1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -160,21 +159,21 @@
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="madridTaxiArea" min="-2" pref="314" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="madridParking" min="-2" pref="294" max="-2" attributes="0"/>
+                                                      <Component id="madridParking" min="-2" pref="301" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="madridTaxiArea" min="-2" pref="321" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>

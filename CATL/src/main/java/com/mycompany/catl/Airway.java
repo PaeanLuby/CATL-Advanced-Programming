@@ -24,13 +24,14 @@ public class Airway {
     }
 
     public void enterAirway(Airplane airplane) {
-        this.airplanes.offer(airplane); //add the airplane at the end of the list
+        this.airplanes.add(airplane); //add the airplane at the end of the list
         System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
         System.out.println("Current airplanes in airway are: " + toString());
     }
     
     public Airplane releaseAirplane(Airplane airplane) {
         if (airplanes.remove(airplane)) {
+            System.out.println("Current airplanes in airway are: " + toString());
             System.out.println("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
             return airplane;
         } else {

@@ -30,26 +30,20 @@ public class BoardingGates {
     }
 
     public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
+        int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
         gateLock.lock();
         printGates();
         int gate = -1;
-        boolean filler = false;
-        int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
-        if (gates[excludedGate] == null) {
-            gates[excludedGate] = new Airplane();
-            filler = true;
-        }
-
         // Iterate to find the first available gate that is not the excluded gate
-        while (!Arrays.asList(gates).contains(null)) {
+        while (!isGatePresent(gates, airplane, excludedGate)) {
             System.out.println("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
             full.await();
         }
         for (int i = 0; i < gates.length; i++) {
-            if (gates[i] == null) {
+            if (gates[i] == null && i != excludedGate) {
                 // Found an open gate that's not excluded
                 gate = i;
-                if (airplane.getLanding()) {
+                if (excludedGate == 1) {
                     gates[gate] = airport.getTaxiArea().releaseAirplane(airplane);
                 } else {
                     gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane);
@@ -57,9 +51,6 @@ public class BoardingGates {
                 System.out.println("Space " + gate + " available in the boarding gate.");
                 break;
             }
-        }
-        if (filler) {
-            gates[excludedGate] = null;
         }
         //If no gate was found, wait
         gateLock.unlock();
@@ -73,7 +64,7 @@ public class BoardingGates {
         System.out.println("Airplane " + airplane.getIdentifier() + " waiting to release boarding gate" + planeIndex);
         gates[planeIndex] = null;
         System.out.println("Airplane " + airplane.getIdentifier() + " released boarding gate " + planeIndex);
-        full.signal();
+        full.signalAll();
         gateLock.unlock();
         return airplane;
     }
@@ -87,5 +78,14 @@ public class BoardingGates {
                 System.out.println(gates[i].getIdentifier());
             }
         }
+    }
+    
+    private boolean isGatePresent(Airplane[] gates, Airplane airplane, int unusableGate) {
+        for (int i = 0; i < gates.length; i++) {
+            if (i != unusableGate && gates[i] == null) {  // Skip index 1 as it is not usable
+                return true;
+            }
+        }
+        return false;
     }
 }
