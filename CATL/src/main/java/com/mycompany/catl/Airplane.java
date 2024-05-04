@@ -244,12 +244,14 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER HANGAR OF STARTING AIRPORT =================
     */
+        if (numberFlights == 1) { //if flight is first flight
         //Add airplane to hangar.
         airport1.getHangar().addAirplane(this);
         this.graphicalHangar(airport1); //Update hangar GUI. Airplane shpould display in hangar.
         gf.getGw().look(); //Check the pause/resume bottons.
         this.log.write("The airplane " + this.identifier + " has been created in the hangar of the airport of: " + this.getCity());
         gf.getGw().look(); //Check the pause/resume bottons
+        }
                 
     /*
     * ================ ENTER PARKING OF STARTING AIRPORT =================
@@ -400,10 +402,10 @@ public class Airplane extends Thread {
             //Airplane decides to rest in hangar or continue life cycle
             int choice = 1 + (int) (Math.random() * 2000); //50% chance
             if (choice == 1) { //if choice 1, rest in hangar 
-                Thread.sleep((long) Math.random() * 1500 + 1500);
-                this.graphicalHangar(airport2);
                 airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
+                this.graphicalHangar(airport2);
                 this.graphicalMaintenanceHall(airport2);
+                Thread.sleep((long) Math.random() * 1500 + 1500);
                 this.graphicalHangar(airport2);
                 
             } else {
