@@ -119,4 +119,13 @@ public class Parking {
         } 
         return allPlanes.toString();
     }
+
+    public BlockingQueue<Airplane> getAirplanesForBoarding() {
+        return airplanesForBoarding;
+    }
+
+    public BlockingQueue<Airplane> getAirplanesForMaintenance() {
+        return airplanesForMaintenance;
+    }
+    
 }

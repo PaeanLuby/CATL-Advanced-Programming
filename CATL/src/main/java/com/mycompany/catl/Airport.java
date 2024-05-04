@@ -4,9 +4,11 @@
  */
 package com.mycompany.catl;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Semaphore;
 
-public class Airport {
+public class Airport extends UnicastRemoteObject implements RemoteInterface{
 
     private int passengers;
     private Hangar hangar;
@@ -19,7 +21,7 @@ public class Airport {
     private Runways runways;
     private String name;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) { //, BoardingGates boardingBG, BoardingGates landingBG, BoardingGates universalBG1, BoardingGates universalBG2, BoardingGates universalBG3, BoardingGates universalBG4, Runways runway1, Runways runway2, Runways runway3, Runways runway4) {
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) throws RemoteException { 
         this.passengers = 0;
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
@@ -32,7 +34,7 @@ public class Airport {
         this.name = name;
     }
 
-    public int getPassengers() {
+    public int getPassengers() throws RemoteException{
         return passengers;
     }
 
@@ -98,6 +100,36 @@ public class Airport {
     
     public String toString() {
         return this.name;
+    }
+    
+    public int numHangar() throws RemoteException{
+        int num = this.hangar.getAirplanes().size();
+        return num;
+    }
+    
+    public int numMaintenance() throws RemoteException{
+        int num = this.maintenanceHall.getAirplanes().size();
+        return num;
+    }
+    
+    public int numParking() throws RemoteException{
+        int num = this.parking.getAirplanesForBoarding().size() + this.parking.getAirplanesForMaintenance().size();
+        return num;
+    }
+    
+    public int numTaxiArea() throws RemoteException{
+        int num = this.taxiArea.getAirplanes().size();
+        return num;
+    }
+    
+    public String showMadBarAirway() throws RemoteException{
+        String airway = this.Mad_Bar.toString();
+        return airway;
+    }
+    
+    public String showBarMadAirway() throws RemoteException{
+        String airway = this.Bar_Mad.toString();
+        return airway;
     }
 
 }

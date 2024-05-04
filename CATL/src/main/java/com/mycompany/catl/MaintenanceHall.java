@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class MaintenanceHall {
 
-    BlockingQueue airplanes;
+    private BlockingQueue airplanes;
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
@@ -55,5 +55,10 @@ public class MaintenanceHall {
         return allPlanes.toString();
 
     }
+
+    public BlockingQueue getAirplanes() {
+        return airplanes;
+    }
+    
 }
 

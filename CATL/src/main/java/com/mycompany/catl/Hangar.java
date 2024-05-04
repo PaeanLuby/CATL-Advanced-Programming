@@ -20,7 +20,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Hangar {
 
-    BlockingQueue<Airplane> airplanes = new LinkedBlockingQueue<Airplane>();
+    private BlockingQueue<Airplane> airplanes = new LinkedBlockingQueue<Airplane>();
     private Lock hangarLock = new ReentrantLock();
     int position;
 
@@ -83,4 +83,6 @@ public class Hangar {
         }
         return allPlanes.toString();
     }
+    
+    
 }

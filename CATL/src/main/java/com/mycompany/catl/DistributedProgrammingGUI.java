@@ -4,6 +4,11 @@
  */
 package com.mycompany.catl;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author THINKPAD
@@ -689,10 +694,77 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AirwayBarcelonaMadridActionPerformed
 
+    public void setMadridHangar(int hangar){
+        this.madridHangar.setText(Integer.toString(hangar));
+    }
+    
+    public void setMadridPassengers(int passengers){
+        this.madridPassengers.setText(Integer.toString(passengers));
+    }
+    
+    public void setMadridMaintenance(int passengers){
+        this.madridMaintenance.setText(Integer.toString(passengers));
+    }
+    
+    public void setMadridParking(int passengers){
+        this.madridParking.setText(Integer.toString(passengers));
+    }
+    
+    public void setMadridTaxiArea(int passengers){
+        this.madridTaxiArea.setText(Integer.toString(passengers));
+    }
+    
+    public void setAirwayMadridBarcelona(String arway){
+        this.AirwayMadridBarcelona.setText(arway);
+    }
+    
+    public void setBarcelonaHangar(int hangar){
+        this.barcelonaHangar.setText(Integer.toString(hangar));
+    }
+
+    public void setBarcelonaPassengers(int passengers){
+        this.barcelonaPassengers.setText(Integer.toString(passengers));
+    }
+
+    public void setBarcelonaMaintenance(int passengers){
+        this.barcelonaMaintenance.setText(Integer.toString(passengers));
+    }
+
+    public void setBarcelonaParking(int passengers){
+        this.barcelonaParking.setText(Integer.toString(passengers));
+    }
+
+    public void setBarcelonaTaxiArea(int passengers){
+        this.barcelonaTaxiArea.setText(Integer.toString(passengers));
+    }
+
+    
+    public void setAirwayBarcelonaMadrid(String arway){
+        this.AirwayBarcelonaMadrid.setText(arway);
+    }
+    
+    public void set() throws RemoteException, NotBoundException, MalformedURLException{
+        RemoteInterface MadridRi = (RemoteInterface) Naming.lookup("//localhost/madrid");
+        RemoteInterface BarcelonaRi = (RemoteInterface) Naming.lookup("//localhost/barcelona");
+        while(true){
+            setMadridHangar(MadridRi.numHangar());
+            setMadridPassengers(MadridRi.getPassengers());
+            setMadridMaintenance(MadridRi.numMaintenance());
+            setMadridParking(MadridRi.numParking());
+            setMadridTaxiArea(MadridRi.numTaxiArea());
+            setBarcelonaHangar(BarcelonaRi.numHangar());
+            setBarcelonaPassengers(BarcelonaRi.getPassengers());
+            setBarcelonaMaintenance(BarcelonaRi.numMaintenance());
+            setBarcelonaParking(BarcelonaRi.numParking());
+            setBarcelonaTaxiArea(BarcelonaRi.numTaxiArea());
+            setAirwayMadridBarcelona(MadridRi.showMadBarAirway());
+            setAirwayBarcelonaMadrid(MadridRi.showBarMadAirway());
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws NotBoundException, MalformedURLException, RemoteException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -715,6 +787,10 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+//        RemoteInterface rI = (RemoteInterface) Naming.lookup("//localhost/");
+//        while(true){
+//            setMadridHangar(rI.numHangar());
+//        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

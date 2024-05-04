@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
@@ -232,11 +233,13 @@ public class Airplane extends Thread {
             
         } catch (InterruptedException ex) {
             Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
         }
         //}
     }
 
-    public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException {
+    public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException, RemoteException {
         numberFlights++; //Increment number of flights
         //while(true) {
         gf.getGw().look(); //Check the pause/resume bottons
