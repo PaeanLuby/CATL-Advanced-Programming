@@ -34,7 +34,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
         this.name = name;
     }
 
-    public int getPassengers() throws RemoteException{
+    public synchronized int getPassengers() throws RemoteException{
         return passengers;
     }
 
@@ -102,32 +102,32 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
         return this.name;
     }
     
-    public int numHangar() throws RemoteException{
+    public synchronized int numHangar() throws RemoteException{
         int num = this.hangar.getAirplanes().size();
         return num;
     }
     
-    public int numMaintenance() throws RemoteException{
+    public synchronized int numMaintenance() throws RemoteException{
         int num = this.maintenanceHall.getAirplanes().size();
         return num;
     }
     
-    public int numParking() throws RemoteException{
+    public synchronized int numParking() throws RemoteException{
         int num = this.parking.getAirplanesForBoarding().size() + this.parking.getAirplanesForMaintenance().size();
         return num;
     }
     
-    public int numTaxiArea() throws RemoteException{
+    public synchronized int numTaxiArea() throws RemoteException{
         int num = this.taxiArea.getAirplanes().size();
         return num;
     }
     
-    public String showMadBarAirway() throws RemoteException{
+    public synchronized String showMadBarAirway() throws RemoteException{
         String airway = this.Mad_Bar.toString();
         return airway;
     }
     
-    public String showBarMadAirway() throws RemoteException{
+    public synchronized String showBarMadAirway() throws RemoteException{
         String airway = this.Bar_Mad.toString();
         return airway;
     }
@@ -137,7 +137,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
     * @param runway its the runway that is going to be oppendes or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 
     */
-    public void openClose(int runway,boolean opCl) throws RemoteException{
+    public synchronized void openClose(int runway,boolean opCl) throws RemoteException{
         this.runways.openClose(runway, opCl);
     }
 
