@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,21 +21,21 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MaintenanceHall {
 
     BlockingQueue airplanes;
-    Lock enterLock;
+    Semaphore enterDoor;
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
-        enterLock = new ReentrantLock();
+        enterDoor = new Semaphore(1); //Only one plane can enter through the door at a time
     }
 
-    public void enterHall(Airplane airplane, Airport airport) throws InterruptedException {
-        enterLock.lock();
-        try {
-            airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane)); //Pull first airplane from parking
-            System.out.println("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
-        } finally {
-            enterLock.unlock();
-        }
+    public void enterHallDoor(Airplane airplane, Airport airport) throws InterruptedException {
+        System.out.println("Airplane " + airplane.getIdentifier() + " wants to enter hall.");
+        enterDoor.acquire();
+        airplanes.put(airplane);
+        Thread.sleep(1000);
+        enterDoor.release();
+        System.out.println("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
+            //Pull first airplane from parking
     }
 
     public Airplane releaseHall(Airplane airplane) throws InterruptedException {

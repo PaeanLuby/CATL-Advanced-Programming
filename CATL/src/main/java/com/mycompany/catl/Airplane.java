@@ -372,10 +372,9 @@ public class Airplane extends Thread {
     /*
     * ================ BEGIN DISEMBARKING =================
     */             
-    for (int i = 0; i < passengers; i++) {
-        Thread.sleep((long) Math.random() * 4 + 1); //Each passanger's transference from the airplane between 1 and 5 seconds 
-        gf.getGw().look(); //Check the pause/resume bottons
-    }   
+    Thread.sleep((long) Math.random() * 4000 + 100); //All passengers' transference from the airplane between 1 and 5 seconds 
+    gf.getGw().look(); //Check the pause/resume bottons
+       
     /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
     */     
@@ -391,16 +390,17 @@ public class Airplane extends Thread {
     /*
     * ================ GO TO THE MAINTENANCE HALL FOR INSPECTION =================
     */  
-    
-    this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2);
-    System.out.println("Airplane " + this.getIdentifier() + " going through maintenance hall door.");
-    Thread.sleep(1000); //Airplane takes 1 second to go through maintanence hall door
-    gf.getGw().look(); //Check the pause/resume bottons
+    System.out.println("Airplane " + this.getIdentifier() + " will attempt to enter maintenance hall door.");
+    Airplane airplaneToQueue = this.getAirport(airport2).getParking().releaseAirplaneForMaintenance(this);
     this.graphicalParking(airport2);
+    this.getAirport(airport2).getMaintenanceHall().enterHallDoor(airplaneToQueue, airport2);
     this.graphicalMaintenanceHall(airport2);
+    System.out.println("Airplane " + this.getIdentifier() + " went through maintenance hall door.");
+    gf.getGw().look(); //Check the pause/resume bottons
+    
 
     //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
-    if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up'
+    if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up
         System.out.println("Airplane " + this.getIdentifier() + " going in for a deep inspection.");
         Thread.sleep((long) Math.random() * 500 + 500); //Inspection takes random time between 5 and 10 seconds
         gf.getGw().look(); //Check the pause/resume bottons
