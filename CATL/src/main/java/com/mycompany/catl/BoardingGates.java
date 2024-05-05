@@ -22,32 +22,54 @@ public class BoardingGates {
     private int remainingAttempts;
     private Lock gateLock;
     private Condition full;
+    private Condition first;
 
     public BoardingGates(int excludedGate) {
         this.type = type; //0 boarding, 1 landing, all others both
         this.gates = new Airplane[6];
         this.gateLock = new ReentrantLock();
         this.full = gateLock.newCondition();
+        this.first = gateLock.newCondition();
     }
 
-    public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
+    public int enterGateFromParking(Airplane airplane, Airport airport) throws InterruptedException {
         gateLock.lock();
-        int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
+        int excludedGate = 0;
         try {
             printGates();
             int gate = isGatePresent(gates, excludedGate);
-            // Iterate to find the first available gate that is not the excluded gate
-            while (gate == -1) {
-                System.out.println("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
+            while (!airplane.getAirport(airport).getParking().getAirplanesForBoarding().peek().equals(airplane)) {
+                first.await();
+            }
+            
+            Airplane removedPlane = airplane.getAirport(airport).getParking().releaseAirplaneForBoarding(airplane);
+            first.signal();
+            while (isGatePresent(gates, excludedGate) == -1){
                 full.await();
                 gate = isGatePresent(gates, excludedGate);
             }
-            
-            if (excludedGate == 1) {
-                gates[gate] = airport.getTaxiArea().releaseAirplane(airplane);
-            } else {
-                gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane);
+            full.signalAll();
+            gates[gate] = removedPlane;
+            System.out.println("Space " + gate + " available in the boarding gate.");
+            return gate;
+            //If no gate was found, wait
+        } finally {
+            gateLock.unlock();
+        }
+    }
+    
+        public int enterGateFromTaxiArea(Airplane airplane, Airport airport) throws InterruptedException {
+        gateLock.lock();
+        int excludedGate = 1;
+        try {
+            printGates();
+            int gate = isGatePresent(gates, excludedGate);
+            while (isGatePresent(gates, excludedGate) == -1){
+                full.await();
+                gate = isGatePresent(gates, excludedGate);
             }
+            full.signalAll();
+            gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane);
             System.out.println("Space " + gate + " available in the boarding gate.");
             return gate;
             //If no gate was found, wait

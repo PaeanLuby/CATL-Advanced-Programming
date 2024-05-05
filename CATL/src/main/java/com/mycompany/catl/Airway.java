@@ -14,12 +14,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Airway {
 
-    private List<Airplane> airplanes;
+    private Queue<Airplane> airplanes;
     private Lock airwayLock = new ReentrantLock();
     private String name;
 
     public Airway(String name) {
-        airplanes = new ArrayList<Airplane>(); 
+        airplanes = new ConcurrentLinkedQueue<Airplane>(); 
         this.name = name;
     }
 
@@ -53,7 +53,7 @@ public class Airway {
         }
     }
 
-    public List<Airplane> getAirplanes() {
+    public Queue<Airplane> getAirplanes() {
         return airplanes;
     }
 
@@ -61,7 +61,7 @@ public class Airway {
         return name;
     }
 
-    public void setAirplanes(List<Airplane> airplanes) {
+    public void setAirplanes(Queue<Airplane> airplanes) {
         this.airplanes = airplanes;
     }
 

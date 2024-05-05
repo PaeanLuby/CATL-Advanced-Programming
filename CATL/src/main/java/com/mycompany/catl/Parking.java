@@ -25,16 +25,11 @@ public class Parking {
 
     private BlockingQueue<Airplane> airplanesForBoarding;
     private BlockingQueue<Airplane> airplanesForMaintenance;
-    private Lock parkingLock;
-    private Condition firstBoarding;
-    private Condition firstMaintenance;
 
     public Parking() {
         airplanesForBoarding = new LinkedBlockingQueue<Airplane>();
         airplanesForMaintenance = new LinkedBlockingQueue<Airplane>();
-        parkingLock = new ReentrantLock();
-        firstBoarding = parkingLock.newCondition();
-        firstMaintenance = parkingLock.newCondition();
+        //firstMaintenance = parkingLock.newCondition();
     }
 
     /**
@@ -44,18 +39,13 @@ public class Parking {
      * @throws java.lang.InterruptedException
      */
     public void addAirplane(Airplane airplane) throws InterruptedException {
-        parkingLock.lock();
-        try {
-            if (!airplane.getLanding()) { //if airplane boarding send to boarding queue
-                this.airplanesForBoarding.offer(airplane); //add the airplane at the end of the list
-            } else {
-                this.airplanesForMaintenance.offer(airplane); //add the airplane at the end of the list
-            }
-            
-            System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
-        } finally {
-            parkingLock.unlock();
+        if (!airplane.getLanding()) { //if airplane boarding send to boarding queue
+            this.airplanesForBoarding.offer(airplane); //add the airplane at the end of the list
+        } else {
+            this.airplanesForMaintenance.offer(airplane); //add the airplane at the end of the list
         }
+
+        System.out.println("Airplane " + airplane.getIdentifier() + " was added to parking.");
     }
 
     /**
@@ -75,50 +65,36 @@ public class Parking {
      * @throws java.lang.InterruptedException
      */
     public Airplane releaseAirplaneForBoarding(Airplane airplane) throws InterruptedException {
-        parkingLock.lock();
-        try {
-            Airplane removedAirplane;
-            while (airplanesForBoarding.peek() == null || !airplanesForBoarding.peek().equals(airplane)) {
-                System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane waiting for boarding is " + airplanesForBoarding.peek().getIdentifier());
-                firstBoarding.await();
-            }
-            
-            // Airplane is at the front of the queue and can proceed
-            removedAirplane = airplanesForBoarding.poll(); // Remove the airplane from the queue
-            System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
-            if (airplanesForBoarding.peek() == null || !airplanesForBoarding.peek().equals(airplane)) {
-                firstBoarding.signalAll(); // Only signal if there are still airplanes waiting
-            }
-            System.out.println("Current airplanes in parking are: " + toString());
-            return removedAirplane;  
-        } finally {
-            parkingLock.unlock();
-        }
-        
+        Airplane removedAirplane;
+        // Airplane is at the front of the queue and can proceed
+        removedAirplane = airplanesForBoarding.poll(); // Remove the airplane from the queue
+        System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
+        System.out.println("Current airplanes in parking are: " + toString());
+        return removedAirplane;  
     }
     
     public Airplane releaseAirplaneForMaintenance(Airplane airplane) throws InterruptedException {
         System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane waiting for maintenance is " + airplanesForMaintenance.peek().getIdentifier());
-        parkingLock.lock();
-        try {
+        //parkingLock.lock();
+       // try {
             Airplane removedAirplane;
-            while ((!airplanesForMaintenance.peek().equals(airplane))) {
-                //System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane waiting for maintenance is " + airplanesForMaintenance.peek().getIdentifier());
-                firstMaintenance.await();
-            }
+//            while ((!airplanesForMaintenance.peek().equals(airplane))) {
+//                //System.out.println("Airplane " + airplane.getIdentifier() + " waiting. First airplane waiting for maintenance is " + airplanesForMaintenance.peek().getIdentifier());
+//                firstMaintenance.await();
+//            }
             
             // Airplane is at the front of the queue and can proceed
             removedAirplane = airplanesForMaintenance.poll(); // Remove the airplane from the queue
             System.out.println("Airplane " + removedAirplane.getIdentifier() + " was removed from parking.");
-            if (airplanesForBoarding.peek() == null || !airplanesForBoarding.peek().equals(airplane)) {
-                firstMaintenance.signalAll(); // Only signal if there are still airplanes waiting
-            }
+//            if (airplanesForBoarding.peek() == null || !airplanesForBoarding.peek().equals(airplane)) {
+//                firstMaintenance.signalAll(); // Only signal if there are still airplanes waiting
+//            }
             System.out.println("Current airplanes in parking are: " + toString());
             return removedAirplane; 
-        } finally {
-            parkingLock.unlock();
-        }
-        
+//        } finally {
+//            parkingLock.unlock();
+//        }
+//        
     }
 
     /**

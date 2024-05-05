@@ -21,19 +21,26 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MaintenanceHall {
 
     BlockingQueue airplanes;
-    Semaphore enterDoor;
+    Lock enterDoor;
+    Condition first;
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
-        enterDoor = new Semaphore(1); //Only one plane can enter through the door at a time
+        enterDoor = new ReentrantLock(); //Only one plane can enter through the door at a time
+        first = enterDoor.newCondition();
     }
+
 
     public void enterHallDoor(Airplane airplane, Airport airport) throws InterruptedException {
         System.out.println("Airplane " + airplane.getIdentifier() + " wants to enter hall.");
-        enterDoor.acquire();
-        airplanes.put(airplane);
+        enterDoor.lock();
+        while(!airplane.getAirport(airport).getParking().getAirplanesForMaintenance().peek().equals(airplane)) {
+            first.await();
+        }
+        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
+        first.signalAll();
         Thread.sleep(1000);
-        enterDoor.release();
+        enterDoor.unlock();
         System.out.println("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
             //Pull first airplane from parking
     }
