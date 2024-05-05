@@ -46,9 +46,22 @@ public class Airplane extends Thread {
         this.numberFlights = 0;
         this.mAD = mAD;
         this.landing = false; //all airplanes start as boarding
-        System.out.println("Airplane " + identifier + " with capacity " + CAPACITY + " has been created.");
-        this.log.write("Airplane " + identifier + " with capacity " + CAPACITY + " has been created.");
 
+        this.log.write("Airplane " + this.getIdentifier() + " with capacity " + CAPACITY + " has been created.");
+
+    }
+    
+    public void run() {
+        while (true) {
+            try {
+                lifeCycle(airportFirst, airportSecond);
+                lifeCycle(airportSecond, airportFirst);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -124,7 +137,7 @@ public class Airplane extends Thread {
                         System.out.println("ERROR in boarding gates graphicalBoardingGate");
                 }
             }
-        } else { 
+        } else {
             if (boarding) {
                 if (airport.toString().equals("MAD")) {
                     switch (gate) {
@@ -196,7 +209,7 @@ public class Airplane extends Thread {
                         default ->
                             System.out.println("ERROR in boarding gates graphicalBoardingGate");
                     }
-                }   
+                }
             }
         }
     }
@@ -384,19 +397,6 @@ public class Airplane extends Thread {
         }
     }
 
-    public void run() {
-        while (true) {
-            try {
-                lifeCycle(airportFirst, airportSecond);
-                lifeCycle(airportSecond, airportFirst);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RemoteException ex) {
-                Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException, RemoteException {
         numberFlights++; //Increment number of flights
         //while(true) {
@@ -409,7 +409,7 @@ public class Airplane extends Thread {
             //Add airplane to hangar.
             airport1.getHangar().addAirplane(this, log);
             this.graphicalHangar(airport1); //Update hangar GUI. Airplane shpould display in hangar.
-            this.log.write("The airplane " + this.identifier + " has been created in the hangar of the airport of: " + this.getCity());
+            this.log.write("The airplane " + this.getIdentifier() + " has been created in the hangar of the airport of: " + airport1);
             gf.getGw().look(); //Check the pause/resume bottons
         }
 
@@ -419,7 +419,7 @@ public class Airplane extends Thread {
         airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this, log)); //Take the airplane from the hangar and put in it in parking.
         this.graphicalHangar(airport1);
         this.graphicalParking(airport1);
-        this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
+        this.log.write("The airplane " + this.getIdentifier() + " leaves the hangar and enters the parking in airport " + airport1 + ".");
         gf.getGw().look(); //Check the pause/resume bottons
 
         /*
@@ -427,7 +427,7 @@ public class Airplane extends Thread {
          */
         int gate = -1; //Starts with no gate.
         gate = airport1.getBoardingGates().enterGateFromParking(this, airport1); //Enter into free boarding gate from parking.
-        this.log.write("Airplane " + identifier + " has entered into boarding gate " + gate + ".");
+        this.log.write("Airplane " + this.getIdentifier() + " has entered into boarding gate " + gate + " of airport " + airport1 + ".");
         this.graphicalBoardingGate(gate, airport1, false, true);
         this.graphicalParking(airport1);
         gf.getGw().look(); //Check the pause/resume bottons
@@ -445,12 +445,11 @@ public class Airplane extends Thread {
             } else {
                 this.attemptBoarding(airport1.getPassengers().get(), airport1);
             }
-            System.out.println("Not yet full. Attempts left: " + remainingAttempts);
             long timeWait = (long) Math.random() * 4000 + 1000;
             Thread.sleep(timeWait); //Sleep for random time between 1 and 5 seconds if there aren't enough passengers
             gf.getGw().look(); //Check the pause/resume bottons
         }
-
+        
         if (remainingAttempts == 3) {
             if (CAPACITY < airport1.getPassengers().get()) {
                 this.attemptBoarding(CAPACITY, airport1);
@@ -458,14 +457,17 @@ public class Airplane extends Thread {
                 this.attemptBoarding(airport1.getPassengers().get(), airport1);
             }
         }
+        
+        this.log.write("Airplane " + identifier + " has boarded " + this.getPassengers() + " in gate " + gate + " of airport " + airport1 + ".");
 
         /*
     * ================ ENTER TAXI AREA OF STARTING AIRPORT =================
          */
+        
         airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this, log), log); //Enter taxi area
         this.graphicalBoardingGate(gate, airport1, true, false);
         this.graphicalTaxiArea(airport1);
-        System.out.println("Pilot check for airplane " + this.getIdentifier());
+        this.log.write("Airplane " + this.getIdentifier() + " has left the boarding gate and entered the taxi area of airport " + airport1 + ".");
         Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons
 
@@ -475,10 +477,10 @@ public class Airplane extends Thread {
         int rw = airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this, log), log);
         this.graphicalTaxiArea(airport1);
         this.graphicalRunway(rw, airport1, false, true);
-        this.log.write("Airplane " + this.getIdentifier() + " completing final checks.");
+        this.log.write("Airplane " + this.getIdentifier() + " completing final checks in runway of airport " + airport1);
         Thread.sleep((long) Math.random() * 2000 + 1000); //Final checks between 1 and 3 seconds
         gf.getGw().look(); //Check the pause/resume bottons
-        this.log.write("Airplane " + this.getIdentifier() + " is taking off.");
+        this.log.write("Airplane " + this.getIdentifier() + " is taking off from runway of airport " + airport1);
         Thread.sleep((long) Math.random() * 4000 + 1000); //Take off between 1 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons
 
@@ -486,6 +488,7 @@ public class Airplane extends Thread {
     * ================ ENTER AIRWAY OF STARTING AIRPORT =================
          */
         getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this), log); //Enter airway and remove it from the runway
+        this.log.write("Airplane " + this.getIdentifier() + " is entering airway " + getAirway(airport1).getAirwayName());
         this.graphicalRunway(rw, airport1, true, true);
         this.graphicalAirway(airport1);
         Thread.sleep((long) Math.random() * 1500 + 1500); //Flight between 15 and 30 seconds
@@ -495,13 +498,12 @@ public class Airplane extends Thread {
     * ================  REQUEST RUNWAY OF DESTINATION AIRPORT =================
          */
         //Attempt to access runway of the other airport
-        this.log.write("Airplane " + this.getIdentifier() + " requested runway for landing.");
+        this.log.write("Airplane " + this.getIdentifier() + " requested runway for landing at airport " + airport2);
 
         /*
     * ================ ENTER RUNWAY OF DESTINATION AIRPORT =================
          */
         this.setLanding(true); //Set landing to true
-        this.log.write("Airplane " + this.getIdentifier() + " requested runway for landing.");
         int runway = airport2.getRunways().enterRunway(this, log);
         this.graphicalRunway(runway, airport2, false, false);
         while (runway == -1) {
@@ -512,8 +514,8 @@ public class Airplane extends Thread {
             this.graphicalRunway(runway, airport2, false, false);
         }
         getAirway(airport1).releaseAirplane(this, log);
+        this.log.write("Airplane " + this.getIdentifier() + " entered runway " + runway + "at airport " + airport2);
         this.graphicalAirway(airport1);
-        this.log.write("Airplane " + this.getIdentifier() + " entered into runway " + runway);
         switchAirway();
 
         /*
@@ -526,6 +528,7 @@ public class Airplane extends Thread {
     * ================ ENTER TAXI AREA OF DESTINATION AIRPORT =================
          */
         airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this), log); //Leave runway and directly access taxi area
+        this.log.write("Airplane " + this.getIdentifier() + " entered the taxi area of airport " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalRunway(runway, airport2, true, false);
         this.graphicalTaxiArea(airport2);
@@ -535,28 +538,29 @@ public class Airplane extends Thread {
          */
         gate = airport2.getBoardingGates().enterGateFromTaxiArea(this, airport2, log);
         gf.getGw().look(); //Check the pause/resume bottons
-        this.log.write("Airplane " + this.getIdentifier() + " flying between taxi area and taxi boarding gate.");
+        this.log.write("Airplane " + this.getIdentifier() + " flying between taxi area and boarding gate at airport " + airport2);
         this.graphicalTaxiArea(airport2);
-        this.graphicalBoardingGate(gate, airport2, false, false);
-        Thread.sleep((long) Math.random() * 2000 + 3000);
-        this.setPassengers(0); //reset passengers
+        this.graphicalBoardingGate(gate, airport2, false, false); 
+        Thread.sleep((long) Math.random() * 2000 + 3000); //Flight time between 2 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons 
-        this.log.write("Airplane " + identifier + " is ready to start debarking.");
 
         /*
     * ================ BEGIN DISEMBARKING =================
          */
+        this.log.write("Airplane " + this.getIdentifier() + " disembarking " + this.getPassengers() + " at boarding gate of " + airport2);
         Thread.sleep((long) Math.random() * 4000 + 1000); //All passengers' transference from the airplane between 1 and 5 seconds 
+        this.setPassengers(0); //reset passengers
         gf.getGw().look(); //Check the pause/resume bottons
 
         /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
          */
         airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this, log));
+        this.log.write("Airplane " + this.getIdentifier() + " disembarked . Accessing parking area of " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalBoardingGate(gate, airport2, true, false);
         this.graphicalParking(airport2);
-        System.out.println("Pilot check for airplane " + this.getIdentifier());
+        this.log.write("Airplane " + this.getIdentifier() + " completing pilot checks in parking area of " + airport2);
         Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalBoardingGate(gate, airport2, true, false);
@@ -565,41 +569,42 @@ public class Airplane extends Thread {
         /*
     * ================ GO TO THE MAINTENANCE HALL FOR INSPECTION =================
          */
-        System.out.println("Airplane " + this.getIdentifier() + " will attempt to enter maintenance hall door.");
-        this.getAirport(airport2).getMaintenanceHall().enterHallDoor(this, airport2);
+        this.log.write("Airplane " + this.getIdentifier() + " will attempt to enter maintenance hall door of airport " + airport2);
+        this.getAirport(airport2).getMaintenanceHall().enterHallDoor(this, airport2, log);
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalParking(airport2);
         this.graphicalMaintenanceHall(airport2);
-        System.out.println("Airplane " + this.getIdentifier() + " went through maintenance hall door.");
 
         //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
         if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up
-            System.out.println("Airplane " + this.getIdentifier() + " going in for a deep inspection.");
+            this.log.write("Airplane " + this.getIdentifier() + " going in for a deep inspection in maintenance hall of " + airport2);
             Thread.sleep((long) Math.random() * 500 + 500); //Inspection takes random time between 5 and 10 seconds
             gf.getGw().look(); //Check the pause/resume bottons
         } else {
-            System.out.println("Airplane " + this.getIdentifier() + " going in for a quick inspection.");
+            this.log.write("Airplane " + this.getIdentifier() + " going in for a quick inspection in maintenance hall of " + airport2);
             Thread.sleep((long) Math.random() * 1000 + 4000); //Inspection takes random time between 1 and 5 seconds
             gf.getGw().look(); //Check the pause/resume bottons
         }
 
+        this.log.write("Airplane " + this.getIdentifier() + " finished inspection in airport " + airport2);
         //Airplane decides to rest in hangar or continue life cycle
         int choice = 1 + (int) (Math.random() * 2); //50% chance
         if (choice == 1) { //if choice 1, rest in hangar 
+            this.log.write("Airplane " + this.getIdentifier() + " resting in hangar of " + airport2);
             airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this), log);
             this.graphicalHangar(airport2);
             this.graphicalMaintenanceHall(airport2);
             Thread.sleep((long) Math.random() * 15000 + 15000);
             gf.getGw().look(); //Check the pause/resume bottons
-
         } else {
+            this.log.write("Airplane " + this.getIdentifier() + " immediately restarting it's life cycle.");
             airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this), log);
             this.graphicalMaintenanceHall(airport2);
             this.graphicalHangar(airport2);
         }
 
         this.setLanding(false);
-        System.out.println("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
+        this.log.write("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
     }
 

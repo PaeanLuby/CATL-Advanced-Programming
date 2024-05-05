@@ -18,9 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Log {
 
     private Lock textLock = new ReentrantLock();
-    //"C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
-    //"\\C:\\Users\\pluby\\Desktop\\AdvancedFINAL\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\"
-    private String airportEvolution = "C:\\Ussers\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
+    private String airportEvolution = "src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt";
     private FileWriter writer;
     private BufferedWriter writerBuffer = null;
 
@@ -31,7 +29,7 @@ public class Log {
             // Create a BufferedWriter to write in the file
             writerBuffer = new BufferedWriter(writer);
         } catch (IOException e) {
-            System.err.println("Error al abrir el archivo: " + e.getMessage());
+            System.err.println("Error upon opening the file " + e.getMessage());
         }
     }
 
@@ -65,7 +63,7 @@ public class Log {
                 writer.close();
             }
         } catch (IOException e) {
-            System.err.println("Error al cerrar el archivo: " + e.getMessage());
+            System.err.println("Error upon opening the file " + e.getMessage());
         }
     }
 }

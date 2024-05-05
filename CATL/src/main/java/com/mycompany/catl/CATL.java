@@ -23,7 +23,7 @@ public class CATL {
 
     public static void main(String[] args) throws RemoteException {
         Log log = new Log();
-        //Creation of Madrid and Barcelonaairport:
+        //Creation of Madrid and Barcelona airport
         //Shared class
         Airway Mad_Bar = new Airway("Mad_Bar");
         Airway Bar_Mad = new Airway("Bar_Mad");
@@ -62,7 +62,7 @@ public class CATL {
         AirplaneCreator airplaneCreator = new AirplaneCreator(log, madrid, barcelona, gf);
         BusCreator busCreator = new BusCreator(log, madrid, barcelona, madridPassengersLock, barcelonaPassengersLock, gf);
 
-        //If the program is finished or interrupted the log is automaticly closed to avoid the loss of information
+        //If the program is finished or interrupted the log is automatically closed to avoid the loss of information
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             airplaneCreator.interrupt();
             busCreator.interrupt();

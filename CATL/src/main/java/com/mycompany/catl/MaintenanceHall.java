@@ -30,17 +30,17 @@ public class MaintenanceHall {
         first = enterDoor.newCondition();
     }
 
-    public void enterHallDoor(Airplane airplane, Airport airport) throws InterruptedException {
-        System.out.println("Airplane " + airplane.getIdentifier() + " wants to enter hall.");
+    public void enterHallDoor(Airplane airplane, Airport airport, Log log) throws InterruptedException {
         enterDoor.lock();
         while (!airplane.getAirport(airport).getParking().getAirplanesForMaintenance().peek().equals(airplane)) {
+            log.write("Airplane " + airplane.getIdentifier() + " waiting to enter hall of airport " + airport);
             first.await();
         }
         airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
+        log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
         first.signalAll();
         Thread.sleep(1000);
         enterDoor.unlock();
-        System.out.println("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
         //Pull first airplane from parking
     }
 

@@ -17,10 +17,10 @@ public class BusCreator extends Thread {
 
     private Log log;
     private Airport madrid;
-    private Lock madridPassengersLock;
     private Airport barcelona;
-    private Lock barcelonaPassengersLock;
     private GraphicalInterface gf;
+    private Lock madridPassengersLock;
+    private Lock barcelonaPassengersLock;
 
     public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock, GraphicalInterface gf) {
         this.log = log;

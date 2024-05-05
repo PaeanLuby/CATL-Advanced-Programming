@@ -105,7 +105,7 @@ public class Bus extends Thread {
                 } else {
                     airport.getPassengers().set(0);
                 }
-                if (this.getCity() == "Madrid") {
+                if (this.getCity().equals("Madrid")) {
                     gf.setMadridPassengers(airport.getPassengers().get());
                 } else {
                     gf.setBarcelonaPassengers(airport.getPassengers().get());

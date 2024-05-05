@@ -68,7 +68,6 @@ public class BoardingGates {
             }
             full.signal();
             gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane, log);
-            System.out.println("Space " + gate + " available in the boarding gate.");
             return gate;
             //If no gate was found, wait
         } finally {
