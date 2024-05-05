@@ -20,7 +20,7 @@ public class Log {
     private Lock textLock = new ReentrantLock();
     //"C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
     //"\\C:\\Users\\pluby\\Desktop\\AdvancedFINAL\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\"
-    private String airportEvolution = "C:\\Ussssers\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
+    private String airportEvolution = "C:\\Users\\THINKPAD\\Documents\\GitHub\\CATL\\CATL\\src\\main\\java\\com\\mycompany\\catl\\airportEvolution.txt\\";
     private FileWriter writer;
     private BufferedWriter writerBuffer = null;
 
