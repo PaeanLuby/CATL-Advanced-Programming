@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Bus extends Thread {
 
     private String identifier;
-    private AtomicInteger passengers;
+    private int passengers;
     private Log log;
     private Airport airport;
     private Lock passengersLock;
@@ -29,7 +29,7 @@ public class Bus extends Thread {
         this.airport = airport;
         this.passengersLock = passengersLock;
         this.gf = gf;
-        this.passengers = new AtomicInteger(0);
+        this.passengers = 0;
     }
 
     /**
@@ -59,13 +59,13 @@ public class Bus extends Thread {
 
                 //Passengers access
                 int jumpIn = (int) (Math.random() * 51);
-                passengers.addAndGet(jumpIn); //Add additional passengers
+                passengers += jumpIn; //Add additional passengers
                 this.log.write(jumpIn + " passengers have accessed to the bus " + this.identifier + " that initiates its route towards the airport of " + this.getCity());
 
                 //Bus initiates its route towards the airport
                 if (this.getCity().equals("Madrid")) {
                     gf.setMadridBusTownAirport(identifier + " (" + passengers + ")");
-                } else { 
+                } else {
                     gf.setBarcelonaBusTownAirport(identifier + " (" + passengers + ")");
                 }
                 sleepTime = (long) (Math.random() * 500 + 500);
@@ -75,12 +75,12 @@ public class Bus extends Thread {
                 //Arrival to airport 
                 //passengersLock.lock();
 //                try {
-                    airport.getPassengers().addAndGet(passengers.get());
-                    if (this.getCity().equals("Madrid")) {
-                        gf.setMadridPassengers(airport.getPassengers());
-                    } else {
-                        gf.setBarcelonaPassengers(airport.getPassengers());
-                    }
+                airport.getPassengers().addAndGet(passengers);
+                if (this.getCity().equals("Madrid")) {
+                    gf.setMadridPassengers(airport.getPassengers().get());
+                } else {
+                    gf.setBarcelonaPassengers(airport.getPassengers().get());
+                }
 //                } catch (Exception e) {
 //                } finally {
 //                    passengersLock.unlock();
@@ -88,7 +88,7 @@ public class Bus extends Thread {
                 System.out.println("Number of airport passengers is: " + airport.getPassengers());
                 this.log.write("Number of airport passengers is: " + airport.getPassengers());
                 this.log.write("The bus " + this.identifier + " has arrived to the airport of " + this.getCity() + " with " + passengers + " passengers.");
-                passengers.getAndSet(0);
+                passengers = 0;
                 //Wait for passengers
                 sleepTime = (long) (Math.random() * 3000 + 2000);
                 Thread.sleep(sleepTime);
@@ -96,20 +96,20 @@ public class Bus extends Thread {
 
                 //Passengers from the airport enter the bus
                 jumpIn = (int) (Math.random() * 51);
-                passengers.addAndGet(jumpIn);
+                passengers += jumpIn;
                 //passengersLock.lock();
 //                try {
-                    if (airport.getPassengers().get() > passengers.get()) {
-                        int toSubtract = passengers.get();
-                        airport.getPassengers().addAndGet(-toSubtract);
-                    } else {
-                        airport.getPassengers().set(0);
-                    }
-                    if (this.getCity() == "Madrid") {
-                        gf.setMadridPassengers(airport.getPassengers());
-                    } else {
-                        gf.setBarcelonaPassengers(airport.getPassengers());
-                    }
+                if (airport.getPassengers().get() > passengers) {
+                    int toSubtract = passengers;
+                    airport.getPassengers().addAndGet(-toSubtract);
+                } else {
+                    airport.getPassengers().set(0);
+                }
+                if (this.getCity() == "Madrid") {
+                    gf.setMadridPassengers(airport.getPassengers().get());
+                } else {
+                    gf.setBarcelonaPassengers(airport.getPassengers().get());
+                }
 //                } catch (Exception e) {
 //                } finally {
 //                    passengersLock.unlock();
@@ -130,7 +130,7 @@ public class Bus extends Thread {
 
                 //Arrival to downtown bus-stop
                 this.log.write("The bus " + this.identifier + " has arrived to the downtown of " + this.getCity() + " with " + passengers + " passengers.");
-                passengers.set(0);
+                passengers = 0;
             } catch (InterruptedException ex) {
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {

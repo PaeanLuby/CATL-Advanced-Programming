@@ -23,10 +23,10 @@ public class TaxiArea {
         airplanes = new LinkedBlockingQueue<Airplane>();
     }
 
-    public void enterTaxiArea(Airplane airplane) {
+    public void enterTaxiArea(Airplane airplane, Log log) {
         airplanes.offer(airplane);
-        System.out.println("Airplane " + airplane.getIdentifier() + " is in the taxi area.");
-        System.out.println("Current airplanes in taxi area are:" + toString());
+        log.write("Airplane " + airplane.getIdentifier() + " is in the taxi area.");
+        log.write("Current airplanes in taxi area are:" + toString());
     }
 
     public BlockingQueue<Airplane> getAirplanes() {
@@ -37,11 +37,12 @@ public class TaxiArea {
         this.airplanes = airplanes;
     }
 
-    public Airplane releaseAirplane(Airplane airplane) {
+    public Airplane releaseAirplane(Airplane airplane, Log log) {
         if (this.airplanes.remove(airplane)) {
-            System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from taxi area.");
+            log.write("Successfully removed airplane " + airplane.getIdentifier() + " from taxi area.");
         } else {
             System.out.println("Error removing airplane from taxi area.");
+            log.write("Error removing airplane from taxi area.");
         }
         return airplane; //we remove it and return it
     }
@@ -49,11 +50,14 @@ public class TaxiArea {
     @Override
     public String toString() {
         StringBuilder allPlanes = new StringBuilder();
-        Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
+        Iterator<Airplane> taxiIterator = airplanes.iterator(); // Create a new iterator
 
-        while (newIterator.hasNext()) {
-            String currPlane = newIterator.next().getIdentifier();
-            allPlanes.append(currPlane.concat(" "));
+        while (taxiIterator.hasNext()) {
+            Airplane currPlane = taxiIterator.next();  // Assuming the object type is Airplane
+            String identifier = currPlane.getIdentifier();
+            int passengers = currPlane.getPassengers();  // Get the number of passengersString currPlane = boardingIterator.next().getIdentifier();
+
+            allPlanes.append(identifier + "(" + passengers + ")" + ", ");
         }
         return allPlanes.toString();
 

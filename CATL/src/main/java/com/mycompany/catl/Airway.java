@@ -23,33 +23,21 @@ public class Airway {
         this.name = name;
     }
 
-    public void enterAirway(Airplane airplane) {
-        airwayLock.lock();
-        try {
-            if (this.airplanes.add(airplane)) { //add the airplane at the end of the list
-                System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
-                System.out.println("Current airplanes in airway are: " + toString());
-            } else {
-                System.err.println("Something happened while adding airplane " + airplane.getIdentifier() + " to airway.");
-            }
-        } finally {
-            airwayLock.unlock();
-        }
+    public void enterAirway(Airplane airplane, Log log) {
+        this.airplanes.add(airplane); //add the airplane at the end of the list
+        log.write("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
+        log.write("Current airplanes in airway are: " + toString());
     }
 
-    public Airplane releaseAirplane(Airplane airplane) {
-        airwayLock.lock();
-        try {
-            if (airplanes.remove(airplane)) {
-                System.out.println("Current airplanes in airway are: " + toString());
-                System.out.println("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
-                return airplane;
-            } else {
-                System.out.println("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
-                return null;
-            }
-        } finally {
-            airwayLock.unlock();
+    public Airplane releaseAirplane(Airplane airplane, Log log) {
+        if (airplanes.remove(airplane)) {
+            log.write("Current airplanes in airway are: " + toString());
+            log.write("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
+            return airplane;
+        } else {
+            System.out.println("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
+            log.write("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
+            return null;
         }
     }
 
@@ -68,11 +56,13 @@ public class Airway {
     @Override
     public String toString() {
         StringBuilder allPlanes = new StringBuilder();
-        Iterator<Airplane> newIterator = airplanes.iterator(); // Create a new iterator
+        Iterator<Airplane> airwayIterator = airplanes.iterator(); // Create a new iterator
 
-        while (newIterator.hasNext()) {
-            String currPlane = newIterator.next().getIdentifier();
-            allPlanes.append(currPlane.concat(" "));
+        while (airwayIterator.hasNext()) {
+            Airplane currPlane = airwayIterator.next();  // Assuming the object type is Airplane
+            String identifier = currPlane.getIdentifier();
+            int passengers = currPlane.getPassengers();  // Get the number of passengersString currPlane = boardingIterator.next().getIdentifier();
+            allPlanes.append(identifier + "(" + passengers + ")" + ", ");
         }
         return allPlanes.toString();
     }

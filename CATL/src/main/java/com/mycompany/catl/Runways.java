@@ -28,7 +28,7 @@ public class Runways {
         openCloseList = new boolean[]{true, true, true, true};
     }
 
-    public int enterRunway(Airplane airplane) throws InterruptedException {
+    public int enterRunway(Airplane airplane, Log log) throws InterruptedException {
         runwayLock.lock();
         try {
             int runway = -1;
@@ -37,7 +37,7 @@ public class Runways {
             }
             for (int i = 0; i < 4; i++) {
                 if (runways[i] == null && openCloseList[i]) {
-                    System.out.println("Space " + i + " available in the runway.");
+                    log.write("Space " + i + " available in the runway.");
                     runways[i] = airplane;
                     runway = i;
                     break;
