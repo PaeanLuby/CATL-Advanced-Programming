@@ -27,7 +27,7 @@ public class BoardingGates {
     public BoardingGates(int excludedGate) {
         this.type = type; //0 boarding, 1 landing, all others both
         this.gates = new Airplane[6];
-        this.gateLock = new ReentrantLock();
+        this.gateLock = new ReentrantLock(true);
         this.full = gateLock.newCondition();
         this.first = gateLock.newCondition();
     }
@@ -41,14 +41,13 @@ public class BoardingGates {
             while (!airplane.getAirport(airport).getParking().getAirplanesForBoarding().peek().equals(airplane)) {
                 first.await();
             }
-            
             Airplane removedPlane = airplane.getAirport(airport).getParking().releaseAirplaneForBoarding(airplane);
             first.signal();
-            while (isGatePresent(gates, excludedGate) == -1){
+            while (isGatePresent(gates, excludedGate) == -1) {
                 full.await();
                 gate = isGatePresent(gates, excludedGate);
             }
-            full.signalAll();
+            full.signal();
             gates[gate] = removedPlane;
             System.out.println("Space " + gate + " available in the boarding gate.");
             return gate;
@@ -57,18 +56,18 @@ public class BoardingGates {
             gateLock.unlock();
         }
     }
-    
-        public int enterGateFromTaxiArea(Airplane airplane, Airport airport) throws InterruptedException {
+
+    public int enterGateFromTaxiArea(Airplane airplane, Airport airport) throws InterruptedException {
         gateLock.lock();
         int excludedGate = 1;
         try {
             printGates();
             int gate = isGatePresent(gates, excludedGate);
-            while (isGatePresent(gates, excludedGate) == -1){
+            while (isGatePresent(gates, excludedGate) == -1) {
                 full.await();
                 gate = isGatePresent(gates, excludedGate);
             }
-            full.signalAll();
+            full.signal();
             gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane);
             System.out.println("Space " + gate + " available in the boarding gate.");
             return gate;
@@ -111,4 +110,5 @@ public class BoardingGates {
         }
         return -1;
     }
+    
 }

@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Hangar {
 
-    List<Airplane> airplanes = new LinkedList<Airplane>();
+    Queue<Airplane> airplanes = new ConcurrentLinkedQueue<Airplane>();
     private Lock hangarLock = new ReentrantLock();
     int position;
 
@@ -30,11 +30,11 @@ public class Hangar {
         position = -1;
     }
 
-    public List<Airplane> getAirplanes() {
+    public Queue<Airplane> getAirplanes() {
         return airplanes;
     }
 
-    public void setAirplanes(List<Airplane> airplanes) {
+    public void setAirplanes(Queue<Airplane> airplanes) {
         this.airplanes = airplanes;
     }
 
@@ -84,6 +84,5 @@ public class Hangar {
         }
         return allPlanes.toString();
     }
-    
-    
+
 }

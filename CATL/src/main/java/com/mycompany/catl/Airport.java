@@ -7,10 +7,11 @@ package com.mycompany.catl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Airport extends UnicastRemoteObject implements RemoteInterface{
+public class Airport extends UnicastRemoteObject implements RemoteInterface {
 
-    private int passengers;
+    private AtomicInteger passengers;
     private Hangar hangar;
     private Airway Mad_Bar;
     private Airway Bar_Mad;
@@ -21,8 +22,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
     private Runways runways;
     private String name;
 
-    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) throws RemoteException { 
-        this.passengers = 0;
+    public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) throws RemoteException {
         this.hangar = hangar;
         this.Mad_Bar = Mad_Bar;
         this.Bar_Mad = Bar_Mad;
@@ -32,13 +32,15 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
         this.boardingGates = boardingGates;
         this.runways = runways;
         this.name = name;
+        this.passengers = new AtomicInteger(0);
+
     }
 
-    public synchronized int getPassengers() throws RemoteException{
+    public AtomicInteger getPassengers() throws RemoteException {
         return passengers;
     }
 
-    public void setPassengers(int passengers) {
+    public void setPassengers(AtomicInteger passengers) {
         this.passengers = passengers;
     }
 
@@ -97,47 +99,47 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface{
     public Runways getRunways() {
         return runways;
     }
-    
+
     public String toString() {
         return this.name;
     }
-    
-    public synchronized int numHangar() throws RemoteException{
+
+    public synchronized int numHangar() throws RemoteException {
         int num = this.hangar.getAirplanes().size();
         return num;
     }
-    
-    public synchronized int numMaintenance() throws RemoteException{
+
+    public synchronized int numMaintenance() throws RemoteException {
         int num = this.maintenanceHall.getAirplanes().size();
         return num;
     }
-    
-    public synchronized int numParking() throws RemoteException{
+
+    public synchronized int numParking() throws RemoteException {
         int num = this.parking.getAirplanesForBoarding().size() + this.parking.getAirplanesForMaintenance().size();
         return num;
     }
-    
-    public synchronized int numTaxiArea() throws RemoteException{
+
+    public synchronized int numTaxiArea() throws RemoteException {
         int num = this.taxiArea.getAirplanes().size();
         return num;
     }
-    
-    public synchronized String showMadBarAirway() throws RemoteException{
+
+    public synchronized String showMadBarAirway() throws RemoteException {
         String airway = this.Mad_Bar.toString();
         return airway;
     }
-    
-    public synchronized String showBarMadAirway() throws RemoteException{
+
+    public synchronized String showBarMadAirway() throws RemoteException {
         String airway = this.Bar_Mad.toString();
         return airway;
     }
-    
+
     /* It opens or closes an airway
     * 
     * @param runway its the runway that is going to be oppendes or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 
-    */
-    public synchronized void openClose(int runway,boolean opCl) throws RemoteException{
+     */
+    public synchronized void openClose(int runway, boolean opCl) throws RemoteException {
         this.runways.openClose(runway, opCl);
     }
 

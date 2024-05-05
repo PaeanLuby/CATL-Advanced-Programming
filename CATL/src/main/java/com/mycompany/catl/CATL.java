@@ -47,17 +47,17 @@ public class CATL {
 
         Lock madridPassengersLock = new ReentrantLock();
         Lock barcelonaPassengersLock = new ReentrantLock();
-        
+
         GraphicalInterface gf = new GraphicalInterface();
         gf.setVisible(true);
-        
-        try{
-            Registry reg =LocateRegistry.createRegistry(1099);
+
+        try {
+            Registry reg = LocateRegistry.createRegistry(1099);
             Naming.rebind("//localhost/madrid", madrid);
             Naming.rebind("//localhost/barcelona", barcelona);
-        }catch(Exception e){e.printStackTrace();}
-        
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         AirplaneCreator airplaneCreator = new AirplaneCreator(log, madrid, barcelona, gf);
         BusCreator busCreator = new BusCreator(log, madrid, barcelona, madridPassengersLock, barcelonaPassengersLock, gf);

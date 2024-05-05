@@ -4,6 +4,7 @@
  */
 package com.mycompany.catl;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -812,21 +813,21 @@ public class GraphicalInterface extends javax.swing.JFrame {
         return gw;
     }
 
-    public void setMadridPassengers(int madridPassengers) {
+    public void setMadridPassengers(AtomicInteger madridPassengers) {
         lockMadridPassengers.lock();
-        try{
+        try {
             this.madridPassengers.setText(String.valueOf(madridPassengers));
-        }catch (Exception e) {
+        } catch (Exception e) {
         } finally {
             lockMadridPassengers.unlock();
         }
     }
 
-    public void setBarcelonaPassengers(int barcelonaPassengers) {
+    public void setBarcelonaPassengers(AtomicInteger barcelonaPassengers) {
         lockBarcelonaPassengers.lock();
-        try{
+        try {
             this.barcelonaPassengers.setText(String.valueOf(barcelonaPassengers));
-        }catch (Exception e) {
+        } catch (Exception e) {
         } finally {
             lockBarcelonaPassengers.unlock();
         }
@@ -962,38 +963,38 @@ public class GraphicalInterface extends javax.swing.JFrame {
     public void setBarcelonaGate6(String gate) {
         this.barcelonaGate6.setText(gate);
     }
-    
-    public void setMadridTaxiArea(String taxiArea){
+
+    public void setMadridTaxiArea(String taxiArea) {
         lockMadridTaxiArea.lock();
-        try{
+        try {
             this.madridTaxiArea.setText(taxiArea);
-        }catch (Exception e) {
+        } catch (Exception e) {
         } finally {
             lockMadridTaxiArea.unlock();
         }
     }
-    
+
     public void setMadridRunway1(String runway) {
         this.madridRunway1.setText(runway);
     }
-    
+
     public void setMadridRunway2(String runway) {
         this.madridRunway2.setText(runway);
     }
-    
+
     public void setMadridRunway3(String runway) {
         this.madridRunway3.setText(runway);
     }
-    
+
     public void setMadridRunway4(String runway) {
         this.madridRunway4.setText(runway);
     }
-    
+
     public void setBarcelonaTaxiArea(String taxiArea) {
         lockBarcelonaTaxiArea.lock();
-        try{
+        try {
             this.barcelonaTaxiArea.setText(taxiArea);
-        }catch (Exception e) {
+        } catch (Exception e) {
         } finally {
             lockBarcelonaTaxiArea.unlock();
         }
@@ -1014,17 +1015,17 @@ public class GraphicalInterface extends javax.swing.JFrame {
     public void setBarcelonaRunway4(String runway) {
         this.barcelonaRunway4.setText(runway);
     }
-    
-    public void setAirwayMadridBarcelona(String airway){
+
+    public void setAirwayMadridBarcelona(String airway) {
         lockAirwayMadridBarcelona.lock();
-        try{
-         this.airwayMadridBarcelona.setText(airway);
-        }catch (Exception e) {
+        try {
+            this.airwayMadridBarcelona.setText(airway);
+        } catch (Exception e) {
         } finally {
             lockAirwayMadridBarcelona.unlock();
         }
     }
-    
+
     public void setAirwayBarcelonaMadrid(String airway) {
         lockAirwayBarcelonaMadrid.lock();
         try {
@@ -1034,17 +1035,17 @@ public class GraphicalInterface extends javax.swing.JFrame {
             lockAirwayBarcelonaMadrid.unlock();
         }
     }
-    
-    public void setMadridMaintenanceHall(String maintenanceHall){
+
+    public void setMadridMaintenanceHall(String maintenanceHall) {
         lockMadridMaintenanceHall.lock();
-        try{
+        try {
             this.madridMaintenance.setText(maintenanceHall);
         } catch (Exception e) {
         } finally {
             lockMadridMaintenanceHall.unlock();
         }
     }
-    
+
     public void setBarcelonaMaintenanceHall(String maintenanceHall) {
         lockBarcelonaMaintenanceHall.lock();
         try {
@@ -1053,8 +1054,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
         } finally {
             lockBarcelonaMaintenanceHall.unlock();
         }
-}
-
+    }
 
     /**
      * @param args the command line arguments

@@ -25,15 +25,15 @@ public class Runways {
         runways = new Airplane[4]; //runway can fit 4 airplanes
         runwayLock = new ReentrantLock();
         full = runwayLock.newCondition();
-        openCloseList= new boolean[]{true,true,true,true};
+        openCloseList = new boolean[]{true, true, true, true};
     }
 
     public int enterRunway(Airplane airplane) throws InterruptedException {
         runwayLock.lock();
-        try{
+        try {
             int runway = -1;
             while (!Arrays.asList(runways).contains(null)) {
-            full.await();
+                full.await();
             }
             for (int i = 0; i < 4; i++) {
                 if (runways[i] == null && openCloseList[i]) {
@@ -47,15 +47,15 @@ public class Runways {
         } finally {
             runwayLock.unlock();
         }
-        
+
     }
 
     public Airplane releaseRunway(Airplane airplane) throws InterruptedException {
         runwayLock.lock();
         try {
             int index = -1;
-            index = Arrays.asList(runways).indexOf(airplane); 
-            if(index != -1) {
+            index = Arrays.asList(runways).indexOf(airplane);
+            if (index != -1) {
                 runways[index] = null;
                 full.signalAll();
                 return airplane;
@@ -65,19 +65,19 @@ public class Runways {
         } finally {
             runwayLock.unlock();
         }
-        
+
     }
-    
+
     /* It opens or closes an runway
     * 
     * @param runway its the runway that is going to be oppendes or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 
-    */
-    public void openClose(int runway,boolean opCl){
-        if (opCl){
-            this.openCloseList[runway]=true;
-        }else{
-            this.openCloseList[runway]=false;
+     */
+    public void openClose(int runway, boolean opCl) {
+        if (opCl) {
+            this.openCloseList[runway] = true;
+        } else {
+            this.openCloseList[runway] = false;
         }
     }
 }

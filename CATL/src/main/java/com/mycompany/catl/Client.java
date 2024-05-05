@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author THINKPAD
  */
-public class Cliente {
+public class Client {
 
     /**
      * @param args the command line arguments
@@ -25,9 +25,9 @@ public class Cliente {
         try {
             gui.set();
         } catch (RemoteException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }

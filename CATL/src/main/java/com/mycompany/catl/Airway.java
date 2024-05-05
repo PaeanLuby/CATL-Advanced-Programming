@@ -19,14 +19,14 @@ public class Airway {
     private String name;
 
     public Airway(String name) {
-        airplanes = new ConcurrentLinkedQueue<Airplane>(); 
+        airplanes = new ConcurrentLinkedQueue<Airplane>();
         this.name = name;
     }
 
     public void enterAirway(Airplane airplane) {
         airwayLock.lock();
         try {
-            if(this.airplanes.add(airplane)) { //add the airplane at the end of the list
+            if (this.airplanes.add(airplane)) { //add the airplane at the end of the list
                 System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
                 System.out.println("Current airplanes in airway are: " + toString());
             } else {
@@ -36,7 +36,7 @@ public class Airway {
             airwayLock.unlock();
         }
     }
-    
+
     public Airplane releaseAirplane(Airplane airplane) {
         airwayLock.lock();
         try {

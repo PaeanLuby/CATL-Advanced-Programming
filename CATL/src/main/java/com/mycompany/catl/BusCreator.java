@@ -51,7 +51,7 @@ public class BusCreator extends Thread {
             try {
                 sleep(sleepTime);    //sleeps between 0,5 and 1 second between each bus
             } catch (InterruptedException ex) {
-                //Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
             gf.getGw().look(); //Check the pause/resume bottons
         }
