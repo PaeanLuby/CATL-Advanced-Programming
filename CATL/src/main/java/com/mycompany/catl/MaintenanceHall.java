@@ -25,18 +25,18 @@ public class MaintenanceHall {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
     }
 
-    public synchronized void enterHall(Airplane airplane, Airport airport) throws InterruptedException {
+    public synchronized void enterHall(Airplane airplane, Airport airport,Log log) throws InterruptedException {
         while (airplanes.remainingCapacity() == 0) { //Wait until there's spacein the queue to add an element
             wait();
         }
-        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane)); //Pull first airplane from parking
-        System.out.println("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
+        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane,log)); //Pull first airplane from parking
+        log.write("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
     }
 
-    public synchronized Airplane releaseHall(Airplane airplane) throws InterruptedException {
+    public synchronized Airplane releaseHall(Airplane airplane,Log log) throws InterruptedException {
         if (airplanes.remove(airplane)) {
             notifyAll();
-            System.out.println("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
+            log.write("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
             return airplane;
         } else {
             return null;

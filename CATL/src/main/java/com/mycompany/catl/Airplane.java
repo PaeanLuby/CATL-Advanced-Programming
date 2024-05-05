@@ -90,11 +90,11 @@ public class Airplane extends Thread {
      * Graphical interface output of the diferent runways
      * 
      * @param gate it is the gate where the airplane has entered
-     * @param actualAirport True if it is in Madrid, false if it is in Barcelona
      * @param airport it is the actual airport
      * @param delete if it is true, it cleans the runway because the airplane has left if it is false it introduces the airplane in the boarding gate
+     * @param boarding true when boarding, false when disembarking
      */
-    public void graphicalBoardingGate(int gate, Airport airport, boolean delete){
+    public void graphicalBoardingGate(int gate, Airport airport, boolean delete,boolean boarding){
         if(delete){
             if (airport.toString().equals("MAD")) {
                 switch (gate) {
@@ -120,26 +120,51 @@ public class Airplane extends Thread {
 
         }
         else{
-            if (airport.toString().equals("MAD")) {
-                switch (gate) {
-                    case 0 -> gf.setMadridGate1(this.identifier);
-                    case 1 -> gf.setMadridGate2(this.identifier);
-                    case 2 -> gf.setMadridGate3(this.identifier);
-                    case 3 -> gf.setMadridGate4(this.identifier);
-                    case 4 -> gf.setMadridGate5(this.identifier);
-                    case 5 -> gf.setMadridGate6(this.identifier);
-                    default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+            if (boarding){
+                if (airport.toString().equals("MAD")) {
+                    switch (gate) {
+                        case 0 -> gf.setMadridGate1("Boarding: "+this.identifier);
+                        case 1 -> gf.setMadridGate2("Boarding: "+this.identifier);
+                        case 2 -> gf.setMadridGate3("Boarding: "+this.identifier);
+                        case 3 -> gf.setMadridGate4("Boarding: "+this.identifier);
+                        case 4 -> gf.setMadridGate5("Boarding: "+this.identifier);
+                        case 5 -> gf.setMadridGate6("Boarding: "+this.identifier);
+                        default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+                    }
+                } else {
+                    switch (gate) {
+                        case 0 -> gf.setBarcelonaGate1("Boarding: "+this.identifier);
+                        case 1 -> gf.setBarcelonaGate2("Boarding: "+this.identifier);
+                        case 2 -> gf.setBarcelonaGate3("Boarding: "+this.identifier);
+                        case 3 -> gf.setBarcelonaGate4("Boarding: "+this.identifier);
+                        case 4 -> gf.setBarcelonaGate5("Boarding: "+this.identifier);
+                        case 5 -> gf.setBarcelonaGate6("Boarding: "+this.identifier);
+                        default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+                    }
                 }
-            } else {
-                switch (gate) {
-                    case 0 -> gf.setBarcelonaGate1(this.identifier);
-                    case 1 -> gf.setBarcelonaGate2(this.identifier);
-                    case 2 -> gf.setBarcelonaGate3(this.identifier);
-                    case 3 -> gf.setBarcelonaGate4(this.identifier);
-                    case 4 -> gf.setBarcelonaGate5(this.identifier);
-                    case 5 -> gf.setBarcelonaGate6(this.identifier);
-                    default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+            } else{
+                if (airport.toString().equals("MAD")) {
+                    switch (gate) {
+                        case 0 -> gf.setMadridGate1("Disembark: "+this.identifier);
+                        case 1 -> gf.setMadridGate2("Disembark: "+this.identifier);
+                        case 2 -> gf.setMadridGate3("Disembark: "+this.identifier);
+                        case 3 -> gf.setMadridGate4("Disembark: "+this.identifier);
+                        case 4 -> gf.setMadridGate5("Disembark: "+this.identifier);
+                        case 5 -> gf.setMadridGate6("Disembark: "+this.identifier);
+                        default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+                    }
+                } else {
+                    switch (gate) {
+                        case 0 -> gf.setBarcelonaGate1("Disembark: "+this.identifier);
+                        case 1 -> gf.setBarcelonaGate2("Disembark: "+this.identifier);
+                        case 2 -> gf.setBarcelonaGate3("Disembark: "+this.identifier);
+                        case 3 -> gf.setBarcelonaGate4("Disembark: "+this.identifier);
+                        case 4 -> gf.setBarcelonaGate5("Disembark: "+this.identifier);
+                        case 5 -> gf.setBarcelonaGate6("Disembark: "+this.identifier);
+                        default -> System.out.println("ERROR in boarding gates graphicalBoardingGate");
+                    }
                 }
+                
             }
         }    
     }
@@ -152,9 +177,17 @@ public class Airplane extends Thread {
      */
     public void graphicalTaxiArea(Airport airport) {
         if (airport.toString().equals("MAD")) {
-            gf.setMadridTaxiArea(airport.getTaxiArea().toString());
+            if(!airport.getTaxiArea().getAirplanes().isEmpty()){
+                gf.setMadridTaxiArea(airport.getTaxiArea().toString()+" ("+this.passengers+")");
+            }else{
+                gf.setMadridTaxiArea("");
+            }
         } else {
-            gf.setBarcelonaTaxiArea(airport.getTaxiArea().toString());
+            if(!airport.getTaxiArea().getAirplanes().isEmpty()){
+                gf.setBarcelonaTaxiArea(airport.getTaxiArea().toString()+" ("+this.passengers+")");
+            }else{
+                gf.setBarcelonaTaxiArea("");
+            }
         }
     }
     
@@ -162,52 +195,89 @@ public class Airplane extends Thread {
          * Graphical interface output of the different runways
          * 
          * @param runway it is the gate where the airplane has entered
-         * @param mAD True if it is in Madrid, false if it is in Barcelona
          * @param airport it is the actual airport
          * @param delete if it is true, it cleans the runway because the airplane has left if it is false it introduces the airplane in the boarding gate
+         * @param takeOff true when the aiplane takes off, false when it is landing
          */
-    public void graphicalRunway(int runway, Airport airport, boolean delete) {
-        // Arrays holding the method names for runways based on airport
-        String[] madridRunways = {"setMadridRunway1", "setMadridRunway2", "setMadridRunway3", "setMadridRunway4"};
-        String[] barcelonaRunways = {"setBarcelonaRunway1", "setBarcelonaRunway2", "setBarcelonaRunway3", "setBarcelonaRunway4"};
-
-        // Determine which set of runways to use
-        String[] runways = airport.toString().equals("MAD") ? madridRunways : barcelonaRunways;
-
-        // Determine the identifier to set based on the delete flag
-        String identifierToSet = delete ? "" : this.identifier;
-
-        // Set the appropriate runway identifier or an empty string if runway is valid
-        if (runway >= 0 && runway < 4) {
-            try {
-                // Use reflection to invoke the correct method
-                Method method = gf.getClass().getMethod(runways[runway], String.class);
-                try {
-                    method.invoke(gf, identifierToSet);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
-                    Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+    public void graphicalRunway(int runway,Airport airport, boolean delete,boolean takeOff) {
+        if (delete) {
+            if (airport.toString().equals("MAD")) {
+                switch (runway) {
+                    case 0 -> gf.setMadridRunway1("");
+                    case 1 -> gf.setMadridRunway2("");
+                    case 2 -> gf.setMadridRunway3("");
+                    case 3 -> gf.setMadridRunway4("");
+                    default -> System.out.println("ERROR in runway graphicalRunway");
                 }
-            } catch (NoSuchMethodException e) {
-                System.out.println("ERROR in accessing runway method: " + e.getMessage());
+            } else {
+                switch (runway) {
+                    case 0 -> gf.setBarcelonaRunway1("");
+                    case 1 -> gf.setBarcelonaRunway2("");
+                    case 2 -> gf.setBarcelonaRunway3("");
+                    case 3 -> gf.setBarcelonaRunway4("");
+                    default -> System.out.println("ERROR in runway graphicalRunway");
+                }
             }
         } else {
-            System.out.println("ERROR in runway graphicalRunway: invalid runway index.");
+            if(takeOff){
+                if (airport.toString().equals("MAD")) {
+                    switch (runway) {
+                        case 0 -> gf.setMadridRunway1("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 1 -> gf.setMadridRunway2("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 2 -> gf.setMadridRunway3("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 3 -> gf.setMadridRunway4("Take-off: "+this.identifier+"("+this.passengers+")");
+                        default -> System.out.println("ERROR in runway graphicalRunway");
+                    }
+                } else {
+                    switch (runway) {
+                        case 0 -> gf.setBarcelonaRunway1("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 1 -> gf.setBarcelonaRunway2("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 2 -> gf.setBarcelonaRunway3("Take-off: "+this.identifier+"("+this.passengers+")");
+                        case 3 -> gf.setBarcelonaRunway4("Take-off: "+this.identifier+"("+this.passengers+")");
+                        default -> System.out.println("ERROR in runway graphicalRunway");
+                    }
+                }
+            }else{
+                if (airport.toString().equals("MAD")) {
+                    switch (runway) {
+                        case 0 -> gf.setMadridRunway1("Landing: "+this.identifier+"("+this.passengers+")");
+                        case 1 -> gf.setMadridRunway2("Landing: "+this.identifier+"("+this.passengers+")");
+                        case 2 -> gf.setMadridRunway3("Landing: "+this.identifier+"("+this.passengers+")");
+                        case 3 -> gf.setMadridRunway4("Landing: "+this.identifier+"("+this.passengers+")");
+                        default -> System.out.println("ERROR in runway graphicalRunway");
+                    }
+                } else {
+                    switch (runway) {
+                        case 0 -> gf.setBarcelonaRunway1("Landing:: "+this.identifier+"("+this.passengers+")");
+                        case 1 -> gf.setBarcelonaRunway2("Landing: "+this.identifier+"("+this.passengers+")");
+                        case 2 -> gf.setBarcelonaRunway3("Landing: "+this.identifier+"("+this.passengers+")");
+                        case 3 -> gf.setBarcelonaRunway4("Landing: "+this.identifier+"("+this.passengers+")");
+                        default -> System.out.println("ERROR in runway graphicalRunway");
+                    }
+                }
+            }
         }
     }
-
+            
+            
         /**
          * Graphical interface output of the taxiArea
          * 
-         * @param actualAirport True if it is in Madrid, false if it is in Barcelona
          * @param airport it is the actual airport
          */
         public void graphicalAirway(Airport airport) {
             if (airport.toString().equals("MAD")) {
-                gf.setAirwayMadridBarcelona(airport.getMad_Bar().toString());
+                if(!airport.getMad_Bar().getAirplanes().isEmpty()){
+                    gf.setAirwayMadridBarcelona(airport.getMad_Bar().toString()+" ("+this.passengers+")");
+                }else{
+                    gf.setAirwayMadridBarcelona("");
+                }        
             } else {
-                gf.setAirwayBarcelonaMadrid(airport.getBar_Mad().toString());
+                if(!airport.getBar_Mad().getAirplanes().isEmpty()){
+                    gf.setAirwayBarcelonaMadrid(airport.getBar_Mad().toString()+" ("+this.passengers+")");
+                }else{
+                    gf.setAirwayBarcelonaMadrid("");
+                }
             }
         }
     
@@ -249,7 +319,7 @@ public class Airplane extends Thread {
     */
     if (numberFlights == 1) { //if flight is first flight
         //Add airplane to hangar.
-        airport1.getHangar().addAirplane(this);
+        airport1.getHangar().addAirplane(this,log);
         this.graphicalHangar(airport1); //Update hangar GUI. Airplane shpould display in hangar.
         this.log.write("The airplane " + this.identifier + " has been created in the hangar of the airport of: " + this.getCity());
         gf.getGw().look(); //Check the pause/resume bottons
@@ -258,7 +328,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER PARKING OF STARTING AIRPORT =================
     */
-    airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this)); //Take the airplane from the hangar and put in it in parking.
+    airport1.getParking().addAirplane(airport1.getHangar().releaseAirplane(this,log),log); //Take the airplane from the hangar and put in it in parking.
     this.graphicalHangar(airport1);
     this.graphicalParking(airport1);
     this.log.write("The airplane " + this.identifier + " leaves the hangar and enters the parking in the airport of: " + this.getCity());
@@ -268,9 +338,9 @@ public class Airplane extends Thread {
     * ================ ENTER BOARDING GATE OF STARTING AIRPORT =================
     */
     int gate= -1; //Starts with no gate.
-    gate=airport1.getBoardingGates().enterGate(this, airport1); //Enter into free boarding gate from parking.
+    gate=airport1.getBoardingGates().enterGate(this, airport1,log); //Enter into free boarding gate from parking.
     this.graphicalParking(airport1);
-    this.graphicalBoardingGate(gate, airport1,false);
+    this.graphicalBoardingGate(gate, airport1,false,true);
     gf.getGw().look(); //Check the pause/resume bottons
         
     /*
@@ -296,8 +366,8 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER TAXI AREA OF STARTING AIRPORT =================
     */
-    airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
-    this.graphicalBoardingGate(gate, airport1,true);
+    airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this,log),log); //Enter taxi area
+    this.graphicalBoardingGate(gate, airport1,true,true);
     this.graphicalTaxiArea(airport1);
     this.log.write("Pilot check for airplane " + this.getIdentifier());
     Thread.sleep((long) (1000 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
@@ -306,9 +376,9 @@ public class Airplane extends Thread {
         /*
     * ================ ENTER RUNWAY OF STARTING AIRPORT =================
     */
-    int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
+    int rw=airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this,log),log);
     this.graphicalTaxiArea(airport1);
-    this.graphicalRunway(rw, airport1,false);
+    this.graphicalRunway(rw, airport1,false,true);
     this.log.write("Airplane " + this.getIdentifier() + " completing final checks.");
     Thread.sleep((long) Math.random() * 2000 + 1000); //Final checks between 1 and 3 seconds
     gf.getGw().look(); //Check the pause/resume bottons
@@ -319,8 +389,8 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER AIRWAY OF STARTING AIRPORT =================
     */
-    getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
-    this.graphicalRunway(rw, airport1, true);
+    getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this),log); //Enter airway and remove it from the runway
+    this.graphicalRunway(rw, airport1, true,true);
     this.graphicalAirway(airport1); 
     Thread.sleep((long) Math.random() * 1500 + 1500); //Flight between 15 and 30 seconds
     gf.getGw().look(); //Check the pause/resume bottons
@@ -335,21 +405,21 @@ public class Airplane extends Thread {
     * ================ ENTER RUNWAY OF DESTINATION AIRPORT =================
     */
     this.setLanding(true); //Set landing to true
-    int runway = airport2.getRunways().enterRunway(this);
-    this.graphicalRunway(runway, airport2, false); 
+    int runway = airport2.getRunways().enterRunway(this,log);
+    this.graphicalRunway(runway, airport2, false,false); 
     if (runway != -1) {
-        getAirway(airport1).releaseAirplane(this);
+        getAirway(airport1).releaseAirplane(this,log);
         this.graphicalAirway(airport1);
     }
-    this.graphicalRunway(runway, airport2, false);
+    this.graphicalRunway(runway, airport2, false,false);
     while (runway == -1) {
         Thread.sleep((long) Math.random() * 4000 + 1000); //Detour random time between 1 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons
         this.log.write("Airplane " + this.getIdentifier() + " taking a detour.");
-        runway = airport2.getRunways().enterRunway(this);
-        this.graphicalRunway(runway, airport2, false);
+        runway = airport2.getRunways().enterRunway(this,log);
+        this.graphicalRunway(runway, airport2, false,false);
     }
-    getAirway(airport1).releaseAirplane(this);
+    getAirway(airport1).releaseAirplane(this,log);
     this.graphicalAirway(airport1);
     this.log.write("Airplane " + this.getIdentifier() + " entered into runway " + runway);
     switchAirway();
@@ -363,21 +433,21 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER TAXI AREA OF DESTINATION AIRPORT =================
     */
-    airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
-    this.graphicalRunway(runway, airport2, true);
+    airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this),log); //Leave runway and directly access taxi area
+    this.graphicalRunway(runway, airport2, true,false);
     this.graphicalTaxiArea(airport2);
             
     /*
     * ================ ENTER BOARDING GATE OF DESTINATION AIRPORT =================
     */      
     
-    gate=airport2.getBoardingGates().enterGate(this, airport2);
+    gate=airport2.getBoardingGates().enterGate(this, airport2,log);
     this.log.write("Airplane " + this.getIdentifier() + " flying between taxi area and taxi boarding gate.");
     Thread.sleep((long) Math.random() * 2000 + 3000); 
     gf.getGw().look(); //Check the pause/resume bottons
     this.graphicalTaxiArea(airport2);
     this.log.write("Airplane " + identifier + " is ready to start debarking.");
-    this.graphicalBoardingGate(gate, airport2, false);
+    this.graphicalBoardingGate(gate, airport2, false,false);
     /*
     * ================ BEGIN DISEMBARKING =================
     */             
@@ -390,8 +460,8 @@ public class Airplane extends Thread {
     /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
     */     
-    airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this));
-    this.graphicalBoardingGate(gate, airport2, true);
+    airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this,log),log);
+    this.graphicalBoardingGate(gate, airport2, true,false);
     this.graphicalParking(airport2);
     this.log.write("Pilot check for airplane " + this.getIdentifier());
     Thread.sleep((long) (1 + Math.random() * 4000)); //Check for period between 1 and 5 seconds
@@ -404,7 +474,7 @@ public class Airplane extends Thread {
     this.log.write("Airplane " + this.getIdentifier() + " going through maintenance hall door.");
     Thread.sleep(1000); //Airplane takes 1 second to go through maintanence hall door
     gf.getGw().look(); //Check the pause/resume bottons
-    this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2);
+    this.getAirport(airport2).getMaintenanceHall().enterHall(this, airport2,log);
     this.graphicalParking(airport2);
     this.graphicalMaintenanceHall(airport2);
 
@@ -422,7 +492,7 @@ public class Airplane extends Thread {
     //Airplane decides to rest in hangar or continue life cycle
     int choice = 1 + (int) (Math.random() * 2000); //50% chance
     if (choice == 1) { //if choice 1, rest in hangar 
-        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
+        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this,log),log);
         this.graphicalHangar(airport2);
         this.graphicalMaintenanceHall(airport2);
         Thread.sleep((long) Math.random() * 1500 + 1500);
@@ -430,7 +500,7 @@ public class Airplane extends Thread {
         this.graphicalHangar(airport2);
 
     } else {
-        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this));
+        airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this,log),log);
         this.graphicalMaintenanceHall(airport2);
         this.graphicalHangar(airport2);
     }

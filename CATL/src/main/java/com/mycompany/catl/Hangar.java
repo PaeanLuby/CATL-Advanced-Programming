@@ -43,11 +43,11 @@ public class Hangar {
      * @param airplane the new airplane
      * @return its position on the list
      */
-    public void addAirplane(Airplane airplane) {
+    public void addAirplane(Airplane airplane,Log log) {
         //int position=-1;           initialize puesto with -1 as an error signal
         this.hangarLock.lock();  //lock to avoid mutual exclusion between threads 
         this.airplanes.offer(airplane);  //adds the airplane to the airplanes list of hangar
-        System.out.println("Successfully added airplane " + airplane.getIdentifier() + " to the hangar.");
+        log.write("Successfully added airplane " + airplane.getIdentifier() + " to the hangar.");
         hangarLock.unlock(); //unlock the lock
     }
 
@@ -56,13 +56,14 @@ public class Hangar {
     * @param puesto the position of the airplane ib the list
     * @return the airplane in the position from the list
      */
-    public Airplane releaseAirplane(Airplane airplane) {
+    public Airplane releaseAirplane(Airplane airplane,Log log) {
         hangarLock.lock();
         Airplane removed = null;                    //initialize a with null as an error signal
         removed = this.airplanes.poll(); //we take out the puesto's (position) airplane from the hangar airplanes list and remove it from the list 
-        System.out.println("Successfully removed airplane " + airplane.getIdentifier() + " from the hangar.");
+        log.write("Successfully removed airplane " + airplane.getIdentifier() + " from the hangar.");
         if (removed == null) {                          //signal a possible error
             System.out.println("Error removing the plane from the hangar.");
+            log.write("Error removing the plane from the hangar.");
         }
         hangarLock.unlock();                  //unlock the lock
         return airplane;                            //return the airplane

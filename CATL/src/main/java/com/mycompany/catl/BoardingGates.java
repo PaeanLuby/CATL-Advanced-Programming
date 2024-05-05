@@ -29,14 +29,14 @@ public class BoardingGates {
         this.full = gateLock.newCondition();
     }
 
-    public int enterGate(Airplane airplane, Airport airport) throws InterruptedException {
+    public int enterGate(Airplane airplane, Airport airport, Log log) throws InterruptedException {
         int excludedGate = airplane.getLanding() ? 1 : 0; // Set excluded gate based on landing status
         gateLock.lock();
-        printGates();
+        //printGates(log);
         int gate = -1;
         // Iterate to find the first available gate that is not the excluded gate
         while (!isGatePresent(gates, airplane, excludedGate)) {
-            System.out.println("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
+            log.write("Airplane " + airplane.getIdentifier() + " trying to get a gate.");
             full.await();
         }
         for (int i = 0; i < gates.length; i++) {
@@ -44,11 +44,11 @@ public class BoardingGates {
                 // Found an open gate that's not excluded
                 gate = i;
                 if (excludedGate == 1) {
-                    gates[gate] = airport.getTaxiArea().releaseAirplane(airplane);
+                    gates[gate] = airport.getTaxiArea().releaseAirplane(airplane,log);
                 } else {
-                    gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane);
+                    gates[gate] = airport.getParking().releaseAirplaneForBoarding(airplane,log);
                 }
-                System.out.println("Space " + gate + " available in the boarding gate.");
+                log.write("Space " + gate + " available in the boarding gate.");
                 break;
             }
         }
@@ -58,24 +58,24 @@ public class BoardingGates {
         return gate;
     }
 
-    public Airplane releaseGate(Airplane airplane) throws InterruptedException {
+    public Airplane releaseGate(Airplane airplane, Log log) throws InterruptedException {
         gateLock.lock();
         int planeIndex = Arrays.asList(gates).indexOf(airplane);
-        System.out.println("Airplane " + airplane.getIdentifier() + " waiting to release boarding gate" + planeIndex);
+        log.write("Airplane " + airplane.getIdentifier() + " waiting to release boarding gate" + planeIndex);
         gates[planeIndex] = null;
-        System.out.println("Airplane " + airplane.getIdentifier() + " released boarding gate " + planeIndex);
+        log.write("Airplane " + airplane.getIdentifier() + " released boarding gate " + planeIndex);
         full.signalAll();
         gateLock.unlock();
         return airplane;
     }
 
-    private void printGates() {
+    private void printGates(Log log) {
         for (int i = 0; i < gates.length; i++) {
             System.out.println("Gate " + i + ":");
             if (gates[i] == null) {
-                System.out.println("null");
+                log.write("null");
             } else {
-                System.out.println(gates[i].getIdentifier());
+                log.write(gates[i].getIdentifier());
             }
         }
     }

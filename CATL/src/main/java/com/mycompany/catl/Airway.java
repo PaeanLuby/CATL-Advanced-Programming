@@ -23,19 +23,20 @@ public class Airway {
         this.name = name;
     }
 
-    public void enterAirway(Airplane airplane) {
+    public void enterAirway(Airplane airplane,Log log) {
         this.airplanes.add(airplane); //add the airplane at the end of the list
-        System.out.println("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
-        System.out.println("Current airplanes in airway are: " + toString());
+        log.write("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
+        log.write("Current airplanes in airway are: " + toString());
     }
     
-    public Airplane releaseAirplane(Airplane airplane) {
+    public Airplane releaseAirplane(Airplane airplane,Log log) {
         if (airplanes.remove(airplane)) {
-            System.out.println("Current airplanes in airway are: " + toString());
-            System.out.println("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
+            log.write("Current airplanes in airway are: " + toString());
+            log.write("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
             return airplane;
         } else {
             System.out.println("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
+            log.write("Error removing airplane " + airplane.getIdentifier() + " from airway " + name);
             return null;
         }
     }
