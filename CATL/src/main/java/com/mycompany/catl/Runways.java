@@ -69,10 +69,6 @@ public class Runways {
     *@param opCl if it is true it opens the runway, if it is false it closes the runway 
      */
     public void openClose(int runway, boolean opCl) {
-        if (opCl) {
-            this.openCloseList[runway] = true;
-        } else {
-            this.openCloseList[runway] = false;
-        }
+        this.openCloseList[runway] = opCl;
     }
 }

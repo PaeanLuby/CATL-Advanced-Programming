@@ -32,7 +32,7 @@ public class Bus extends Thread {
      * @return Madrid if the bus has an even identifier, Barcelona if it has an
      * odd identifier
      */
-    public String getCity() {
+    private String getCity() {
         if (Character.getNumericValue(this.identifier.charAt(5)) % 2 == 0) {
             return "Madrid";
         } else {
@@ -112,7 +112,7 @@ public class Bus extends Thread {
 
     private void travelToAirport() {
         try {
-            Thread.sleep((long) (Math.random() * 500 + 500));
+            Thread.sleep((long) (Math.random() * 5000 + 5000)); //Drive from downtown to the airport takes between 5 and 10 seconds
         } catch (InterruptedException ex) {
             Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
         }

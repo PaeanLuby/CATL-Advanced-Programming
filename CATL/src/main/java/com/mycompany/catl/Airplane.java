@@ -491,7 +491,7 @@ public class Airplane extends Thread {
     /*
     * ================ LAND AT DESTINATION AIRPORT =================
     */
-        Thread.sleep((long) Math.random() * 4000 + 1000); //Land for a  random time between 1 and 5 seconds
+        Thread.sleep((long) (Math.random() * 4000 + 1000)); //Land for a  random time between 1 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons
 
     /*
@@ -511,14 +511,14 @@ public class Airplane extends Thread {
         this.log.write("Airplane " + this.getIdentifier() + " flying between taxi area and boarding gate at airport " + airport2);
         this.graphicalTaxiArea(airport2);
         this.graphicalBoardingGate(gate, airport2, false, false);
-        Thread.sleep((long) Math.random() * 2000 + 3000); //Flight time between 2 and 5 seconds
+        Thread.sleep((long) (Math.random() * 2000 + 3000)); //Flight time between 2 and 5 seconds
         gf.getGw().look(); //Check the pause/resume bottons 
 
     /*
     * ================ BEGIN DISEMBARKING =================
     */
         this.log.write("Airplane " + this.getIdentifier() + " disembarking " + this.getPassengers() + " at boarding gate of " + airport2);
-        Thread.sleep((long) Math.random() * 4000 + 1000); //All passengers' transference from the airplane between 1 and 5 seconds 
+        Thread.sleep((long) (Math.random() * 4000 + 1000)); //All passengers' transference from the airplane between 1 and 5 seconds 
         airport2.addPassengers(this.getPassengers());
         this.setPassengers(0); //Reset passengers
         gf.getGw().look(); //Check the pause/resume bottons
@@ -574,7 +574,7 @@ public class Airplane extends Thread {
             this.graphicalHangar(airport2);
         }
         this.setLanding(false);
-        this.log.write("Airplane " + this.getIdentifier() + " has finished it's lap from " + airport1 + " to " + airport2);
+        this.log.write("Airplane " + this.getIdentifier() + " has finished lap " + numberFlights + " from " + airport1 + " to " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
     }
 

@@ -26,24 +26,33 @@ public class MaintenanceHall {
 
     public void enterHallDoor(Airplane airplane, Airport airport, Log log) throws InterruptedException {
         enterDoor.lock();
-        while (!airplane.getAirport(airport).getParking().getAirplanesForMaintenance().peek().equals(airplane)) {
-            log.write("Airplane " + airplane.getIdentifier() + " waiting to enter hall of airport " + airport);
-            first.await();
+        try {
+            while (!airplane.getAirport(airport).getParking().getAirplanesForMaintenance().peek().equals(airplane)) {
+                log.write("Airplane " + airplane.getIdentifier() + " waiting to enter hall of airport " + airport);
+                first.await();
+            }
+            airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
+            log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
+            first.signal();
+            Thread.sleep(1000);
+        } finally {
+            enterDoor.unlock();
         }
-        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
-        log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
-        first.signal();
-        Thread.sleep(1000);
-        enterDoor.unlock();
-        //Pull first airplane from parking
     }
 
     public Airplane releaseHall(Airplane airplane) throws InterruptedException {
-        if (airplanes.remove(airplane)) {
-            System.out.println("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
-            return airplane;
-        } else {
-            return null;
+        enterDoor.lock();
+        try {
+            if (airplanes.remove(airplane)) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
+                Thread.sleep(1000);
+                return airplane;
+            } else {
+                System.err.println("Error removing airplane " + airplane.getIdentifier() + " from the maintenance hall.");
+                return null;
+            }
+        } finally {
+            enterDoor.unlock();
         }
     }
 
