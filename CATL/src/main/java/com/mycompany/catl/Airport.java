@@ -129,7 +129,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface {
 
     /* It opens or closes a runway. It is synchronized in case there is more than one client
     * 
-    *@param runway its the runway that is going to be oppendes or closed
+    *@param runway its the runway that is going to be open or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 
      */
     public synchronized void openClose(int runway, boolean opCl) throws RemoteException {

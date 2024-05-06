@@ -532,9 +532,9 @@ public class Airplane extends Thread {
         this.log.write("Airplane " + this.getIdentifier() + " disembarking " + this.getPassengers() + " at boarding gate of " + airport2);
         Thread.sleep((long) (Math.random() * 4000 + 1000)); //All passengers' transference from the airplane between 1 and 5 seconds 
         airport2.addPassengers(this.getPassengers());
-        showPassengers(airport2);
         this.setPassengers(0); //Reset passengers
         gf.getGw().look(); //Check the pause/resume bottons
+        showPassengers(airport2);
         
 
     /*
@@ -638,14 +638,19 @@ public class Airplane extends Thread {
         this.landing = landing;
     }
 
-    private void attemptBoarding(int passengersToTake, Airport airport) throws InterruptedException {
+    private void attemptBoarding(int passengersToTake, Airport airport) {
         this.setPassengers(passengersToTake); //Add new passengers
         this.getAirport(airport).releasePassengers(passengersToTake); //Subtract those passengers from the airport
-
-        for (int i = 0; i < passengersToTake; i++) {
-            Thread.sleep((long) (Math.random() * 2000 + 1000)); //Each passanger's transference to the airplane between 1 and 3 seconds 
-            gf.getGw().look(); //Check the pause/resume bottons
+        try {
+            showPassengers(airport);
+            for (int i = 0; i < passengersToTake; i++) {
+                Thread.sleep((long) (Math.random() * 2000 + 1000)); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                gf.getGw().look(); //Check the pause/resume bottons
+            }
+            
+        } catch (RemoteException | InterruptedException ex) {
+            Logger.getLogger(Airplane.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
-
     }
 }

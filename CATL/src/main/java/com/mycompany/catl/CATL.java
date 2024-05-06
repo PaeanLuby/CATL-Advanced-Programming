@@ -20,9 +20,9 @@ public class CATL {
         //Shared class
         Airway Mad_Bar = new Airway("Mad_Bar");
         Airway Bar_Mad = new Airway("Bar_Mad");
-        BoardingGates boardingGatesMadrid = new BoardingGates(1); //1 is exclusively for landing. 0 is exclusively for boarding
+        BoardingGates boardingGatesMadrid = new BoardingGates(); //1 is exclusively for landing. 0 is exclusively for boarding
         Runways runwaysMadrid = new Runways();
-        BoardingGates boardingGatesBarcelona = new BoardingGates(1); //1 is exclusively for landing. 0 is exclusively for boarding
+        BoardingGates boardingGatesBarcelona = new BoardingGates(); //1 is exclusively for landing. 0 is exclusively for boarding
         Runways runwaysBarcelona = new Runways(); //
 
         //Madrid class
@@ -38,9 +38,6 @@ public class CATL {
         TaxiArea taxiBarcelona = new TaxiArea();
         Airport barcelona = new Airport(hangarBarcelona, Mad_Bar, Bar_Mad, taxiBarcelona, parkingBarcelona, maintenanceHallBarcelona, boardingGatesBarcelona, runwaysBarcelona, "BAC");
 
-        Lock madridPassengersLock = new ReentrantLock();
-        Lock barcelonaPassengersLock = new ReentrantLock();
-
         GraphicalInterface gf = new GraphicalInterface();
         gf.setVisible(true);
 
@@ -53,7 +50,7 @@ public class CATL {
         }
 
         AirplaneCreator airplaneCreator = new AirplaneCreator(log, madrid, barcelona, gf);
-        BusCreator busCreator = new BusCreator(log, madrid, barcelona, madridPassengersLock, barcelonaPassengersLock, gf);
+        BusCreator busCreator = new BusCreator(log, madrid, barcelona, gf);
 
         //If the program is finished or interrupted the log is automatically closed to avoid the loss of information
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

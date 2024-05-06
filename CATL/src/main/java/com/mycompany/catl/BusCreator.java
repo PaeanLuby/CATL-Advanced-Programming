@@ -16,7 +16,7 @@ public class BusCreator extends Thread {
     private final Airport barcelona;
     private final GraphicalInterface gf;
 
-    public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock, GraphicalInterface gf) {
+    public BusCreator(Log log, Airport madrid, Airport barcelona, GraphicalInterface gf) {
         this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;

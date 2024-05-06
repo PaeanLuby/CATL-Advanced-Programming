@@ -18,7 +18,7 @@ public class BoardingGates {
     private Condition full;
     private Condition first;
 
-    public BoardingGates(int excludedGate) {
+    public BoardingGates() {
         this.gates = new Airplane[6];
         this.gateLock = new ReentrantLock(true);
         this.full = gateLock.newCondition();

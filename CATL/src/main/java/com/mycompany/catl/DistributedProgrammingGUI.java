@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class DistributedProgrammingGUI extends javax.swing.JFrame {
 
-    RemoteInterface madridRi;
-    RemoteInterface barcelonaRi;
+    private RemoteInterface madridRi;
+    private RemoteInterface barcelonaRi;
 
     /**
      * Creates new form DistributedProgrammingGUI
