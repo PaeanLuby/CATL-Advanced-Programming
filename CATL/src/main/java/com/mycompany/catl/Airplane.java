@@ -559,7 +559,7 @@ public class Airplane extends Thread {
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalParking(airport2);
         this.graphicalMaintenanceHall(airport2);
-
+        
         //Check if airplane needs to be sent to the maintenance hall for deep or light inspection
         if (numberFlights % 15 == 0) { //if it's been 15 flight since last tune up
             this.log.write("Airplane " + this.getIdentifier() + " going in for a deep inspection in maintenance hall of " + airport2);
@@ -570,6 +570,7 @@ public class Airplane extends Thread {
             Thread.sleep((long) (Math.random() * 1000 + 4000)); //Inspection takes random time between 1 and 5 seconds
             gf.getGw().look(); //Check the pause/resume bottons
         }
+        this.graphicalMaintenanceHall(airport2);
 
         this.log.write("Airplane " + this.getIdentifier() + " finished inspection in airport " + airport2);
         //Airplane decides to rest in hangar or continue life cycle
@@ -577,15 +578,15 @@ public class Airplane extends Thread {
         if (choice == 1) { //if choice 1, rest in hangar 
             this.log.write("Airplane " + this.getIdentifier() + " resting in hangar of " + airport2);
             airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this), log);
-            this.graphicalHangar(airport2);
             this.graphicalMaintenanceHall(airport2);
+            this.graphicalHangar(airport2);
             Thread.sleep((long) (Math.random() * 15000 + 15000));
             gf.getGw().look(); //Check the pause/resume bottons
         } else {
             this.log.write("Airplane " + this.getIdentifier() + " immediately restarting it's life cycle.");
             airport2.getHangar().addAirplane(airport2.getMaintenanceHall().releaseHall(this), log);
-            this.graphicalMaintenanceHall(airport2);
             this.graphicalHangar(airport2);
+            this.graphicalMaintenanceHall(airport2);
         }
         this.setLanding(false);
         this.log.write("Airplane " + this.getIdentifier() + " has finished lap " + numberFlights + " from " + airport1 + " to " + airport2);
@@ -644,7 +645,7 @@ public class Airplane extends Thread {
         try {
             showPassengers(airport);
             for (int i = 0; i < passengersToTake; i++) {
-                Thread.sleep((long) (Math.random() * 2000 + 1000)); //Each passanger's transference to the airplane between 1 and 3 seconds 
+                Thread.sleep((long) (Math.random() * 200 + 100)); //Each passanger's transference to the airplane between 1 and 3 seconds 
                 gf.getGw().look(); //Check the pause/resume bottons
             }
             

@@ -20,7 +20,7 @@ public class MaintenanceHall {
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
-        enterDoor = new ReentrantLock(true); //Only one plane can enter through the door at a time
+        enterDoor = new ReentrantLock(); //Only one plane can enter through the door at a time
         first = enterDoor.newCondition();
     }
 
@@ -33,7 +33,7 @@ public class MaintenanceHall {
             }
             airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
             log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
-            first.signal();
+            first.signalAll();
             Thread.sleep(1000);
         } finally {
             enterDoor.unlock();

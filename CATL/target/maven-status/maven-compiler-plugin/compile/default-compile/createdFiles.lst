@@ -11,6 +11,7 @@ com\mycompany\catl\DistributedProgrammingGUI$6.class
 com\mycompany\catl\DistributedProgrammingGUI$10.class
 com\mycompany\catl\DistributedProgrammingGUI$13.class
 com\mycompany\catl\DistributedProgrammingGUI$23.class
+com\mycompany\catl\Server.class
 com\mycompany\catl\Airway.class
 com\mycompany\catl\GraphicalInterface$5.class
 com\mycompany\catl\DistributedProgrammingGUI$1.class
@@ -41,7 +42,6 @@ com\mycompany\catl\DistributedProgrammingGUI$25.class
 com\mycompany\catl\Client.class
 com\mycompany\catl\GraphicalInterface$12.class
 com\mycompany\catl\DistributedProgrammingGUI$3.class
-com\mycompany\catl\CATL.class
 com\mycompany\catl\DistributedProgrammingGUI$28.class
 com\mycompany\catl\Airplane.class
 com\mycompany\catl\DistributedProgrammingGUI$12.class

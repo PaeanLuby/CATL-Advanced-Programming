@@ -19,7 +19,7 @@ public class BoardingGates {
 
     public BoardingGates() {
         this.gates = new Airplane[6];
-        this.gateLock = new ReentrantLock(true);
+        this.gateLock = new ReentrantLock();
         this.full = gateLock.newCondition();
         this.first = gateLock.newCondition();
     }
@@ -37,7 +37,7 @@ public class BoardingGates {
                 gate = isGatePresent(gates, excludedGate);
             }
             gates[gate] = airplane.getAirport(airport).getParking().releaseAirplaneForBoarding(airplane);
-            first.signal();
+            first.signalAll();
             return gate;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println("Airplane " + airplane.getIdentifier() + " couldn't be transferred to the boarding gate from parking.");
@@ -68,7 +68,7 @@ public class BoardingGates {
         try {
             int planeIndex = Arrays.asList(gates).indexOf(airplane);
             gates[planeIndex] = null;
-            full.signal();
+            full.signalAll();
             return airplane;
         } finally {
             gateLock.unlock();

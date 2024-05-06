@@ -331,7 +331,7 @@ public class GraphicalInterface extends javax.swing.JFrame {
         jPanel1.add(barcelonaHangar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 494, -1));
 
         jLabel39.setText("Maintenance: ");
-        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, -1, 28));
+        jPanel1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, -1, 40));
 
         barcelonaMaintenance.setEditable(false);
         barcelonaMaintenance.setBackground(new java.awt.Color(255, 255, 255));

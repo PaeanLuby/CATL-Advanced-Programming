@@ -72,7 +72,7 @@ public class Hangar {
 
         while (newIterator.hasNext()) {
             String currPlane = newIterator.next().getIdentifier();
-            allPlanes.append(currPlane.concat(" "));
+            allPlanes.append(currPlane.concat(", "));
         }
         return allPlanes.toString();
     }
