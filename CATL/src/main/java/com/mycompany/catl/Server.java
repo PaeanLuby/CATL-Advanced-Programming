@@ -4,15 +4,13 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
  * @author Paean Luby 
  * @author Nicolás Rodríguez Sánchez 
  */
-public class CATL {
+public class Server {
 
     public static void main(String[] args) throws RemoteException {
         Log log = new Log();
