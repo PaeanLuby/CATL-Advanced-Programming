@@ -359,22 +359,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Hangar:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Hangar:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Maintenance:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Maintenance:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Parking:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Parking:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Taxi Area:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Taxi Area:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
@@ -516,7 +516,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Hangar:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Hangar:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="barcelonaHangar">
@@ -529,7 +529,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Maintenance:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Maintenance:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="barcelonaMaintenance">
@@ -542,7 +542,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Parking:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Parking:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="barcelonaParking">
@@ -555,7 +555,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Number of passengers in Taxi Area:"/>
+        <Property name="text" type="java.lang.String" value="Number of airplanes in Taxi Area:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="barcelonaTaxiArea">

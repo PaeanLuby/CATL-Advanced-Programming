@@ -103,13 +103,13 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Number of passengers at the Airport:");
 
-        jLabel4.setText("Number of passengers in Hangar:");
+        jLabel4.setText("Number of airplanes in Hangar:");
 
-        jLabel5.setText("Number of passengers in Maintenance:");
+        jLabel5.setText("Number of airplanes in Maintenance:");
 
-        jLabel6.setText("Number of passengers in Parking:");
+        jLabel6.setText("Number of airplanes in Parking:");
 
-        jLabel7.setText("Number of passengers in Taxi Area:");
+        jLabel7.setText("Number of airplanes in Taxi Area:");
 
         jLabel8.setText("Runway 1");
 
@@ -219,7 +219,7 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("Number of passengers in Hangar:");
+        jLabel13.setText("Number of airplanes in Hangar:");
 
         barcelonaHangar.setEditable(false);
         barcelonaHangar.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +228,7 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setText("Number of passengers in Maintenance:");
+        jLabel14.setText("Number of airplanes in Maintenance:");
 
         barcelonaMaintenance.setEditable(false);
         barcelonaMaintenance.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +237,7 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("Number of passengers in Parking:");
+        jLabel15.setText("Number of airplanes in Parking:");
 
         barcelonaParking.setEditable(false);
         barcelonaParking.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +246,7 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setText("Number of passengers in Taxi Area:");
+        jLabel16.setText("Number of airplanes in Taxi Area:");
 
         barcelonaTaxiArea.setEditable(false);
         barcelonaTaxiArea.addActionListener(new java.awt.event.ActionListener() {
@@ -378,23 +378,22 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
                                         .addComponent(buttonMadridCloseRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(buttonMadridOpenRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(madridParking))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(madridPassengers))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(madridMaintenance))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(madridHangar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(madridParking))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(madridPassengers))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(madridMaintenance))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(madridHangar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(jLabel1)))
@@ -440,36 +439,30 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
                                         .addComponent(buttonBarcelonaCloseRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(buttonBarcelonaOpenRunway4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(barcelonaParking))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel12)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(barcelonaPassengers))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(barcelonaMaintenance))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(barcelonaHangar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(barcelonaParking))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(barcelonaPassengers))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(barcelonaMaintenance))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(barcelonaHangar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(AirwayMadridBarcelona)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(AirwayBarcelonaMadrid)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())))
+                    .addComponent(AirwayMadridBarcelona)
+                    .addComponent(AirwayBarcelonaMadrid)
+                    .addComponent(jSeparator1))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
