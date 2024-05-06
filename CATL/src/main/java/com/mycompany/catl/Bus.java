@@ -48,8 +48,7 @@ public class Bus extends Thread {
                 gf.getGw().look(); //Check the pause/resume bottons
                 arriveDowntown();
                 //Passengers board
-                gf.getGw().look();
-                //Check the pause/resume bottons
+                gf.getGw().look();//Check the pause/resume bottons
                 boardDowntownPassengers();
                 gf.getGw().look(); //Check the pause/resume bottons
 

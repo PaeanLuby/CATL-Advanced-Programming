@@ -377,6 +377,14 @@ public class Airplane extends Thread {
             gf.setBarcelonaMaintenanceHall(airport.getMaintenanceHall().toString());
         }
     }
+    
+    public void showPassengers(Airport airport) throws RemoteException{
+         if (airport.toString().equals("MAD")) {
+            gf.setMadridPassengers(airport.getPassengers().get());
+        } else {
+            gf.setBarcelonaPassengers(airport.getPassengers().get());
+        }
+    }
 
     public void lifeCycle(Airport airport1, Airport airport2) throws InterruptedException, RemoteException {
         numberFlights++; //Increment number of flights
@@ -426,6 +434,7 @@ public class Airplane extends Thread {
             this.log.write("Airplane " + identifier + " is  finishing boarding attempt " + (3 - remainingAttempts) + " with " + this.getPassengers() + " in gate " + gate + " of airport " + airport1 + ".");
             gf.getGw().look(); //Check the pause/resume bottons
         }
+        showPassengers(airport1);
 
         this.log.write("Airplane " + identifier + " is  finishing boarding on attempt " + (3 - remainingAttempts) + ". Preparing for takeoff with " + this.getPassengers() + " from gate " + gate + " of airport " + airport1 + ".");
 
@@ -523,8 +532,10 @@ public class Airplane extends Thread {
         this.log.write("Airplane " + this.getIdentifier() + " disembarking " + this.getPassengers() + " at boarding gate of " + airport2);
         Thread.sleep((long) (Math.random() * 4000 + 1000)); //All passengers' transference from the airplane between 1 and 5 seconds 
         airport2.addPassengers(this.getPassengers());
+        showPassengers(airport2);
         this.setPassengers(0); //Reset passengers
         gf.getGw().look(); //Check the pause/resume bottons
+        
 
     /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
