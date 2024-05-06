@@ -1,36 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.catl;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class DistributedProgrammingGUI extends javax.swing.JFrame {
 
     RemoteInterface madridRi;
     RemoteInterface barcelonaRi;
+
     /**
      * Creates new form DistributedProgrammingGUI
      */
     public DistributedProgrammingGUI() {
         initComponents();
-        try{
+        try {
             madridRi = (RemoteInterface) Naming.lookup("//localhost/madrid");
             barcelonaRi = (RemoteInterface) Naming.lookup("//localhost/barcelona");
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             Logger.getLogger(DistributedProgrammingGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -767,57 +767,56 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AirwayBarcelonaMadridActionPerformed
 
-    public void setMadridHangar(int hangar){
+    public void setMadridHangar(int hangar) {
         this.madridHangar.setText(Integer.toString(hangar));
     }
-    
-    public void setMadridPassengers(int passengers){
-        this.madridPassengers.setText(Integer.toString(passengers));
+
+    public void setMadridPassengers(AtomicInteger passengers) {
+        this.madridPassengers.setText(passengers.toString());
     }
-    
-    public void setMadridMaintenance(int passengers){
+
+    public void setMadridMaintenance(int passengers) {
         this.madridMaintenance.setText(Integer.toString(passengers));
     }
-    
-    public void setMadridParking(int passengers){
+
+    public void setMadridParking(int passengers) {
         this.madridParking.setText(Integer.toString(passengers));
     }
-    
-    public void setMadridTaxiArea(int passengers){
+
+    public void setMadridTaxiArea(int passengers) {
         this.madridTaxiArea.setText(Integer.toString(passengers));
     }
-    
-    public void setAirwayMadridBarcelona(String arway){
+
+    public void setAirwayMadridBarcelona(String arway) {
         this.AirwayMadridBarcelona.setText(arway);
     }
-    
-    public void setBarcelonaHangar(int hangar){
+
+    public void setBarcelonaHangar(int hangar) {
         this.barcelonaHangar.setText(Integer.toString(hangar));
     }
 
-    public void setBarcelonaPassengers(int passengers){
-        this.barcelonaPassengers.setText(Integer.toString(passengers));
+    public void setBarcelonaPassengers(AtomicInteger passengers) {
+        this.barcelonaPassengers.setText(passengers.toString());
     }
 
-    public void setBarcelonaMaintenance(int passengers){
+    public void setBarcelonaMaintenance(int passengers) {
         this.barcelonaMaintenance.setText(Integer.toString(passengers));
     }
 
-    public void setBarcelonaParking(int passengers){
+    public void setBarcelonaParking(int passengers) {
         this.barcelonaParking.setText(Integer.toString(passengers));
     }
 
-    public void setBarcelonaTaxiArea(int passengers){
+    public void setBarcelonaTaxiArea(int passengers) {
         this.barcelonaTaxiArea.setText(Integer.toString(passengers));
     }
 
-    
-    public void setAirwayBarcelonaMadrid(String arway){
+    public void setAirwayBarcelonaMadrid(String arway) {
         this.AirwayBarcelonaMadrid.setText(arway);
     }
-    
-    public void set() throws RemoteException{
-        while(true){
+
+    public void set() throws RemoteException {
+        while (true) {
             setMadridHangar(madridRi.numHangar());
             setMadridPassengers(madridRi.getPassengers());
             setMadridMaintenance(madridRi.numMaintenance());
@@ -832,6 +831,7 @@ public class DistributedProgrammingGUI extends javax.swing.JFrame {
             setAirwayBarcelonaMadrid(madridRi.showBarMadAirway());
         }
     }
+
     /**
      * @param args the command line arguments
      */

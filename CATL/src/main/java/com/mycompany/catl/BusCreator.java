@@ -1,33 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.io.BufferedWriter;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class BusCreator extends Thread {
 
-    private Log log;
-    private Airport madrid;
-    private Lock madridPassengersLock;
-    private Airport barcelona;
-    private Lock barcelonaPassengersLock;
-    private GraphicalInterface gf;
+    private final Log log;
+    private final Airport madrid;
+    private final Airport barcelona;
+    private final GraphicalInterface gf;
 
     public BusCreator(Log log, Airport madrid, Airport barcelona, Lock madridPassengersLock, Lock barcelonaPassengersLock, GraphicalInterface gf) {
         this.log = log;
         this.madrid = madrid;
         this.barcelona = barcelona;
-        this.madridPassengersLock = madridPassengersLock;
-        this.barcelonaPassengersLock = barcelonaPassengersLock;
         this.gf = gf;
     }
 
@@ -41,9 +33,9 @@ public class BusCreator extends Thread {
             }
             identifier = "B-" + identifier;    //We add B-
             if (i % 2 == 0) {                   //Even identifier for Madrid
-                bus = new Bus(identifier, log, madrid, madridPassengersLock, gf);
+                bus = new Bus(identifier, log, madrid, gf);
             } else {                         //Odd identifier for Barcelona
-                bus = new Bus(identifier, log, barcelona, barcelonaPassengersLock, gf);
+                bus = new Bus(identifier, log, barcelona, gf);
             }
             bus.start();
 
@@ -51,7 +43,7 @@ public class BusCreator extends Thread {
             try {
                 sleep(sleepTime);    //sleeps between 0,5 and 1 second between each bus
             } catch (InterruptedException ex) {
-                //Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(BusCreator.class.getName()).log(Level.SEVERE, null, ex);
             }
             gf.getGw().look(); //Check the pause/resume bottons
         }

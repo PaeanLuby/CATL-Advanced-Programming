@@ -1,45 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class MaintenanceHall {
 
-    private BlockingQueue airplanes;
+    BlockingQueue airplanes;
+    Lock enterDoor;
+    Condition first;
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
+        enterDoor = new ReentrantLock(true); //Only one plane can enter through the door at a time
+        first = enterDoor.newCondition();
     }
 
-    public synchronized void enterHall(Airplane airplane, Airport airport,Log log) throws InterruptedException {
-        while (airplanes.remainingCapacity() == 0) { //Wait until there's spacein the queue to add an element
-            wait();
+    public void enterHallDoor(Airplane airplane, Airport airport, Log log) throws InterruptedException {
+        enterDoor.lock();
+        try {
+            while (!airplane.getAirport(airport).getParking().getAirplanesForMaintenance().peek().equals(airplane)) {
+                log.write("Airplane " + airplane.getIdentifier() + " waiting to enter hall of airport " + airport);
+                first.await();
+            }
+            airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
+            log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
+            first.signal();
+            Thread.sleep(1000);
+        } finally {
+            enterDoor.unlock();
         }
-        airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane,log)); //Pull first airplane from parking
-        log.write("Airplane " + airplane.getIdentifier() + " successfully entered into maintenance hall.");
     }
 
-    public synchronized Airplane releaseHall(Airplane airplane,Log log) throws InterruptedException {
-        if (airplanes.remove(airplane)) {
-            notifyAll();
-            log.write("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
-            return airplane;
-        } else {
-            return null;
+    public Airplane releaseHall(Airplane airplane) throws InterruptedException {
+        enterDoor.lock();
+        try {
+            if (airplanes.remove(airplane)) {
+                System.out.println("Airplane " + airplane.getIdentifier() + " successfully exiting the maintenance hall.");
+                Thread.sleep(1000);
+                return airplane;
+            } else {
+                System.err.println("Error removing airplane " + airplane.getIdentifier() + " from the maintenance hall.");
+                return null;
+            }
+        } finally {
+            enterDoor.unlock();
         }
     }
 
@@ -59,6 +72,5 @@ public class MaintenanceHall {
     public BlockingQueue getAirplanes() {
         return airplanes;
     }
-    
-}
 
+}

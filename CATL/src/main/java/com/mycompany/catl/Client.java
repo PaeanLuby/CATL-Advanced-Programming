@@ -1,20 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.net.MalformedURLException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
-public class Cliente {
+public class Client {
 
     /**
      * @param args the command line arguments
@@ -25,9 +20,9 @@ public class Cliente {
         try {
             gui.set();
         } catch (RemoteException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }
