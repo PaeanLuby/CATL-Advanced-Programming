@@ -1,28 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.io.BufferedWriter;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class AirplaneCreator extends Thread {
 
-    private Log log;
-    private Airport madrid;
-    private Airport barcelona;
-    private GraphicalInterface gf;
+    private final Log log;
+    private final Airport madrid;
+    private final Airport barcelona;
+    private final GraphicalInterface gf;
 
     public AirplaneCreator(Log log, Airport madrid, Airport barcelona, GraphicalInterface gf) {
         this.log = log;

@@ -1,23 +1,16 @@
 package com.mycompany.catl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class TaxiArea {
 
     private BlockingQueue<Airplane> airplanes;
-    private Lock taxiLock = new ReentrantLock();
 
     public TaxiArea() {
         airplanes = new LinkedBlockingQueue<Airplane>();
@@ -50,13 +43,11 @@ public class TaxiArea {
     @Override
     public String toString() {
         StringBuilder allPlanes = new StringBuilder();
-        Iterator<Airplane> taxiIterator = airplanes.iterator(); // Create a new iterator
-
-        while (taxiIterator.hasNext()) {
-            Airplane currPlane = taxiIterator.next();  // Assuming the object type is Airplane
+        // Create a new iterator
+        for (Airplane currPlane : airplanes) {
+            // Assuming the object type is Airplane
             String identifier = currPlane.getIdentifier();
             int passengers = currPlane.getPassengers();  // Get the number of passengersString currPlane = boardingIterator.next().getIdentifier();
-
             allPlanes.append(identifier + "(" + passengers + ")" + ", ");
         }
         return allPlanes.toString();

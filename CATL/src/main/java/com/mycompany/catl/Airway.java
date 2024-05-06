@@ -1,22 +1,18 @@
 package com.mycompany.catl;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class Airway {
 
     private Queue<Airplane> airplanes;
-    private Lock airwayLock = new ReentrantLock();
-    private String name;
+    private final String name;
 
     public Airway(String name) {
         airplanes = new ConcurrentLinkedQueue<Airplane>();

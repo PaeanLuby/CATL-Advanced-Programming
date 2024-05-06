@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.locks.Condition;
@@ -13,13 +8,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class BoardingGates {
 
     private int type;
     private Airplane[] gates;
-    private int remainingAttempts;
     private Lock gateLock;
     private Condition full;
     private Condition first;
@@ -60,7 +55,6 @@ public class BoardingGates {
         gateLock.lock();
         int excludedGate = 1;
         try {
-            //printGates(log);
             int gate = isGatePresent(gates, excludedGate);
             while (isGatePresent(gates, excludedGate) == -1) {
                 full.await();
@@ -69,7 +63,6 @@ public class BoardingGates {
             full.signal();
             gates[gate] = airplane.getAirport(airport).getTaxiArea().releaseAirplane(airplane, log);
             return gate;
-            //If no gate was found, wait
         } finally {
             gateLock.unlock();
         }
@@ -86,16 +79,6 @@ public class BoardingGates {
         return airplane;
     }
 
-//    private void printGates(Log log) {
-//        for (int i = 0; i < gates.length; i++) {
-//            System.out.println("Gate " + i + ":");
-//            if (gates[i] == null) {
-//                log.write("null");
-//            } else {
-//                log.write(gates[i].getIdentifier());
-//            }
-//        }
-//    }
     private int isGatePresent(Airplane[] gates, int unusableGate) {
         for (int i = 0; i < gates.length; i++) {
             if (i != unusableGate && gates[i] == null) {  // Skip index that is not usable

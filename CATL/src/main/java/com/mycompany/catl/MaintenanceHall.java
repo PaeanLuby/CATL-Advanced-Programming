@@ -1,22 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class MaintenanceHall {
 
@@ -26,7 +20,7 @@ public class MaintenanceHall {
 
     public MaintenanceHall() {
         airplanes = new ArrayBlockingQueue<Airplane>(20);
-        enterDoor = new ReentrantLock(); //Only one plane can enter through the door at a time
+        enterDoor = new ReentrantLock(true); //Only one plane can enter through the door at a time
         first = enterDoor.newCondition();
     }
 
@@ -38,7 +32,7 @@ public class MaintenanceHall {
         }
         airplanes.put(airplane.getAirport(airport).getParking().releaseAirplaneForMaintenance(airplane));
         log.write("Airplane " + airplane.getIdentifier() + " entered hall of airport " + airport);
-        first.signalAll();
+        first.signal();
         Thread.sleep(1000);
         enterDoor.unlock();
         //Pull first airplane from parking

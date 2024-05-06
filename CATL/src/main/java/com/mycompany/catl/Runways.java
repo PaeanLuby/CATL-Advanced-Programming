@@ -1,18 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
 import java.util.Arrays;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author THINKPAD
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
  */
 public class Runways {
 
@@ -28,7 +24,7 @@ public class Runways {
         openCloseList = new boolean[]{true, true, true, true};
     }
 
-    public int enterRunway(Airplane airplane, Log log) throws InterruptedException {
+    public int enterRunway(Airplane airplane) throws InterruptedException {
         runwayLock.lock();
         try {
             int runway = -1;
@@ -37,7 +33,6 @@ public class Runways {
             }
             for (int i = 0; i < 4; i++) {
                 if (runways[i] == null && openCloseList[i]) {
-                    log.write("Space " + i + " available in the runway.");
                     runways[i] = airplane;
                     runway = i;
                     break;
@@ -70,7 +65,7 @@ public class Runways {
 
     /* It opens or closes an runway
     * 
-    * @param runway its the runway that is going to be oppendes or closed
+    *@param runway its the runway that is going to be oppendes or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 
      */
     public void openClose(int runway, boolean opCl) {

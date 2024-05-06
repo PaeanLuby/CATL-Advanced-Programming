@@ -1,26 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.catl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ *
+ * @author Paean Luby 
+ * @author Nicolás Rodríguez Sánchez 
+ */
 public class Airport extends UnicastRemoteObject implements RemoteInterface {
 
-    private AtomicInteger passengers;
-    private Hangar hangar;
-    private Airway Mad_Bar;
-    private Airway Bar_Mad;
-    private TaxiArea taxiArea;
-    private Parking parking;
-    private MaintenanceHall maintenanceHall;
-    private BoardingGates boardingGates;
-    private Runways runways;
-    private String name;
+    private AtomicInteger currentPassengers;
+    private final Hangar hangar;
+    private final Airway Mad_Bar;
+    private final Airway Bar_Mad;
+    private final TaxiArea taxiArea;
+    private final Parking parking;
+    private final MaintenanceHall maintenanceHall;
+    private final BoardingGates boardingGates;
+    private final Runways runways;
+    private final String name;
 
     public Airport(Hangar hangar, Airway Mad_Bar, Airway Bar_Mad, TaxiArea taxiArea, Parking parking, MaintenanceHall maintenanceHall, BoardingGates boardingGates, Runways runways, String name) throws RemoteException {
         this.hangar = hangar;
@@ -32,64 +32,56 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface {
         this.boardingGates = boardingGates;
         this.runways = runways;
         this.name = name;
-        this.passengers = new AtomicInteger(0);
+        this.currentPassengers = new AtomicInteger(0);
+    }
 
+    // Method to add passengers.
+    public void addPassengers(int passengers) {
+        currentPassengers.addAndGet(passengers);
+    }
+
+    // Method to offload passengers, ensuring total passengers never go below 0.
+    public int releasePassengers(int passengers) {
+        while (true) {
+            int nowPassengers = this.currentPassengers.get();
+            int passengersToOffload = Math.min(passengers, nowPassengers);
+            int newPassengers = Math.max(0, nowPassengers - passengers);
+            if (this.currentPassengers.compareAndSet(nowPassengers, newPassengers)) {
+                return passengersToOffload;
+            }
+        }
     }
 
     public AtomicInteger getPassengers() throws RemoteException {
-        return passengers;
+        return currentPassengers;
     }
 
     public void setPassengers(AtomicInteger passengers) {
-        this.passengers = passengers;
+        this.currentPassengers = passengers;
     }
 
     public Hangar getHangar() {
         return hangar;
     }
 
-    public void setHangar(Hangar hangar) {
-        this.hangar = hangar;
-    }
-
     public Airway getMad_Bar() {
         return Mad_Bar;
-    }
-
-    public void setMad_Bar(Airway Mad_Bar) {
-        this.Mad_Bar = Mad_Bar;
     }
 
     public Airway getBar_Mad() {
         return Bar_Mad;
     }
 
-    public void setBar_Mad(Airway Bar_Mad) {
-        this.Bar_Mad = Bar_Mad;
-    }
-
     public TaxiArea getTaxiArea() {
         return taxiArea;
-    }
-
-    public void setTaxiArea(TaxiArea taxiArea) {
-        this.taxiArea = taxiArea;
     }
 
     public Parking getParking() {
         return parking;
     }
 
-    public void setParking(Parking parking) {
-        this.parking = parking;
-    }
-
     public MaintenanceHall getMaintenanceHall() {
         return maintenanceHall;
-    }
-
-    public void setMaintenanceHall(MaintenanceHall maintenanceHall) {
-        this.maintenanceHall = maintenanceHall;
     }
 
     public BoardingGates getBoardingGates() {
@@ -100,6 +92,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface {
         return runways;
     }
 
+    @Override
     public String toString() {
         return this.name;
     }
