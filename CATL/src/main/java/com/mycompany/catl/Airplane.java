@@ -444,7 +444,11 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER RUNWAY OF STARTING AIRPORT =================
     */
-        int rw = airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
+        int rw = airport1.getRunways().enterRunway(this);
+        while(rw==-1){
+            rw = airport1.getRunways().enterRunway(this);
+        }
+        airport1.getTaxiArea().releaseAirplane(this);
         this.graphicalTaxiArea(airport1);
         this.graphicalRunway(rw, airport1, false, true);
         this.log.write("Airplane " + this.getIdentifier() + " completing final checks in runway of airport " + airport1);
@@ -475,14 +479,13 @@ public class Airplane extends Thread {
     */
         this.setLanding(true); //Set landing to true
         int runway = airport2.getRunways().enterRunway(this);
-        this.graphicalRunway(runway, airport2, false, false);
         while (runway == -1) {
             this.log.write("Airplane " + this.getIdentifier() + " taking a detour.");
             Thread.sleep((long) (Math.random() * 4000 + 1000)); //Detour random time between 1 and 5 seconds
             gf.getGw().look(); //Check the pause/resume bottons
             runway = airport2.getRunways().enterRunway(this);
-            this.graphicalRunway(runway, airport2, false, false);
         }
+        this.graphicalRunway(runway, airport2, false, false);
         getAirway(airport1).releaseAirplane(this, log);
         this.log.write("Airplane " + this.getIdentifier() + " entered runway " + runway + "at airport " + airport2);
         this.graphicalAirway(airport1);
