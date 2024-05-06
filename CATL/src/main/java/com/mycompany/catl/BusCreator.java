@@ -1,6 +1,5 @@
 package com.mycompany.catl;
 
-import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

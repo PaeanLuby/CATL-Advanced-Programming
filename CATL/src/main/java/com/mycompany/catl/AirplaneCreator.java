@@ -1,6 +1,5 @@
 package com.mycompany.catl;
 
-import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
