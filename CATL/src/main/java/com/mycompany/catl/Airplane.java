@@ -329,7 +329,7 @@ public class Airplane extends Thread {
                 } else {
                     switch (runway) {
                         case 0 ->
-                            gf.setBarcelonaRunway1("Landing:: " + this.identifier + "(" + this.passengers + ")");
+                            gf.setBarcelonaRunway1("Landing: " + this.identifier + "(" + this.passengers + ")");
                         case 1 ->
                             gf.setBarcelonaRunway2("Landing: " + this.identifier + "(" + this.passengers + ")");
                         case 2 ->
@@ -433,7 +433,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER TAXI AREA OF STARTING AIRPORT =================
     */
-        airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this, log), log); //Enter taxi area
+        airport1.getTaxiArea().enterTaxiArea(airport1.getBoardingGates().releaseGate(this)); //Enter taxi area
         this.log.write("Airplane " + this.getIdentifier() + " has left the boarding gate and entered the taxi area of airport " + airport1 + ".");
         this.graphicalBoardingGate(gate, airport1, true, false);
         this.graphicalTaxiArea(airport1);
@@ -444,7 +444,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER RUNWAY OF STARTING AIRPORT =================
     */
-        int rw = airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this, log));
+        int rw = airport1.getRunways().enterRunway(airport1.getTaxiArea().releaseAirplane(this));
         this.graphicalTaxiArea(airport1);
         this.graphicalRunway(rw, airport1, false, true);
         this.log.write("Airplane " + this.getIdentifier() + " completing final checks in runway of airport " + airport1);
@@ -457,7 +457,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER AIRWAY OF STARTING AIRPORT =================
     */
-        getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this), log); //Enter airway and remove it from the runway
+        getAirway(airport1).enterAirway(airport1.getRunways().releaseRunway(this)); //Enter airway and remove it from the runway
         this.log.write("Airplane " + this.getIdentifier() + " is entering airway " + getAirway(airport1).getAirwayName());
         this.graphicalRunway(rw, airport1, true, true);
         this.graphicalAirway(airport1);
@@ -497,7 +497,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER TAXI AREA OF DESTINATION AIRPORT =================
     */
-        airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this), log); //Leave runway and directly access taxi area
+        airport2.getTaxiArea().enterTaxiArea(airport2.getRunways().releaseRunway(this)); //Leave runway and directly access taxi area
         this.log.write("Airplane " + this.getIdentifier() + " entered the taxi area of airport " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalRunway(runway, airport2, true, false);
@@ -506,7 +506,7 @@ public class Airplane extends Thread {
     /*
     * ================ ENTER BOARDING GATE OF DESTINATION AIRPORT =================
     */
-        gate = airport2.getBoardingGates().enterGateFromTaxiArea(this, airport2, log);
+        gate = airport2.getBoardingGates().enterGateFromTaxiArea(this, airport2);
         gf.getGw().look(); //Check the pause/resume bottons
         this.log.write("Airplane " + this.getIdentifier() + " flying between taxi area and boarding gate at airport " + airport2);
         this.graphicalTaxiArea(airport2);
@@ -526,7 +526,7 @@ public class Airplane extends Thread {
     /*
     * ================ COMPLETE CHECKS IN PARKING AREA =================
     */
-        airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this, log));
+        airport2.getParking().addAirplane(airport2.getBoardingGates().releaseGate(this));
         this.log.write("Airplane " + this.getIdentifier() + " disembarked . Accessing parking area of " + airport2);
         gf.getGw().look(); //Check the pause/resume bottons
         this.graphicalBoardingGate(gate, airport2, true, false);
@@ -625,12 +625,11 @@ public class Airplane extends Thread {
     }
 
     private void attemptBoarding(int passengersToTake, Airport airport) throws InterruptedException {
-
         this.setPassengers(passengersToTake); //Add new passengers
         this.getAirport(airport).releasePassengers(passengersToTake); //Subtract those passengers from the airport
 
         for (int i = 0; i < passengersToTake; i++) {
-            Thread.sleep((long) (Math.random() * 200 + 100)); //Each passanger's transference to the airplane between 1 and 3 seconds 
+            Thread.sleep((long) (Math.random() * 2000 + 1000)); //Each passanger's transference to the airplane between 1 and 3 seconds 
             gf.getGw().look(); //Check the pause/resume bottons
         }
 

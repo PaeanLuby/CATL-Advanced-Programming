@@ -19,14 +19,12 @@ public class Airway {
         this.name = name;
     }
 
-    public void enterAirway(Airplane airplane, Log log) {
-        this.airplanes.add(airplane); //add the airplane at the end of the list
-        log.write("Airplane " + airplane.getIdentifier() + " was added to airway " + name);
-        log.write("Current airplanes in airway are: " + toString());
+    public void enterAirway(Airplane airplane) {
+        this.airplanes.add(airplane); //Add the airplane at the end of the list
     }
 
     public Airplane releaseAirplane(Airplane airplane, Log log) {
-        if (airplanes.remove(airplane)) {
+        if (airplanes.remove(airplane)) { //Remove the airplane from whatever position in the list
             log.write("Current airplanes in airway are: " + toString());
             log.write("Airplane " + airplane.getIdentifier() + " was removed from airway " + name);
             return airplane;
@@ -43,10 +41,6 @@ public class Airway {
 
     public String getAirwayName() {
         return name;
-    }
-
-    public void setAirplanes(Queue<Airplane> airplanes) {
-        this.airplanes = airplanes;
     }
 
     @Override

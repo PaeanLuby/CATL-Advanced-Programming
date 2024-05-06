@@ -744,20 +744,20 @@ public class GraphicalInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_madridMaintenanceActionPerformed
 
     private void resumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeButtonActionPerformed
-        if (!resumePressed) //If not pressed
+        if (!resumePressed) //if not pressed
         {
-            resumePressed = true;             //we change it to pulsed
+            resumePressed = true; //we change it to pressed
             pausePressed = false;
-            gw.open();    //Close the gateway for paiters
+            gw.open();    //Close the gateway 
         }
     }//GEN-LAST:event_resumeButtonActionPerformed
 
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
-        if (!pausePressed) //If not pressed
+        if (!pausePressed) //if not pressed
         {
-            resumePressed = false;             //we change it to pulsed
+            resumePressed = false; //we change it to pulsed
             pausePressed = true;
-            gw.close();    //Close the gateway for paiters
+            gw.close();    //Close the gateway 
         }
     }//GEN-LAST:event_pauseButtonActionPerformed
 

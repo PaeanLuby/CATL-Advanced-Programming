@@ -127,7 +127,7 @@ public class Airport extends UnicastRemoteObject implements RemoteInterface {
         return airway;
     }
 
-    /* It opens or closes an airway
+    /* It opens or closes a runway
     * 
     * @param runway its the runway that is going to be oppendes or closed
     *@param opCl If it is true it opens the runway, if it is false it closes the runway 

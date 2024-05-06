@@ -16,7 +16,6 @@ public class Bus extends Thread {
     private int passengers;
     private final Log log;
     private final Airport airport;
-    private Lock passengersLock;
     private final GraphicalInterface gf;
 
     public Bus(String identifier, Log log, Airport airport, GraphicalInterface gf) {
@@ -46,46 +45,49 @@ public class Bus extends Thread {
         while (true) {
             try {
                 //Arrival to downtown
-                arriveDowntown();
                 gf.getGw().look(); //Check the pause/resume bottons
+                arriveDowntown();
                 //Passengers board
+                gf.getGw().look();
+                //Check the pause/resume bottons
                 boardDowntownPassengers();
                 gf.getGw().look(); //Check the pause/resume bottons
 
-                travelToAirport();
-                gf.getGw().look(); //Check the pause/resume bottons
                 if (this.getCity().equals("Madrid")) {
                     gf.setMadridBusTownAirport(identifier + " (" + this.getPassengers() + ")");
                 } else {
                     gf.setBarcelonaBusTownAirport(identifier + " (" + this.getPassengers() + ")");
                 }
+                travelToAirport();
+                gf.getGw().look(); //Check the pause/resume bottons
 
-                arriveAtAirport();
+                
                 this.log.write("The bus " + this.identifier + " has arrived to the airport of " + this.getCity() + " with " + this.getPassengers() + " passengers.");
+                arriveAtAirport();
                 gf.getGw().look(); //Check the pause/resume bottons
                 if (this.getCity().equals("Madrid")) {
                     gf.setMadridPassengers(airport.getPassengers().get());
                 } else {
                     gf.setBarcelonaPassengers(airport.getPassengers().get());
                 }
-
+                
+                gf.getGw().look(); //Check the pause/resume bottons
                 boardPassengersAtAirport();
-                gf.getGw().look();
                 if (this.getCity().equals("Madrid")) {
                     gf.setMadridPassengers(airport.getPassengers().get());
                 } else {
                     gf.setBarcelonaPassengers(airport.getPassengers().get());
                 }
-
-                travelDowntown();
+                gf.getGw().look(); //Check the pause/resume bottons
+                
                 if (this.getCity().equals("Madrid")) {
                     gf.setMadridBusAirportTown(identifier + " (" + this.getPassengers() + ")");
                 } else {
                     gf.setBarcelonaBusAirportTown(identifier + " (" + this.getPassengers() + ")");
                 }
-                this.log.write("The bus " + this.identifier + " has arrived to the downtown of " + this.getCity() + " with " + passengers + " passengers.");
+                travelDowntown();
                 gf.getGw().look(); //Check the pause/resume bottons
-
+                this.log.write("The bus " + this.identifier + " has arrived to the downtown of " + this.getCity() + " with " + passengers + " passengers.");
             } catch (RemoteException ex) {
                 Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -96,6 +98,7 @@ public class Bus extends Thread {
         this.log.write("The bus " + this.identifier + " has arrived to the city of " + this.getCity());
         try {
             Thread.sleep((long) (Math.random() * 3000 + 2000));
+            gf.getGw().look();
         } catch (InterruptedException ex) {
             Logger.getLogger(Bus.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -29,38 +29,37 @@ public class AirplaneCreator extends Thread {
      *
      * @return two random capital letters and a "-" Ex:XX-
      */
-    public String randomLetters() {
+    private String randomLetters() {
         List<String> alphabet = new ArrayList<>(Arrays.asList(
                 "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         ));
-        int firstLetter = (int) (Math.random() * 25);
-        int secondtLetter = (int) (Math.random() * 25);
+        int firstLetter = (int) (Math.random() * 26); //Indices 0-25
+        int secondtLetter = (int) (Math.random() * 26);
         String randomLetters = alphabet.get(firstLetter) + alphabet.get(secondtLetter) + "-";
         return randomLetters;
     }
 
     public void run() {
-        for (int i = 0; i < 8000; i++) { //8000
+        for (int i = 0; i < 8000; i++) { 
             gf.getGw().look(); //Check the pause/resume bottons
             Airplane airplane;
             String identifier = String.valueOf(i);
             while (identifier.length() != 4) { //If the identifier doesn't have 4 digits
                 identifier = "0" + identifier;  //We add 0 until it has 4 digits
             }
-            identifier = randomLetters() + identifier;    //We add two random letters at the beginning
-            int capacity = (int) (Math.random() * 200) + 100;
+            identifier = randomLetters() + identifier; //We add two random letters at the beginning
+            int capacity = (int) (Math.random() * 201) + 100; //Capacity between 100 and 300
 
-            if (i % 2 == 0) {                   //Even identifier for Madrid
+            if (i % 2 == 0) { //Even identifier for Madrid
                 airplane = new Airplane(capacity, identifier, log, madrid, barcelona, gf, true);
-            } else {                         //Odd identifier for Barcelona
+            } else { //Odd identifier for Barcelona
                 airplane = new Airplane(capacity, identifier, log, barcelona, madrid, gf, false);
             }
-            airplane.start();
-            long sleepTime = (long) (Math.random() * 2000 + 1000);  //random between 1 and 3
-
+            airplane.start(); //Starts airplane thread
+ 
             try {
-                sleep(sleepTime);    //sleeps between 1 and 3 second between each bus
+                Thread.sleep((long) (Math.random() * 2000 + 1000));    //Random stagger time between 1 and 3 seconds for next airplane
             } catch (InterruptedException ex) {
                 //Logger.getLogger(AirplaneCreator.class.getName()).log(Level.SEVERE, null, ex);
             }

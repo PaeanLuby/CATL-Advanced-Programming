@@ -65,8 +65,8 @@ public class Runways {
 
     /* It opens or closes an runway
     * 
-    *@param runway its the runway that is going to be oppendes or closed
-    *@param opCl If it is true it opens the runway, if it is false it closes the runway 
+    *@param runway is the runway that will be open or closed
+    *@param opCl if it is true it opens the runway, if it is false it closes the runway 
      */
     public void openClose(int runway, boolean opCl) {
         if (opCl) {

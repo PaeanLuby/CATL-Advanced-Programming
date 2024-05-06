@@ -16,10 +16,8 @@ public class TaxiArea {
         airplanes = new LinkedBlockingQueue<Airplane>();
     }
 
-    public void enterTaxiArea(Airplane airplane, Log log) {
+    public void enterTaxiArea(Airplane airplane) {
         airplanes.offer(airplane);
-        log.write("Airplane " + airplane.getIdentifier() + " is in the taxi area.");
-        log.write("Current airplanes in taxi area are:" + toString());
     }
 
     public BlockingQueue<Airplane> getAirplanes() {
@@ -30,13 +28,8 @@ public class TaxiArea {
         this.airplanes = airplanes;
     }
 
-    public Airplane releaseAirplane(Airplane airplane, Log log) {
-        if (this.airplanes.remove(airplane)) {
-            log.write("Successfully removed airplane " + airplane.getIdentifier() + " from taxi area.");
-        } else {
-            System.out.println("Error removing airplane from taxi area.");
-            log.write("Error removing airplane from taxi area.");
-        }
+    public Airplane releaseAirplane(Airplane airplane) {
+        this.airplanes.remove(airplane);
         return airplane; //we remove it and return it
     }
 
